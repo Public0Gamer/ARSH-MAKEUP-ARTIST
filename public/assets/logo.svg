@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 140" width="100%" height="100%">
+  <defs>
+    <!-- Rich 24K Royal Gold Gradient -->
+    <linearGradient id="royalGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BF953F" />
+      <stop offset="25%" stop-color="#FCF6BA" />
+      <stop offset="50%" stop-color="#B38728" />
+      <stop offset="75%" stop-color="#FBF5B7" />
+      <stop offset="100%" stop-color="#AA771C" />
+    </linearGradient>
+
+    <!-- Warm Rose Champagne Gradient -->
+    <linearGradient id="roseChampagne" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B76E79" />
+      <stop offset="40%" stop-color="#F5D0A9" />
+      <stop offset="100%" stop-color="#D4AF37" />
+    </linearGradient>
+
+    <!-- Brush Handle Gradient -->
+    <linearGradient id="brushHandle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2C241D" />
+      <stop offset="50%" stop-color="#4A3E38" />
+      <stop offset="100%" stop-color="#1A1410" />
+    </linearGradient>
+
+    <!-- Brush Bristle Gradient -->
+    <linearGradient id="bristles" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3A2E2B" />
+      <stop offset="60%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#FFFDF9" />
+    </linearGradient>
+
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- ==========================================
+       LEFT EMBLEM: INTERTWINED 'AM' + MAKEUP BRUSH
+       ========================================== -->
+  <g transform="translate(10, 8)">
+    <!-- Outer Ornate Royal Crest Ring -->
+    <circle cx="62" cy="62" r="58" fill="none" stroke="url(#royalGold)" stroke-width="1.8" stroke-dasharray="6 3" opacity="0.7"/>
+    <circle cx="62" cy="62" r="53" fill="#FFFDF9" stroke="url(#royalGold)" stroke-width="2.2" />
+
+    <!-- Royal Crown Flourish on top -->
+    <path d="M 62 14 L 66 22 L 74 18 L 71 27 L 76 30 L 62 26 L 48 30 L 53 27 L 50 18 L 58 22 Z" fill="url(#royalGold)" />
+
+    <!-- INTERTWINED 'A' & 'M' MONOGRAM -->
+    <!-- Letter 'M' in background (Gold) -->
+    <path d="M 44 88 L 44 48 L 54 48 L 62 67 L 70 48 L 80 48 L 80 88 L 72 88 L 72 61 L 65 77 L 59 77 L 52 61 L 52 88 Z" 
+          fill="url(#royalGold)" opacity="0.9" />
+
+    <!-- Letter 'A' Intertwined (White/Gold fill with outline) -->
+    <path d="M 62 36 L 42 88 L 51 88 L 56 74 L 68 74 L 73 88 L 82 88 Z M 62 55 L 65 67 L 59 67 Z" 
+          fill="url(#royalGold)" stroke="#FFFDF9" stroke-width="2" filter="url(#goldGlow)" />
+
+    <!-- LUXURY MAKEUP BRUSH (Sweeping diagonally across AM) -->
+    <g transform="rotate(-38 62 62)">
+      <!-- Brush Handle (Deep Ebony & Gold Tip) -->
+      <path d="M 60 8 L 64 8 L 63 60 L 61 60 Z" fill="url(#brushHandle)" stroke="url(#royalGold)" stroke-width="0.8"/>
+      <!-- Ferrule (Gold metal band) -->
+      <rect x="59.5" y="60" width="5" height="14" rx="1" fill="url(#royalGold)" stroke="#AA771C" stroke-width="0.5"/>
+      <line x1="59.5" y1="65" x2="64.5" y2="65" stroke="#7A5310" stroke-width="0.6"/>
+      <line x1="59.5" y1="69" x2="64.5" y2="69" stroke="#7A5310" stroke-width="0.6"/>
+      <!-- Bristles (Fine flared tip with champagne highlight) -->
+      <path d="M 59.5 74 C 57 84, 58 92, 62 95 C 66 92, 67 84, 64.5 74 Z" fill="url(#bristles)" />
+    </g>
+
+    <!-- Shimmer Sparkles & Powder Swirl -->
+    <path d="M 28 85 Q 62 102 96 82" fill="none" stroke="url(#roseChampagne)" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+    <!-- Little Stars -->
+    <polygon points="62,6 63.5,9.5 67,11 63.5,12.5 62,16 60.5,12.5 57,11 60.5,9.5" fill="url(#royalGold)"/>
+    <circle cx="28" cy="62" r="2" fill="#D4AF37"/>
+    <circle cx="96" cy="62" r="2" fill="#D4AF37"/>
+  </g>
+
+  <!-- ==========================================
+       RIGHT BRAND TYPOGRAPHY (LARGE, BOLD, LUXURY)
+       ========================================== -->
+  <g transform="translate(148, 20)">
+    <!-- Main Big Name: ARSH -->
+    <text x="0" y="52" 
+          font-family="'Cinzel', 'Playfair Display', Georgia, serif" 
+          font-size="54" 
+          font-weight="800" 
+          letter-spacing="5" 
+          fill="url(#royalGold)" 
+          filter="url(#goldGlow)">
+      ARSH
+    </text>
+
+    <!-- Subtitle: MAKEUP ARTIST DELHI (Bigger, Bolder) -->
+    <text x="4" y="80" 
+          font-family="'Montserrat', 'Plus Jakarta Sans', sans-serif" 
+          font-size="16" 
+          font-weight="700" 
+          letter-spacing="6" 
+          fill="#1C1714">
+      MAKEUP ARTIST DELHI
+    </text>
+
+    <!-- Luxury Hairline Divider with Diamond -->
+    <line x1="4" y1="92" x2="190" y2="92" stroke="url(#royalGold)" stroke-width="1.2" opacity="0.75"/>
+    <polygon points="200,92 204,88 208,92 204,96" fill="url(#royalGold)"/>
+    <line x1="218" y1="92" x2="420" y2="92" stroke="url(#royalGold)" stroke-width="1.2" opacity="0.75"/>
+
+    <!-- Specialization & Location Tagline -->
+    <text x="4" y="108" 
+          font-family="'Cormorant Garamond', Georgia, serif" 
+          font-style="italic" 
+          font-size="14.5" 
+          font-weight="600" 
+          letter-spacing="2" 
+          fill="#8C6718">
+      Bridal Specialist &bull; Luxury Studio &bull; Delhi NCR
+    </text>
+  </g>
+</svg>

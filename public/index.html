@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARSH MAKEUP ARTIST DELHI | Bridal Specialist in Delhi NCR</title>
+  <meta name="description" content="Enhancing your natural beauty. Delhi's premier luxury bridal makeup artist specializing in Bridal HD, Airbrush, Engagement, Reception, and Destination Weddings." />
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandGold: '#C5A059',
+            brandDark: '#1C1714',
+            brandCream: '#FAF7F2'
+          },
+          fontFamily: {
+            royal: ['Cinzel', 'serif'],
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-luxury-pattern text-[#1C1714]">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-[#1C1714] text-[#EAD49B] text-xs py-2.5 px-4 text-center tracking-wider uppercase font-medium flex items-center justify-center gap-3">
+    <span>✨ Wedding Season Bookings Open &bull; 15-20 Days Advance Notice Required</span>
+    <span class="hidden md:inline text-amber-500">|</span>
+    <span class="hidden md:inline">Call / WhatsApp: <strong>7428701987</strong></span>
+  </div>
+
+  <!-- Luxury Sticky Navbar -->
+  <header class="sticky top-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
+      <!-- Brand Logo & Official Emblem -->
+      <a href="#" class="flex items-center gap-4 group py-1">
+        <!-- Official Logo Image -->
+        <div class="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+          <img src="/assets/logo.png" alt="ARSH MAKEUP ARTIST DELHI" class="w-full h-full object-contain rounded-full shadow-lg border-2 border-amber-400" />
+        </div>
+
+        <!-- Brand Name (Large, Bold, Royal) -->
+        <div class="flex flex-col">
+          <span class="text-2xl sm:text-3xl lg:text-4xl font-royal font-black tracking-wider text-[#1C1714] leading-none">
+            ARSH
+          </span>
+          <span class="text-[11px] sm:text-[13px] font-sans font-bold tracking-[3px] sm:tracking-[4.5px] uppercase text-[#8C6718] mt-1">
+            MAKEUP ARTIST DELHI
+          </span>
+          <span class="text-[10px] sm:text-[11px] font-serif italic text-stone-500 tracking-wider">
+            Bridal Specialist &bull; Delhi NCR
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-8 text-xs uppercase tracking-widest font-semibold text-[#4A3E38]">
+        <a href="#about" class="hover:text-[#C5A059] transition-colors">About Arsh</a>
+        <a href="#services" class="hover:text-[#C5A059] transition-colors">Services</a>
+        <a href="#gallery" class="hover:text-[#C5A059] transition-colors">Portfolio</a>
+        <a href="#packages" class="hover:text-[#C5A059] transition-colors">Packages</a>
+        <a href="#brands" class="hover:text-[#C5A059] transition-colors">Brands</a>
+        <a href="#policy" class="hover:text-[#C5A059] transition-colors">Policies</a>
+        <a href="#contact" class="hover:text-[#C5A059] transition-colors">Contact</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="tel:7428701987" class="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-[#1C1714] px-4 py-2 rounded-full border border-amber-300 hover:bg-amber-50 transition-colors">
+          <svg class="w-3.5 h-3.5 text-[#C5A059]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+          <span>7428701987</span>
+        </a>
+        <button onclick="openBookingDrawer()" class="btn-gold px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase flex items-center gap-2 cursor-pointer">
+          <span>Book Now</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       HERO SECTION WITH ANIMATION 1 (SPARKLE CANVAS)
+       =================================================================== -->
+  <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-16 lg:py-24">
+    <!-- Golden Dust Particle Canvas -->
+    <canvas id="sparkle-canvas"></canvas>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+      <!-- Left Content -->
+      <div class="lg:col-span-7 text-center lg:text-left reveal-on-scroll">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full gold-shimmer-badge text-xs uppercase font-bold tracking-widest mb-6">
+          <span class="text-amber-500">👑</span>
+          <span data-bind="hero.badge">Delhi NCR's Premier Bridal Specialist</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-royal font-bold text-[#1C1714] leading-[1.15] mb-6">
+          Enhancing Your <br />
+          <span class="gold-gradient-text">Natural Beauty</span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-[#4A3E38] max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-8" data-bind="branding.tagline">
+          enhancing your natural beauty - bridal specialist in delhi
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-12">
+          <button onclick="openBookingDrawer()" class="btn-gold px-8 py-4 rounded-xl text-sm font-bold tracking-wider uppercase flex items-center gap-2.5 cursor-pointer shadow-lg">
+            <span>Schedule Consultation</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </button>
+
+          <a href="#" class="whatsapp-link btn-gold-outline px-7 py-4 rounded-xl text-sm font-semibold tracking-wide flex items-center gap-2.5">
+            <svg class="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            <span>WhatsApp Direct</span>
+          </a>
+        </div>
+
+        <!-- Dynamic Stats Row -->
+        <div id="hero-stats-container" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <!-- Populated dynamically via app.js -->
+        </div>
+      </div>
+
+      <!-- Right Visual Feature -->
+      <div class="lg:col-span-5 relative reveal-on-scroll delay-200">
+        <div class="relative mx-auto max-w-md lg:max-w-none">
+          <!-- Decorative Royal Borders -->
+          <div class="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-amber-400/30 to-amber-100/10 blur-xl"></div>
+          <div class="relative rounded-3xl overflow-hidden border-2 border-amber-300/60 shadow-2xl p-2 bg-white">
+            <img id="hero-main-image" src="/assets/images/bridal_look_3.jpg" alt="Arsh Bridal Makeup Masterpiece" class="w-full h-[520px] object-cover rounded-2xl animate-float" />
+            <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl glass-panel border border-white/60">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-xs font-bold uppercase tracking-wider text-amber-800">Master Bridal Artistry</div>
+                  <div class="text-sm font-royal font-bold text-[#1C1714]">Arsh Khan Signature HD Finish</div>
+                </div>
+                <span class="text-xl">✨</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       ANIMATION 2: INTERACTIVE BEFORE / AFTER BRIDAL GLAM SLIDER
+       =================================================================== -->
+  <section class="py-20 bg-[#F5EFEB] border-y border-amber-200/40 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14 reveal-on-scroll">
+        <span class="text-xs uppercase font-bold tracking-widest text-[#8C6718] mb-2 block">Interactive Experience</span>
+        <h2 class="text-3xl sm:text-4xl font-royal font-bold text-[#1C1714] mb-4">The Bridal Transformation</h2>
+        <p class="text-sm sm:text-base text-[#4A3E38]">Drag the gold slider left and right to reveal the precision blending, flawless HD skin, and royal jewelry setting crafted by Arsh Khan.</p>
+      </div>
+
+      <div class="max-w-4xl mx-auto reveal-on-scroll delay-100">
+        <div id="ba-slider-container" class="ba-container">
+          <!-- Before Image (Base) -->
+          <div class="ba-image" style="background-image: url('/assets/images/bridal_look_2.jpg');"></div>
+          <span class="ba-badge ba-badge-before">Eye Art & Matha Patti</span>
+
+          <!-- After Image (Clipped overlay) -->
+          <div class="ba-after" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
+            <div class="ba-image" style="background-image: url('/assets/images/bridal_look_1.jpg');"></div>
+            <span class="ba-badge ba-badge-after">Signature Royal Bride</span>
+          </div>
+
+          <!-- Draggable Divider Handle -->
+          <div class="ba-slider-handle" style="left: 50%;">
+            <div class="ba-slider-button">
+              <svg class="w-5 h-5 text-[#8C6718]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-[#7E7068] mt-3 px-2 font-medium">
+          <span>👈 Drag left/right to compare</span>
+          <span>Camera-Ready 4K High Definition</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       ABOUT THE ARTIST SECTION
+       =================================================================== -->
+  <section id="about" class="py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-14 items-center">
+        <!-- Artist Portrait -->
+        <div class="lg:col-span-5 reveal-on-scroll">
+          <div class="relative">
+            <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl border-2 border-[#D4AF37] z-0"></div>
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl z-10 bg-white p-2">
+              <img id="about-artist-image" src="/assets/images/bridal_look_1.jpg" alt="Arsh Khan Bridal Artist" class="w-full h-[520px] object-cover rounded-2xl" />
+              <div class="p-4 bg-white/95 text-center border-t border-amber-100">
+                <h3 class="font-royal font-bold text-xl text-[#1C1714]" data-bind="about.artistName">Arsh Khan</h3>
+                <p class="text-xs uppercase tracking-wider text-[#8C6718] font-semibold" data-bind="about.artistTitle">Celebrity & Luxury Bridal Makeup Artist</p>
+                <p class="text-[11px] text-gray-500 mt-1 font-medium">South Delhi &bull; Pincode 110017 &bull; Available Pan-India</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Artist Biography -->
+        <div class="lg:col-span-7 reveal-on-scroll delay-200">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full gold-shimmer-badge text-[11px] uppercase font-bold tracking-widest mb-4">
+            Meet Your Artist
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-royal font-bold text-[#1C1714] mb-6 leading-tight">
+            Crafting Timeless Elegance For Your Most Royal Day
+          </h2>
+
+          <div class="p-6 rounded-2xl bg-[#F5EFEB] border-l-4 border-[#C5A059] mb-6 italic text-[#4A3E38] font-serif text-lg leading-relaxed">
+            "<span data-bind="about.quote">Makeup is not a mask; it is the art of illuminating the royal goddess within you.</span>"
+          </div>
+
+          <p class="text-sm sm:text-base text-[#4A3E38] leading-relaxed mb-4" data-bind="about.bioParagraph1">
+            Welcome to the world of Arsh Khan — Delhi's acclaimed bridal makeup artist known for creating breathtaking, photogenic, and skin-like bridal transformations. Based in South Delhi (Pincode 110017) and serving the entirety of Delhi NCR and royal destination venues across India.
+          </p>
+
+          <p class="text-sm sm:text-base text-[#4A3E38] leading-relaxed mb-8" data-bind="about.bioParagraph2">
+            Arsh's signature technique blends modern global aesthetics with timeless Indian royal tradition. Every stroke is measured to enhance your unique facial architecture, ensuring your bridal glow remains immaculate under 4K video lights, tearful vidai moments, and late-night celebrations.
+          </p>
+
+          <!-- Key Highlights Checklist -->
+          <div class="grid sm:grid-cols-2 gap-4 mb-8">
+            <div class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-amber-100 text-[#8C6718] flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+              <span class="text-xs sm:text-sm font-medium text-[#1C1714]">Customized Skin Prep & 24Hr Hydration</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-amber-100 text-[#8C6718] flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+              <span class="text-xs sm:text-sm font-medium text-[#1C1714]">Heavy Kundan, Jewelry & Saree Draping</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-amber-100 text-[#8C6718] flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+              <span class="text-xs sm:text-sm font-medium text-[#1C1714]">100% Genuine Luxury Global Brands Only</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-amber-100 text-[#8C6718] flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+              <span class="text-xs sm:text-sm font-medium text-[#1C1714]">Destination Weddings (Pan-India & Abroad)</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button onclick="openBookingDrawer()" class="btn-gold px-7 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer">
+              Book Arsh for Your Wedding
+            </button>
+            <a href="https://instagram.com/arshkhan_makeupartist" target="_blank" class="instagram-link flex items-center gap-2 text-xs font-semibold text-[#8C6718] hover:underline">
+              <span>Follow @arshkhan_makeupartist</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SERVICES SECTION (3D TILT CARDS - ANIMATION 3)
+       =================================================================== -->
+  <section id="services" class="py-24 bg-[#FDFCFA] border-t border-amber-200/30 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+        <span class="text-xs uppercase font-bold tracking-widest text-[#8C6718] mb-2 block">Bespoke Bridal Services</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-royal font-bold text-[#1C1714] mb-4">Our Signature Offerings</h2>
+        <p class="text-sm sm:text-base text-[#4A3E38]">Tailored luxury beauty experiences designed specifically for your special wedding events in Delhi NCR and destination venues.</p>
+      </div>
+
+      <!-- Services Grid (Populated dynamically via app.js) -->
+      <div id="services-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       PHOTO GALLERY SECTION (REAL PHOTOS & LIGHTBOX)
+       =================================================================== -->
+  <section id="gallery" class="py-24 bg-[#FAF7F2] border-t border-amber-200/40 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 reveal-on-scroll">
+        <div>
+          <span class="text-xs uppercase font-bold tracking-widest text-[#8C6718] mb-2 block">Real Brides & Artistry</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-royal font-bold text-[#1C1714]">Portfolio Gallery</h2>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap items-center gap-2 mt-6 md:mt-0">
+          <button onclick="filterGallery('All', this)" class="gallery-filter-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all bg-[#1C1714] text-white border border-[#1C1714]">All</button>
+          <button onclick="filterGallery('Bridal', this)" class="gallery-filter-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all bg-white text-[#4A3E38] border border-amber-200">Bridal HD</button>
+          <button onclick="filterGallery('Reception', this)" class="gallery-filter-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all bg-white text-[#4A3E38] border border-amber-200">Reception</button>
+        </div>
+      </div>
+
+      <!-- Gallery Grid (Populated dynamically via app.js) -->
+      <div id="gallery-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <!-- Real Instagram Connect Banner -->
+      <div class="mt-14 p-8 rounded-3xl glass-panel border border-amber-300/50 text-center flex flex-col md:flex-row items-center justify-between gap-6 reveal-on-scroll">
+        <div class="text-left">
+          <h4 class="font-royal font-bold text-xl text-[#1C1714]">See More Real Client Videos On Instagram</h4>
+          <p class="text-xs text-stone-600 mt-1">Daily bridal behind-the-scenes, reel transformations, and live client reviews.</p>
+        </div>
+        <a href="https://instagram.com/arshkhan_makeupartist" target="_blank" class="btn-gold px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+          <span>@arshkhan_makeupartist</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       PACKAGES & PRICING SECTION
+       =================================================================== -->
+  <section id="packages" class="py-24 bg-[#FFFFFF] border-t border-amber-200/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+        <span class="text-xs uppercase font-bold tracking-widest text-[#8C6718] mb-2 block" data-bind="pricing.status">PRICE ON REQUEST</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-royal font-bold text-[#1C1714] mb-4" data-bind="pricing.title">Curated Bridal Packages</h2>
+        <p class="text-sm sm:text-base text-[#4A3E38]" data-bind="pricing.notice">Due to personalized skin prep, custom bridal hair styling, and venue timing requirements, all packages are quoted on request to best serve your event vision.</p>
+      </div>
+
+      <!-- Packages Grid -->
+      <div id="packages-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       BRANDS SECTION
+       =================================================================== -->
+  <section id="brands" class="py-16 bg-[#F5EFEB] border-t border-amber-200/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <span class="text-xs uppercase font-bold tracking-widest text-[#8C6718]">100% Genuine Cosmetics Guarantee</span>
+        <h3 class="text-2xl font-royal font-bold text-[#1C1714] mt-1">Luxury International Brands in Our Kit</h3>
+      </div>
+      <div id="brands-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       STUDIO & BOOKING POLICIES SECTION
+       =================================================================== -->
+  <section id="policy" class="py-24 bg-[#FAF7F2] border-t border-amber-200/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+        <span class="text-xs uppercase font-bold tracking-widest text-[#8C6718] mb-2 block">Studio Transparency</span>
+        <h2 class="text-3xl sm:text-4xl font-royal font-bold text-[#1C1714] mb-4" data-bind="policy.title">Booking & Studio Policies</h2>
+        <p class="text-sm sm:text-base text-[#4A3E38]" data-bind="policy.subtitle">Please review our booking guidelines before scheduling your consultation.</p>
+      </div>
+
+      <div id="policies-grid" class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       CONTACT & BOOKING INQUIRY SECTION
+       =================================================================== -->
+  <section id="contact" class="py-24 bg-white border-t border-amber-200/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-14">
+        <!-- Contact Details -->
+        <div class="lg:col-span-5 reveal-on-scroll">
+          <span class="text-xs uppercase font-bold tracking-widest text-[#8C6718] mb-2 block">Get in Touch</span>
+          <h2 class="text-3xl sm:text-4xl font-royal font-bold text-[#1C1714] mb-6">Let's Plan Your Royal Wedding Look</h2>
+          <p class="text-sm sm:text-base text-[#4A3E38] leading-relaxed mb-8">
+            Appointments fill up rapidly for peak muhurat and wedding dates. Reach out today for customized quotes, slot availability, or travel consultations.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 flex-shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+              </div>
+              <div>
+                <span class="text-xs uppercase font-bold tracking-wider text-gray-500 block">Direct Call & Booking</span>
+                <a href="tel:7428701987" class="phone-link text-lg font-bold text-[#1C1714] hover:text-[#C5A059]">+91 7428701987</a>
+                <span class="text-xs text-emerald-700 font-medium block">Active for calls & instant queries</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 flex-shrink-0">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+              </div>
+              <div>
+                <span class="text-xs uppercase font-bold tracking-wider text-gray-500 block">WhatsApp Chat</span>
+                <a href="#" class="whatsapp-link text-lg font-bold text-emerald-700 hover:underline">+91 7428701987</a>
+                <span class="text-xs text-gray-500 block">Share outfit photos for instant consultation</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 flex-shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              </div>
+              <div>
+                <span class="text-xs uppercase font-bold tracking-wider text-gray-500 block">Studio Location & Coverage</span>
+                <p class="text-sm font-semibold text-[#1C1714]">Pincode 110017, Delhi</p>
+                <p class="text-xs text-gray-600">All Delhi NCR On-Location Service &amp; Destination Weddings</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-700 flex-shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
+              </div>
+              <div>
+                <span class="text-xs uppercase font-bold tracking-wider text-gray-500 block">Instagram</span>
+                <a href="https://instagram.com/arshkhan_makeupartist" target="_blank" class="instagram-link text-sm font-bold text-purple-700 hover:underline">@arshkhan_makeupartist</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact & Booking Form -->
+        <div class="lg:col-span-7 reveal-on-scroll delay-200">
+          <div class="p-8 sm:p-10 rounded-3xl glass-panel border border-amber-300/60 shadow-xl">
+            <h3 class="text-2xl font-royal font-bold text-[#1C1714] mb-2">Request Bridal Date Availability</h3>
+            <p class="text-xs text-[#7E7068] mb-6">Fill in your wedding details below. You will receive an instant quote and date check directly on WhatsApp.</p>
+
+            <form id="consultation-form" class="space-y-4">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Your Full Name *</label>
+                  <input type="text" id="inq-name" required placeholder="e.g. Ananya Roy" class="w-full px-4 py-3 rounded-xl border border-amber-200 focus:outline-none focus:border-amber-500 bg-white text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Phone / WhatsApp Number *</label>
+                  <input type="tel" id="inq-phone" required placeholder="e.g. 9810123456" class="w-full px-4 py-3 rounded-xl border border-amber-200 focus:outline-none focus:border-amber-500 bg-white text-sm" />
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Service Needed *</label>
+                  <select id="inq-service" class="w-full px-4 py-3 rounded-xl border border-amber-200 focus:outline-none focus:border-amber-500 bg-white text-sm">
+                    <option value="BRIDAL HD / AIRBRUSH">BRIDAL HD / AIRBRUSH</option>
+                    <option value="ENGAGEMENT PARTY">ENGAGEMENT PARTY</option>
+                    <option value="HALDI / MEHNDI">HALDI / MEHNDI</option>
+                    <option value="RECEPTION">RECEPTION</option>
+                    <option value="HAIR & SAREE DRAPING">HAIR & SAREE DRAPING</option>
+                    <option value="DESTINATION WEDDING">DESTINATION WEDDING</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Event Date</label>
+                  <input type="date" id="inq-date" class="w-full px-4 py-3 rounded-xl border border-amber-200 focus:outline-none focus:border-amber-500 bg-white text-sm" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Event Venue / City</label>
+                <input type="text" id="inq-venue" placeholder="e.g. The Leela Palace, Chanakyapuri / South Delhi" class="w-full px-4 py-3 rounded-xl border border-amber-200 focus:outline-none focus:border-amber-500 bg-white text-sm" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Special Requirements or Outfit Notes</label>
+                <textarea id="inq-notes" rows="3" placeholder="Tell us about your lehenga shade, event timings, or jewelry preferences..." class="w-full px-4 py-3 rounded-xl border border-amber-200 focus:outline-none focus:border-amber-500 bg-white text-sm"></textarea>
+              </div>
+
+              <button type="submit" class="w-full btn-gold py-4 rounded-xl text-xs font-bold tracking-widest uppercase cursor-pointer flex items-center justify-center gap-2 shadow-lg">
+                <span>Submit &amp; Connect On WhatsApp</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Footer -->
+  <footer class="bg-[#1C1714] text-[#FAF7F2] py-16 border-t border-amber-400/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div class="space-y-4">
+          <div class="flex items-center gap-3.5">
+            <img src="/assets/logo.png" alt="ARSH Logo" class="w-14 h-14 rounded-full border-2 border-amber-400 shadow-md object-contain" />
+            <div>
+              <div class="text-xl font-royal font-black text-[#F5E6AB] tracking-wider leading-none">ARSH</div>
+              <div class="text-[10px] font-sans font-bold tracking-[3px] text-amber-200 uppercase mt-1">MAKEUP ARTIST DELHI</div>
+              <div class="text-[10px] font-serif italic text-stone-400 mt-0.5">Bridal Specialist &bull; Delhi NCR</div>
+            </div>
+          </div>
+          <p class="text-xs text-stone-400 leading-relaxed">
+            Enhancing your natural beauty. Delhi's premier luxury bridal makeup artist serving Delhi NCR and destinations worldwide.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase tracking-widest font-bold text-[#EAD49B] mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-xs text-stone-300">
+            <li><a href="#about" class="hover:text-amber-400">About Arsh</a></li>
+            <li><a href="#services" class="hover:text-amber-400">Services</a></li>
+            <li><a href="#gallery" class="hover:text-amber-400">Photo Gallery</a></li>
+            <li><a href="#packages" class="hover:text-amber-400">Packages &amp; Pricing</a></li>
+            <li><a href="#policy" class="hover:text-amber-400">Booking Policies</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase tracking-widest font-bold text-[#EAD49B] mb-4">Studio Location</h4>
+          <p class="text-xs text-stone-300 leading-relaxed mb-2">
+            South Delhi, Pincode 110017<br />
+            Delhi NCR, India
+          </p>
+          <p class="text-xs text-stone-400">
+            Phone: <a href="tel:7428701987" class="text-amber-400 hover:underline">7428701987</a>
+          </p>
+          <p class="text-xs text-stone-400">
+            Instagram: <a href="https://instagram.com/arshkhan_makeupartist" target="_blank" class="text-amber-400 hover:underline">@arshkhan_makeupartist</a>
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase tracking-widest font-bold text-[#EAD49B] mb-4">Client Policies</h4>
+          <ul class="space-y-2 text-xs text-stone-400">
+            <li>&bull; 50% Non-refundable Advance</li>
+            <li>&bull; 15-20 Days Advance Booking</li>
+            <li>&bull; Outstation Travel Extra</li>
+            <li>&bull; 100% Genuine Luxury Brands</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-4">
+        <div>&copy; 2026 ARSH MAKEUP ARTIST DELHI. All rights reserved.</div>
+        <div class="flex items-center gap-6">
+          <a href="/admin" class="hover:text-[#EAD49B] transition-colors flex items-center gap-1.5 font-medium">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            <span>Admin Control Panel</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================
+       ANIMATION 5: FLOATING CONSULTATION DRAWER
+       =================================================================== -->
+  <div id="consultation-backdrop" class="consultation-drawer-backdrop" onclick="closeBookingDrawer()"></div>
+  <div id="consultation-drawer" class="consultation-drawer p-8">
+    <div class="flex items-center justify-between pb-6 border-b border-amber-200">
+      <div>
+        <span class="text-xs uppercase font-bold tracking-widest text-[#8C6718]">Direct Consultation</span>
+        <h3 class="text-xl font-royal font-bold text-[#1C1714]">Book Arsh Khan</h3>
+      </div>
+      <button onclick="closeBookingDrawer()" class="w-9 h-9 rounded-full bg-stone-100 flex items-center justify-center hover:bg-stone-200 transition-colors text-stone-600">
+        ✕
+      </button>
+    </div>
+
+    <div class="py-6 space-y-6">
+      <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 leading-relaxed">
+        👑 <strong>Guaranteed Spot:</strong> Submitting will lock your inquiry in Arsh's diary and open a direct WhatsApp chat with details ready.
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Service Required</label>
+          <select id="drawer-service" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm bg-white">
+            <option value="BRIDAL HD / AIRBRUSH">BRIDAL HD / AIRBRUSH</option>
+            <option value="ENGAGEMENT PARTY">ENGAGEMENT PARTY</option>
+            <option value="HALDI / MEHNDI">HALDI / MEHNDI</option>
+            <option value="RECEPTION">RECEPTION</option>
+            <option value="HAIR & SAREE DRAPING">HAIR & SAREE DRAPING</option>
+            <option value="DESTINATION WEDDING">DESTINATION WEDDING</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Your Full Name</label>
+          <input type="text" id="drawer-name" placeholder="Bride's Name" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm bg-white" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Phone Number</label>
+          <input type="tel" id="drawer-phone" placeholder="WhatsApp Number" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm bg-white" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Tentative Event Date</label>
+          <input type="date" id="drawer-date" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm bg-white" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Venue / Location</label>
+          <input type="text" id="drawer-venue" placeholder="e.g. Saket, South Delhi" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm bg-white" />
+        </div>
+
+        <button onclick="handleDrawerSubmit()" class="w-full btn-gold py-4 rounded-xl text-xs font-bold uppercase tracking-widest cursor-pointer mt-4">
+          Send Inquiry on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Quick Button -->
+  <a href="#" class="whatsapp-link floating-whatsapp-btn w-14 h-14 bg-emerald-500 rounded-full flex items-center justify-center text-white shadow-xl cursor-pointer">
+    <div class="whatsapp-ping"></div>
+    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+  </a>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <button class="close-lightbox absolute top-6 right-6 text-white text-3xl font-light hover:text-amber-400 z-50">✕</button>
+    <div class="max-w-4xl max-h-[90vh] p-4 flex flex-col items-center">
+      <img id="lightbox-image" src="" alt="Full view" class="max-h-[75vh] w-auto object-contain rounded-2xl shadow-2xl border border-amber-300/40 mb-4" />
+      <div class="text-center text-white">
+        <h3 id="lightbox-title" class="font-royal text-xl font-bold text-amber-300"></h3>
+        <p id="lightbox-desc" class="text-xs text-stone-300 mt-1 max-w-lg"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Quick drawer submit handler
+    async function handleDrawerSubmit() {
+      const name = document.getElementById('drawer-name').value;
+      const phone = document.getElementById('drawer-phone').value;
+      const service = document.getElementById('drawer-service').value;
+      const date = document.getElementById('drawer-date').value;
+      const venue = document.getElementById('drawer-venue').value;
+
+      if (!name || !phone) {
+        alert('Please provide your name and phone number.');
+        return;
+      }
+
+      try {
+        await fetch('/api/inquiries', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, service, date, venue })
+        });
+
+        const targetPhone = (siteData && siteData.contact && siteData.contact.whatsapp) || '7428701987';
+        const msg = `👑 *ARSH MAKEUP ARTIST DELHI - BRIDAL CONSULTATION*\n` +
+                    `👤 *Bride Name:* ${name}\n` +
+                    `📞 *Phone:* ${phone}\n` +
+                    `💄 *Service:* ${service}\n` +
+                    `📅 *Date:* ${date || 'Flexible'}\n` +
+                    `📍 *Venue:* ${venue || 'Delhi NCR'}`;
+
+        const waUrl = `https://wa.me/91${targetPhone.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`;
+        closeBookingDrawer();
+        window.open(waUrl, '_blank');
+      } catch (e) {
+        window.open(`https://wa.me/917428701987`, '_blank');
+      }
+    }
+  </script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

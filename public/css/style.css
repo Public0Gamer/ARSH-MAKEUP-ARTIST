@@ -1,0 +1,442 @@
+/* ===================================================================
+   ARSH MAKEUP ARTIST DELHI - LUXURY LIGHT & PREMIUM DESIGN SYSTEM
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #FAF7F2;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F5EFEB;
+  --bg-card: rgba(255, 255, 255, 0.85);
+
+  --gold-300: #EAD49B;
+  --gold-400: #D4AF37;
+  --gold-500: #C5A059;
+  --gold-600: #A88438;
+  --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F5E6AB 45%, #C5A059 75%, #8C6718 100%);
+  --rose-gold-gradient: linear-gradient(135deg, #C5A059 0%, #E8C39E 50%, #B76E79 100%);
+
+  --text-primary: #1C1714;
+  --text-secondary: #4A3E38;
+  --text-muted: #7E7068;
+
+  --border-light: rgba(197, 160, 89, 0.22);
+  --border-gold: rgba(212, 175, 55, 0.45);
+
+  --shadow-soft: 0 10px 30px -10px rgba(74, 62, 56, 0.08);
+  --shadow-gold: 0 15px 35px -8px rgba(197, 160, 89, 0.25);
+  --shadow-hover: 0 25px 50px -12px rgba(28, 23, 20, 0.12);
+
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', serif;
+  --font-royal: 'Cinzel', serif;
+  --font-sans: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Luxury Texture Pattern */
+.bg-luxury-pattern {
+  background-color: #FAF7F2;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(183, 110, 121, 0.03) 0%, transparent 40%),
+    radial-gradient(rgba(197, 160, 89, 0.08) 1px, transparent 0);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A88438;
+}
+
+/* Typography Helpers */
+.font-royal {
+  font-family: var(--font-royal);
+}
+.font-serif {
+  font-family: var(--font-serif);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.gold-gradient-text {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gold-shimmer-badge {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(245, 230, 171, 0.25) 50%, rgba(197, 160, 89, 0.12) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #8C6718;
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-shimmer-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transform: skewX(-25deg);
+  animation: shine 4s infinite ease-in-out;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
+
+/* Luxury Glassmorphism & Panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: var(--shadow-soft);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.luxury-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.luxury-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Gold Buttons */
+.btn-gold {
+  background: var(--gold-gradient);
+  color: #1A1408;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+  filter: brightness(1.05);
+}
+
+.btn-gold-outline {
+  border: 1.5px solid var(--gold-400);
+  color: #8C6718;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.btn-gold-outline:hover {
+  background: var(--gold-gradient);
+  color: #1A1408;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+/* ===================================================================
+   ANIMATION 1: GOLDEN SPARKLE PARTICLE CANVAS (Hero Section)
+   =================================================================== */
+#sparkle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating animation */
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+.animate-float {
+  animation: floatGentle 6s ease-in-out infinite;
+}
+
+/* ===================================================================
+   ANIMATION 2: INTERACTIVE BEFORE / AFTER BRIDAL GLAM SLIDER
+   =================================================================== */
+.ba-container {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: var(--shadow-gold);
+  user-select: none;
+}
+
+.ba-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.ba-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ba-slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gold-gradient);
+  cursor: ew-resize;
+  z-index: 10;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+}
+
+.ba-slider-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  background: #FFFFFF;
+  border: 2.5px solid #D4AF37;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  color: #8C6718;
+  font-size: 16px;
+  cursor: ew-resize;
+}
+
+.ba-badge {
+  position: absolute;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 5;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.ba-badge-before {
+  top: 20px;
+  left: 20px;
+  background: rgba(28, 23, 20, 0.75);
+  color: #FFFFFF;
+  backdrop-filter: blur(6px);
+}
+
+.ba-badge-after {
+  top: 20px;
+  right: 20px;
+  background: var(--gold-gradient);
+  color: #1A1408;
+}
+
+/* ===================================================================
+   ANIMATION 3: 3D PARALLAX TILT & MAGNETIC GLOW CARDS
+   =================================================================== */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  will-change: transform;
+}
+
+.tilt-inner {
+  transform: translateZ(30px);
+  transition: transform 0.2s ease-out;
+}
+
+/* Glare overlay */
+.tilt-card .glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+/* ===================================================================
+   ANIMATION 4: SCROLL REVEAL STAGGER CLASSES
+   =================================================================== */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay modifiers */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* ===================================================================
+   ANIMATION 5: FLOATING CONSULTATION DRAWER & WHATSAPP
+   =================================================================== */
+.consultation-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 23, 20, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.consultation-drawer-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.consultation-drawer {
+  position: fixed;
+  top: 0;
+  right: -550px;
+  width: 100%;
+  max-width: 500px;
+  height: 100vh;
+  background: #FFFFFF;
+  box-shadow: -15px 0 40px rgba(0, 0, 0, 0.2);
+  z-index: 101;
+  transition: right 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.consultation-drawer.active {
+  right: 0;
+}
+
+/* Floating WhatsApp Badge Pulsing */
+.floating-whatsapp-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 90;
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-whatsapp-btn:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-ping {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 14px;
+  height: 14px;
+  background: #FF3B30;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 12, 10, 0.95);
+  backdrop-filter: blur(12px);
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ba-container {
+    height: 380px;
+  }
+  .consultation-drawer {
+    max-width: 100%;
+  }
+}
