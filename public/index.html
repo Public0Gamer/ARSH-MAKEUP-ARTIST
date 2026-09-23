@@ -547,12 +547,9 @@
       </div>
 
       <div class="pt-8 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-4">
-        <div>&copy; 2026 ARSH MAKEUP ARTIST DELHI. All rights reserved.</div>
-        <div class="flex items-center gap-6">
-          <a href="/admin" class="hover:text-[#EAD49B] transition-colors flex items-center gap-1.5 font-medium">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-            <span>Admin Control Panel</span>
-          </a>
+        <div id="secret-admin-trigger" class="cursor-default select-none" title="">&copy; 2026 ARSH MAKEUP ARTIST DELHI. All rights reserved.</div>
+        <div class="text-xs text-stone-500">
+          Crafted for Bridal Perfection &bull; South Delhi
         </div>
       </div>
     </div>
@@ -671,6 +668,21 @@
       } catch (e) {
         window.open(`https://wa.me/917428701987`, '_blank');
       }
+    // Hidden Owner Access: 3 fast clicks on copyright text quietly opens admin
+    let secretClicks = 0;
+    let secretTimer = null;
+    const secretTrigger = document.getElementById('secret-admin-trigger');
+    if (secretTrigger) {
+      secretTrigger.addEventListener('click', () => {
+        secretClicks++;
+        clearTimeout(secretTimer);
+        if (secretClicks >= 3) {
+          window.location.href = '/admin';
+          secretClicks = 0;
+        } else {
+          secretTimer = setTimeout(() => { secretClicks = 0; }, 1500);
+        }
+      });
     }
   </script>
   <script src="/js/app.js"></script>
