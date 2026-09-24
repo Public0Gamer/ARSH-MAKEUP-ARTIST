@@ -291,5 +291,99 @@
       "origin": "Paris",
       "badge": "Backstage Highlighters"
     }
-  ]
+  ],
+  "reviews": {
+    "title": "Real Bride Love & 5-Star Reviews",
+    "subtitle": "Unfiltered feedback from real Indian brides across South Delhi, NCR & Destination weddings.",
+    "averageRating": "5.0",
+    "totalReviews": "128",
+    "recommendRate": "100%",
+    "googleReviewUrl": "https://www.google.com/search?q=ARSH+MAKEUP+ARTIST+DELHI+reviews",
+    "items": [
+      {
+        "id": "rev-1",
+        "name": "Pooja Sharma",
+        "initial": "P",
+        "avatarColor": "#1a73e8",
+        "rating": 5,
+        "badge": "Local Guide · 48 reviews",
+        "time": "2 weeks ago",
+        "service": "Bridal HD Makeup & Saree Draping",
+        "location": "Chattarpur Farmhouse Wedding, Delhi",
+        "category": "Bridal HD",
+        "review": "Booking Arsh for my wedding day was hands down the BEST decision of my wedding! From 6 PM varmala to 5 AM morning pheras, my makeup did not move even 1%! The HD finish was so skin-like, lightweight and natural—zero cakey feeling. Every single guest and my husband couldn't stop praising how royal yet natural I looked. Arsh was so punctual and patient during the pre-wedding rush. Thank you so much Arsh for making me feel like a true queen! 👑❤️",
+        "verified": true
+      },
+      {
+        "id": "rev-2",
+        "name": "Dr. Simran Kaur",
+        "initial": "S",
+        "avatarColor": "#e37400",
+        "rating": 5,
+        "badge": "Verified Bride",
+        "time": "a month ago",
+        "service": "Luxury Airbrush Bridal Makeup",
+        "location": "Aerocity Hotel, Delhi",
+        "category": "Airbrush Signature",
+        "review": "I am very particular about hygiene and genuine products because of my sensitive skin. Arsh only used fresh sanitized brushes and top-tier luxury brands like Charlotte Tilbury and Dior. The Airbrush base stayed completely sweat-proof and tear-proof throughout our emotional vidai ceremony. Her eye makeup and lashes blend so seamlessly. Highly recommended to every Delhi bride looking for understated royal elegance! ⭐⭐⭐⭐⭐",
+        "verified": true
+      },
+      {
+        "id": "rev-3",
+        "name": "Tanya Malhotra",
+        "initial": "T",
+        "avatarColor": "#0d652d",
+        "rating": 5,
+        "badge": "Local Guide · 19 reviews",
+        "time": "3 weeks ago",
+        "service": "Cocktail & Engagement Glam",
+        "location": "Saket, South Delhi",
+        "category": "Engagement",
+        "review": "Arsh did my cocktail evening glam and my mother’s party makeup. She gave me the most stunning Hollywood waves hairstyle and radiant glass-skin glow that looked magical under chandelier lighting. The outfit draping and jewelry setting were done to absolute perfection. 10/10 professionalism!",
+        "verified": true
+      },
+      {
+        "id": "rev-4",
+        "name": "Ananya Singhal",
+        "initial": "A",
+        "avatarColor": "#9334e6",
+        "rating": 5,
+        "badge": "Verified Bride",
+        "time": "2 months ago",
+        "service": "Haldi, Mehndi & Reception Look",
+        "location": "Punjabi Bagh, West Delhi",
+        "category": "Pre-Wedding",
+        "review": "Arsh created completely distinct vibes for all three of my functions! Fresh dewy sun-kissed for Haldi, floral braided chic for Mehndi, and high-fashion red carpet glam for Reception. What I loved most is how she listens to what YOU want instead of forcing typical heavy makeup. Worth every single rupee.",
+        "verified": true
+      },
+      {
+        "id": "rev-5",
+        "name": "Rhea Sengupta",
+        "initial": "R",
+        "avatarColor": "#d93025",
+        "rating": 5,
+        "badge": "Verified Bride",
+        "time": "3 months ago",
+        "service": "Destination Wedding Royale",
+        "location": "Jaipur Palace Destination Wedding",
+        "category": "Destination",
+        "review": "Hired Arsh for our destination wedding in Jaipur. She arrived right on time with her full professional kit and lighting setup. She handled me, my mother, and my sister effortlessly without any rush or stress. Her dupatta setting and matha patti pinning stayed rock solid even while dancing in the baraat! Total artist with golden hands.",
+        "verified": true
+      },
+      {
+        "id": "rev-6",
+        "name": "Mehak Chawla",
+        "initial": "M",
+        "avatarColor": "#1a73e8",
+        "rating": 5,
+        "badge": "Local Guide · 31 reviews",
+        "time": "4 months ago",
+        "service": "Bridal HD Makeup",
+        "location": "Vasant Vihar, South Delhi",
+        "category": "Bridal HD",
+        "review": "If you want your bridal photos and 4K wedding video to look flawless from every angle without looking overdone, book Arsh Khan without thinking twice! Her contouring and blush placement sculpted my face beautifully. She is super humble, polite, and reassuring on a bride's most anxious day.",
+        "verified": true
+      }
+    ]
+  }
 }
