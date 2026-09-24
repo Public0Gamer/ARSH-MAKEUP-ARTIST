@@ -109,6 +109,9 @@ function renderDynamicContent() {
   // Render Brands
   renderBrands();
 
+  // Render Google 5-Star Reviews
+  renderReviews();
+
   // Re-apply 3D tilt to newly rendered cards
   initTiltCards();
 }
@@ -281,6 +284,106 @@ function renderBrands() {
       <div class="text-[11px] text-[#8C6718] mt-1 font-medium">${b.badge || b.origin || 'Certified Genuine'}</div>
     </div>
   `).join('');
+}
+
+// -------------------------------------------------------------
+// REVIEWS & GOOGLE TESTIMONIALS RENDERING
+// -------------------------------------------------------------
+let activeReviewCategory = 'All';
+
+function renderReviews() {
+  const container = document.getElementById('reviews-grid');
+  if (!container || !siteData.reviews || !siteData.reviews.items) return;
+
+  const items = activeReviewCategory === 'All'
+    ? siteData.reviews.items
+    : siteData.reviews.items.filter(r => (r.category || '').toLowerCase().includes(activeReviewCategory.toLowerCase()));
+
+  if (items.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full py-12 text-center text-stone-500">
+        No reviews in this category yet.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = items.map(rev => `
+    <div class="tilt-card luxury-card p-6 sm:p-7 flex flex-col justify-between border border-amber-200/70 hover:border-amber-400/80 transition-all duration-300 relative group bg-white shadow-sm hover:shadow-xl">
+      <div class="glare"></div>
+      <div>
+        <!-- Top Row: Reviewer Avatar + Name + Google G Logo -->
+        <div class="flex items-start justify-between gap-3 mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base shadow-sm flex-shrink-0" style="background-color: ${rev.avatarColor || '#1a73e8'};">
+              ${rev.initial || (rev.name ? rev.name.charAt(0).toUpperCase() : 'B')}
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <h4 class="font-royal font-bold text-base text-[#1C1714] leading-snug">${rev.name}</h4>
+                ${rev.verified ? `
+                  <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" title="Verified Customer" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                ` : ''}
+              </div>
+              <div class="text-[11px] text-stone-500 font-medium">${rev.badge || 'Verified Bride'} &bull; <span class="text-stone-400">${rev.time || 'Recently'}</span></div>
+            </div>
+          </div>
+
+          <!-- Google G Icon -->
+          <div class="w-6 h-6 flex-shrink-0" title="Posted on Google Reviews">
+            <svg class="w-full h-full" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.97 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Rating Stars & Location/Service Pill -->
+        <div class="flex items-center gap-2 mb-3">
+          <div class="flex text-amber-400 text-sm tracking-tight">
+            ${'★'.repeat(rev.rating || 5)}${'☆'.repeat(5 - (rev.rating || 5))}
+          </div>
+          <span class="text-[11px] font-semibold text-amber-800 bg-[#FFF8E6] px-2.5 py-0.5 rounded-full border border-amber-200">
+            ${rev.service || 'Bridal HD'}
+          </span>
+        </div>
+
+        <!-- Review Text -->
+        <p class="text-xs sm:text-[13px] text-[#4A3E38] leading-relaxed mb-4 italic font-serif">
+          "${rev.review}"
+        </p>
+      </div>
+
+      <!-- Card Footer: Location & Verified Pill -->
+      <div class="pt-3 border-t border-amber-100 flex items-center justify-between text-[11px] text-stone-500">
+        <span class="flex items-center gap-1 font-medium text-stone-600 truncate max-w-[70%]">
+          <svg class="w-3.5 h-3.5 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          <span class="truncate">${rev.location || 'Delhi NCR'}</span>
+        </span>
+        <span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md font-semibold flex items-center gap-0.5">
+          <span>✓</span> Google Review
+        </span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterReviews(category) {
+  activeReviewCategory = category;
+  document.querySelectorAll('.review-filter-btn').forEach(btn => {
+    btn.classList.remove('bg-[#1C1714]', 'text-white');
+    btn.classList.add('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+  });
+  if (window.event && window.event.currentTarget) {
+    window.event.currentTarget.classList.remove('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+    window.event.currentTarget.classList.add('bg-[#1C1714]', 'text-white');
+  }
+  renderReviews();
+  initTiltCards();
 }
 
 // =============================================================

@@ -99,6 +99,7 @@ const TAB_TITLES = {
   about: { title: 'Artist Profile & Bio', subtitle: 'Edit Arsh Khan biography, photo, and accolades' },
   inquiries: { title: 'Client Inquiries', subtitle: 'Manage booking leads submitted from the website' },
   pricing: { title: 'Packages & Policies', subtitle: 'Manage advance booking notice, outstation rules, and quotes' },
+  reviews: { title: 'Google 5-Star Reviews', subtitle: 'Manage verified client testimonials and Google rating showcase' },
   contact: { title: 'Contact & Location', subtitle: 'Update phone, WhatsApp, Instagram, and Delhi address' },
   security: { title: 'Password Management', subtitle: 'Secure your administrative portal with custom credentials' }
 };
@@ -217,6 +218,9 @@ function populateAllSections() {
 
   // 6. Render Services items
   renderAdminServices();
+
+  // 7. Render Reviews
+  renderAdminReviews();
 }
 
 // ==========================================
@@ -818,6 +822,129 @@ function setupEventListeners() {
     await saveSection('pricing', pricingData);
     await saveSection('policy', policyData, 'Pricing & Policy settings published!');
   });
+
+  // Add Google Review Form
+  const addRevForm = document.getElementById('add-review-form');
+  if (addRevForm) {
+    addRevForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('add-review-btn');
+      btn.disabled = true;
+      btn.innerText = 'Publishing Review...';
+
+      const payload = {
+        name: document.getElementById('new-rev-name').value.trim(),
+        service: document.getElementById('new-rev-service').value,
+        location: document.getElementById('new-rev-location').value.trim(),
+        rating: parseInt(document.getElementById('new-rev-rating').value, 10) || 5,
+        badge: document.getElementById('new-rev-badge').value.trim(),
+        time: document.getElementById('new-rev-time').value.trim(),
+        review: document.getElementById('new-rev-text').value.trim()
+      };
+
+      try {
+        const res = await fetch('/api/reviews', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${adminToken}`
+          },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('⭐ New 5-Star Review published live on website!');
+          addRevForm.reset();
+          await fetchAdminData();
+        } else {
+          alert(data.message || 'Failed to add review');
+        }
+      } catch (err) {
+        alert('Error: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'Publish 5★ Review To Website';
+      }
+    });
+  }
+}
+
+// ==========================================
+// 8. GOOGLE REVIEWS MANAGEMENT
+// ==========================================
+function renderAdminReviews() {
+  const container = document.getElementById('admin-reviews-list');
+  const countEl = document.getElementById('admin-reviews-count');
+  const revData = currentSiteData.reviews || { items: [] };
+  const items = revData.items || [];
+
+  if (countEl) countEl.innerText = `${items.length} Reviews Active`;
+
+  if (!container) return;
+
+  if (items.length === 0) {
+    container.innerHTML = `<div class="col-span-full py-8 text-center text-stone-400 text-sm">No client reviews added yet. Add one above!</div>`;
+    return;
+  }
+
+  container.innerHTML = items.map(rev => `
+    <div class="bg-stone-50 rounded-2xl p-5 border border-stone-200 shadow-xs flex flex-col justify-between relative group">
+      <div>
+        <div class="flex items-start justify-between gap-2 mb-3">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-xs" style="background-color: ${rev.avatarColor || '#1a73e8'};">
+              ${rev.initial || (rev.name ? rev.name.charAt(0).toUpperCase() : 'B')}
+            </div>
+            <div>
+              <h4 class="font-royal font-bold text-sm text-[#1C1714] leading-tight">${rev.name}</h4>
+              <span class="text-[10px] text-stone-500">${rev.badge || 'Verified'} &bull; ${rev.time || 'Recently'}</span>
+            </div>
+          </div>
+          <button onclick="deleteReviewItem('${rev.id}')" class="text-stone-400 hover:text-red-600 transition-colors p-1 cursor-pointer" title="Delete Review">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2 mb-2">
+          <div class="flex text-amber-500 text-xs">
+            ${'★'.repeat(rev.rating || 5)}
+          </div>
+          <span class="text-[10px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+            ${rev.service || 'Bridal Service'}
+          </span>
+        </div>
+
+        <p class="text-xs text-stone-600 italic line-clamp-4 leading-relaxed mb-3">
+          "${rev.review}"
+        </p>
+      </div>
+
+      <div class="pt-2 border-t border-stone-200 flex items-center justify-between text-[10px] text-stone-500">
+        <span class="truncate">📍 ${rev.location || 'Delhi NCR'}</span>
+        <span class="text-emerald-700 font-semibold">✓ Google Verified</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function deleteReviewItem(id) {
+  if (!confirm('Are you sure you want to delete this client review from the website?')) return;
+
+  try {
+    const res = await fetch(`/api/reviews/${id}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${adminToken}` }
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('Client review removed from website.');
+      await fetchAdminData();
+    } else {
+      alert(data.message || 'Failed to delete review');
+    }
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
 }
 
 async function saveSection(section, data, successMsg = 'Changes saved successfully!') {
