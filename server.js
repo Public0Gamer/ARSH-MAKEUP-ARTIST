@@ -469,7 +469,7 @@ app.get('/api/content', (req, res) => {
 // Update specific site section (Hero, About, Contact, Policies, Pricing, etc.)
 app.put('/api/content', requireAuth, (req, res) => {
   const { section, data } = req.body;
-  const allowedSections = ['branding', 'contact', 'hero', 'about', 'services', 'gallery', 'pricing', 'policy', 'brands'];
+  const allowedSections = ['branding', 'contact', 'hero', 'about', 'services', 'gallery', 'pricing', 'policy', 'brands', 'reviews'];
 
   if (!section || !data || !allowedSections.includes(section)) {
     return res.status(400).json({ success: false, message: 'Invalid or restricted section' });
@@ -564,6 +564,80 @@ app.delete('/api/gallery/:id', requireAuth, (req, res) => {
     res.json({ success: true, message: 'Photo deleted successfully!' });
   } else {
     res.status(500).json({ success: false, message: 'Failed to delete photo' });
+  }
+});
+
+// ===================================================================
+// 4B. REVIEWS & GOOGLE TESTIMONIALS APIS
+// ===================================================================
+
+// Get Reviews
+app.get('/api/reviews', (req, res) => {
+  const data = readJson(SITE_DATA_FILE);
+  res.json(data.reviews || { items: [] });
+});
+
+// Add Review
+app.post('/api/reviews', requireAuth, (req, res) => {
+  const { name, rating, review, service, location, badge, time, category } = req.body;
+  if (!name || !review) {
+    return res.status(400).json({ success: false, message: 'Reviewer name and review text are required' });
+  }
+
+  const currentData = readJson(SITE_DATA_FILE);
+  if (!currentData.reviews) currentData.reviews = { items: [] };
+  if (!currentData.reviews.items) currentData.reviews.items = [];
+
+  const initial = (name.trim().charAt(0) || 'B').toUpperCase();
+  const colors = ['#1a73e8', '#e37400', '#0d652d', '#9334e6', '#d93025'];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+  const newReview = {
+    id: 'rev-' + Date.now(),
+    name: sanitizeString(name, 80),
+    initial: initial,
+    avatarColor: randomColor,
+    rating: parseInt(rating, 10) || 5,
+    badge: sanitizeString(badge, 50) || 'Verified Bride',
+    time: sanitizeString(time, 40) || 'Recently',
+    service: sanitizeString(service, 100) || 'Bridal HD Makeup',
+    location: sanitizeString(location, 100) || 'Delhi NCR',
+    category: sanitizeString(category, 50) || 'Bridal HD',
+    review: sanitizeString(review, 1000),
+    verified: true
+  };
+
+  currentData.reviews.items.unshift(newReview);
+
+  // Update total count
+  currentData.reviews.totalReviews = String(currentData.reviews.items.length + 120);
+
+  if (writeJson(SITE_DATA_FILE, currentData)) {
+    res.json({ success: true, message: 'Review added successfully!', review: newReview });
+  } else {
+    res.status(500).json({ success: false, message: 'Failed to save review' });
+  }
+});
+
+// Delete Review
+app.delete('/api/reviews/:id', requireAuth, (req, res) => {
+  const { id } = req.params;
+  const currentData = readJson(SITE_DATA_FILE);
+  if (!currentData.reviews || !currentData.reviews.items) {
+    return res.status(404).json({ success: false, message: 'No reviews found' });
+  }
+
+  const initialCount = currentData.reviews.items.length;
+  currentData.reviews.items = currentData.reviews.items.filter(r => r.id !== id);
+
+  if (currentData.reviews.items.length === initialCount) {
+    return res.status(404).json({ success: false, message: 'Review not found' });
+  }
+
+  if (writeJson(SITE_DATA_FILE, currentData)) {
+    res.json({ success: true, message: 'Review deleted successfully!' });
+  } else {
+    res.status(500).json({ success: false, message: 'Failed to delete review' });
   }
 });
 
