@@ -127,6 +127,10 @@
             <span>💎</span>
             <span>Packages &amp; Policies</span>
           </button>
+          <button onclick="switchTab('reviews')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left">
+            <span>⭐</span>
+            <span>Google 5★ Reviews</span>
+          </button>
           <button onclick="switchTab('contact')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left">
             <span>📍</span>
             <span>Contact &amp; Studio Info</span>
@@ -509,6 +513,88 @@
               Save Pricing &amp; Policies
             </button>
           </form>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           TAB: GOOGLE 5-STAR REVIEWS MANAGEMENT
+           ============================================================= -->
+      <section id="tab-reviews" class="tab-content hidden space-y-8">
+        <!-- Add New Review Card -->
+        <div class="bg-white p-8 rounded-2xl border border-amber-200 shadow-sm">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800 text-lg font-bold">⭐</div>
+            <h3 class="text-xl font-royal font-bold text-[#1C1714]">Add New 5-Star Client Review</h3>
+          </div>
+          <p class="text-xs text-[#7E7068] mb-6">Add genuine feedback from brides and families to display in the website's Google Reviews section.</p>
+
+          <form id="add-review-form" class="space-y-4">
+            <div class="grid sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Bride / Client Full Name *</label>
+                <input type="text" id="new-rev-name" required placeholder="e.g. Priya Kapoor" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Service Rendered *</label>
+                <select id="new-rev-service" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm bg-white focus:outline-none focus:border-amber-500">
+                  <option value="Bridal HD Makeup & Saree Draping">Bridal HD Makeup & Saree Draping</option>
+                  <option value="Luxury Airbrush Bridal Makeup">Luxury Airbrush Bridal Makeup</option>
+                  <option value="Cocktail & Engagement Glam">Cocktail & Engagement Glam</option>
+                  <option value="Haldi, Mehndi & Reception Look">Haldi, Mehndi & Reception Look</option>
+                  <option value="Destination Wedding Royale">Destination Wedding Royale</option>
+                  <option value="Party & Sider Makeup">Party & Sider Makeup</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Event Venue / Location *</label>
+                <input type="text" id="new-rev-location" required placeholder="e.g. South Delhi / Chattarpur" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Star Rating</label>
+                <select id="new-rev-rating" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm bg-white focus:outline-none focus:border-amber-500">
+                  <option value="5" selected>★★★★★ (5 Stars - Exceptional)</option>
+                  <option value="4">★★★★☆ (4 Stars)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Badge Tag</label>
+                <input type="text" id="new-rev-badge" value="Verified Bride" placeholder="e.g. Verified Bride / Local Guide" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Review Time</label>
+                <input type="text" id="new-rev-time" value="Recently" placeholder="e.g. 2 weeks ago / Recently" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Client Review Text / Testimonial *</label>
+              <textarea id="new-rev-text" required rows="3" placeholder="Write the bride's authentic review praising Arsh Khan's work, punctuality, and long-lasting finish..." class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500"></textarea>
+            </div>
+
+            <button type="submit" id="add-review-btn" class="btn-gold px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer">
+              Publish 5★ Review To Website
+            </button>
+          </form>
+        </div>
+
+        <!-- Active Reviews List -->
+        <div class="bg-white p-8 rounded-2xl border border-amber-200 shadow-sm">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="text-xl font-royal font-bold text-[#1C1714]">Live Google Reviews on Website</h3>
+              <p class="text-xs text-[#7E7068]">Currently active testimonials displayed in the Google Reviews section.</p>
+            </div>
+            <span id="admin-reviews-count" class="bg-amber-100 text-amber-900 text-xs px-3 py-1 rounded-full font-bold">
+              6 Reviews Active
+            </span>
+          </div>
+
+          <div id="admin-reviews-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated by admin.js -->
+          </div>
         </div>
       </section>
 
