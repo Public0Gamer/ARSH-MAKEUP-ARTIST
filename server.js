@@ -659,18 +659,28 @@ app.post('/api/services', requireAuth, (req, res) => {
   const currentData = readJson(SITE_DATA_FILE);
   if (!currentData.services) currentData.services = [];
 
+  let parsedFeatures = [];
+  if (Array.isArray(features)) {
+    parsedFeatures = features.map(f => sanitizeString(f, 100)).filter(Boolean);
+  } else if (typeof features === 'string') {
+    parsedFeatures = features.includes('\n')
+      ? features.split('\n').map(s => sanitizeString(s.trim(), 100)).filter(Boolean)
+      : features.split(',').map(s => sanitizeString(s.trim(), 100)).filter(Boolean);
+  }
+  if (parsedFeatures.length === 0) {
+    parsedFeatures = ['HD Bridal Application', 'Skin Prep & Priming', 'Hair Styling Included'];
+  }
+
   const newService = {
     id: 'srv-' + Date.now(),
     name: sanitizeString(name, 100),
     category: sanitizeString(category, 50) || 'Bridal',
-    tagline: sanitizeString(tagline, 150),
-    description: sanitizeString(description, 500),
-    price: sanitizeString(price, 50) || 'PRICE ON REQUEST',
-    features: Array.isArray(features) 
-      ? features.map(f => sanitizeString(f, 80)) 
-      : (features ? features.split(',').map(s => sanitizeString(s.trim(), 80)) : []),
-    image: image || '/assets/images/bridal_look_1.jpg',
-    badge: sanitizeString(badge, 50) || 'Exclusive'
+    tagline: sanitizeString(tagline, 150) || 'Luxury bespoke makeover',
+    description: sanitizeString(description, 500) || 'Signature bridal styling tailored by Arsh Khan.',
+    price: sanitizeString(price, 50) || 'Starting From ₹15,000',
+    features: parsedFeatures,
+    image: (image && typeof image === 'string' && image.trim()) || 'https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg',
+    badge: sanitizeString(badge, 50) || 'Signature Service'
   };
 
   currentData.services.push(newService);
@@ -693,11 +703,27 @@ app.put('/api/services/:id', requireAuth, (req, res) => {
     return res.status(404).json({ success: false, message: 'Service not found' });
   }
 
-  if (updates.name) updates.name = sanitizeString(updates.name, 100);
-  if (updates.tagline) updates.tagline = sanitizeString(updates.tagline, 150);
-  if (updates.price) updates.price = sanitizeString(updates.price, 50);
+  const srv = currentData.services[index];
+  if (updates.name !== undefined) srv.name = sanitizeString(updates.name, 100);
+  if (updates.category !== undefined) srv.category = sanitizeString(updates.category, 50);
+  if (updates.tagline !== undefined) srv.tagline = sanitizeString(updates.tagline, 150);
+  if (updates.description !== undefined) srv.description = sanitizeString(updates.description, 500);
+  if (updates.price !== undefined) srv.price = sanitizeString(updates.price, 50);
+  if (updates.badge !== undefined) srv.badge = sanitizeString(updates.badge, 50);
+  if (updates.image !== undefined && typeof updates.image === 'string' && updates.image.trim()) {
+    srv.image = updates.image.trim();
+  }
+  if (updates.features !== undefined) {
+    if (Array.isArray(updates.features)) {
+      srv.features = updates.features.map(f => sanitizeString(f, 100)).filter(Boolean);
+    } else if (typeof updates.features === 'string') {
+      srv.features = updates.features.includes('\n')
+        ? updates.features.split('\n').map(s => sanitizeString(s.trim(), 100)).filter(Boolean)
+        : updates.features.split(',').map(s => sanitizeString(s.trim(), 100)).filter(Boolean);
+    }
+  }
 
-  currentData.services[index] = { ...currentData.services[index], ...updates };
+  currentData.services[index] = srv;
 
   if (writeJson(SITE_DATA_FILE, currentData)) {
     res.json({ success: true, message: 'Service updated successfully!', service: currentData.services[index] });

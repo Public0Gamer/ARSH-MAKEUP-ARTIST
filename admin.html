@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Studio CMS | ARSH MAKEUP ARTIST DELHI</title>
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandGold: '#C5A059',
+            brandDark: '#1C1714',
+            brandCream: '#FAF7F2'
+          },
+          fontFamily: {
+            royal: ['Cinzel', 'serif'],
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-[#F8F6F2] text-[#1C1714] min-h-screen">
+
+  <!-- ===================================================================
+       1. LOGIN OVERLAY (Shown when not authenticated)
+       =================================================================== -->
+  <div id="login-overlay" class="fixed inset-0 z-50 bg-[#1C1714]/90 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-8 sm:p-10 max-w-md w-full shadow-2xl border border-amber-300/40 text-center relative overflow-hidden">
+      <!-- Glow background -->
+      <div class="absolute -top-24 -right-24 w-48 h-48 bg-amber-200/40 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex items-center justify-center gap-4 mb-6">
+        <img src="/assets/logo.png" alt="ARSH Logo" class="w-16 h-16 rounded-full border-2 border-amber-400 shadow-md object-contain" />
+        <div class="text-left">
+          <div class="text-2xl font-royal font-black text-[#1C1714] tracking-wider leading-none">ARSH</div>
+          <div class="text-[11px] font-sans font-bold tracking-[3.5px] uppercase text-[#8C6718] mt-1">MAKEUP ARTIST DELHI</div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-royal font-bold text-[#1C1714] mb-1">Studio Administration</h2>
+      <p class="text-xs text-[#7E7068] mb-6">Enter your security key to manage gallery, services, hero banners, and booking leads.</p>
+
+      <form id="admin-login-form" class="space-y-4 text-left">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Admin Security Password</label>
+          <input type="password" id="login-password" required placeholder="Enter your confidential password" class="w-full px-4 py-3 rounded-xl border border-amber-200 focus:outline-none focus:border-amber-500 bg-stone-50 text-sm" />
+          <div class="text-[11px] text-gray-400 mt-1 flex items-center justify-between">
+            <span>🔒 Encrypted Portal Access</span>
+            <span class="text-emerald-700 font-medium">Cloudinary Live</span>
+          </div>
+        </div>
+
+        <button type="submit" id="login-btn" class="w-full btn-gold py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest cursor-pointer shadow-md">
+          Sign In to Studio Portal
+        </button>
+      </form>
+
+      <div class="mt-6 pt-4 border-t border-stone-200 text-xs text-stone-500">
+        <a href="/" class="hover:text-amber-700 flex items-center justify-center gap-1">
+          <span>&larr; Back to Client Website</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       2. MAIN ADMIN PORTAL (Visible after login)
+       =================================================================== -->
+  <div id="admin-app" class="hidden min-h-screen flex flex-col lg:flex-row">
+    <!-- Sidebar -->
+    <aside class="w-full lg:w-72 bg-[#1C1714] text-white flex-shrink-0 flex flex-col justify-between p-6 border-r border-amber-400/20">
+      <div>
+        <!-- Logo & Brand -->
+        <div class="pb-6 mb-6 border-b border-stone-800">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="/assets/logo.png" alt="ARSH Logo" class="w-12 h-12 rounded-full border border-amber-400 shadow-md object-contain" />
+            <div>
+              <div class="text-lg font-royal font-black text-[#F5E6AB] tracking-wider leading-none">ARSH</div>
+              <div class="text-[9px] font-sans font-bold tracking-[2.5px] uppercase text-amber-300 mt-1">MAKEUP ARTIST DELHI</div>
+            </div>
+          </div>
+          <div class="text-[11px] text-emerald-400 font-mono flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Live Production Studio &bull; Cloudinary Active</span>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="space-y-1 text-xs uppercase tracking-wider font-semibold">
+          <button onclick="switchTab('overview')" class="nav-tab active w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left">
+            <span>📊</span>
+            <span>Dashboard Overview</span>
+          </button>
+          <button onclick="switchTab('hero')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left">
+            <span>✨</span>
+            <span>Hero &amp; Banners</span>
+          </button>
+          <button onclick="switchTab('gallery')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left">
+            <span>🖼️</span>
+            <span>Photo Gallery (Cloudinary)</span>
+          </button>
+          <button onclick="switchTab('services')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left">
+            <span>💄</span>
+            <span>Services &amp; Inclusions</span>
+          </button>
+          <button onclick="switchTab('about')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left">
+            <span>👑</span>
+            <span>Artist Profile &amp; Bio</span>
+          </button>
+          <button onclick="switchTab('inquiries')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left justify-between">
+            <div class="flex items-center gap-3">
+              <span>💌</span>
+              <span>Client Inquiries</span>
+            </div>
+            <span id="inquiry-badge-count" class="bg-amber-500 text-black text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
+          </button>
+          <button onclick="switchTab('pricing')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left">
+            <span>💎</span>
+            <span>Packages &amp; Policies</span>
+          </button>
+          <button onclick="switchTab('reviews')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left">
+            <span>⭐</span>
+            <span>Google 5★ Reviews</span>
+          </button>
+          <button onclick="switchTab('contact')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left">
+            <span>📍</span>
+            <span>Contact &amp; Studio Info</span>
+          </button>
+          <button onclick="switchTab('security')" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-stone-800 text-left text-amber-300">
+            <span>🔒</span>
+            <span>Password &amp; Security</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- User footer actions -->
+      <div class="pt-6 border-t border-stone-800 space-y-3">
+        <a href="/" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-stone-800 hover:bg-stone-700 text-xs font-semibold flex items-center justify-between text-amber-200">
+          <span>View Live Website</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+        <button onclick="logoutAdmin()" class="w-full py-2.5 px-4 rounded-xl border border-red-500/40 hover:bg-red-500/20 text-xs text-red-400 font-semibold flex items-center justify-center gap-2 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6 lg:p-10 overflow-y-auto">
+      <!-- Top Bar -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b border-amber-200 gap-4">
+        <div>
+          <h1 id="tab-title" class="text-2xl lg:text-3xl font-royal font-bold text-[#1C1714]">Dashboard Overview</h1>
+          <p id="tab-subtitle" class="text-xs text-[#7E7068]">Real-time controls for ARSH MAKEUP ARTIST DELHI</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold flex items-center gap-2 border border-emerald-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+            <span>Cloudinary Cloud: <strong>gdkzinnv</strong></span>
+          </div>
+          <button onclick="fetchAdminData()" class="p-2 rounded-xl bg-white border border-amber-200 text-stone-700 hover:bg-stone-50 cursor-pointer" title="Refresh Data">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- =============================================================
+           TAB 1: OVERVIEW
+           ============================================================= -->
+      <section id="tab-overview" class="tab-content space-y-8">
+        <!-- Metric Cards -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-amber-200 shadow-xs">
+            <span class="text-xs text-stone-500 uppercase tracking-wider font-semibold">Gallery Photos</span>
+            <div id="stat-gallery-count" class="text-3xl font-royal font-bold text-amber-700 mt-2">0</div>
+            <span class="text-[11px] text-emerald-600 font-medium">Stored on Cloudinary / CDN</span>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-amber-200 shadow-xs">
+            <span class="text-xs text-stone-500 uppercase tracking-wider font-semibold">Active Services</span>
+            <div id="stat-services-count" class="text-3xl font-royal font-bold text-amber-700 mt-2">6</div>
+            <span class="text-[11px] text-stone-500">Fully Customizable</span>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-amber-200 shadow-xs">
+            <span class="text-xs text-stone-500 uppercase tracking-wider font-semibold">Client Inquiries</span>
+            <div id="stat-inquiries-count" class="text-3xl font-royal font-bold text-amber-700 mt-2">0</div>
+            <span class="text-[11px] text-amber-700 font-medium">Direct leads tracker</span>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-amber-200 shadow-xs">
+            <span class="text-xs text-stone-500 uppercase tracking-wider font-semibold">Studio Security</span>
+            <div class="text-base font-bold text-emerald-700 mt-2">PBKDF2 Protected</div>
+            <span class="text-[11px] text-stone-500">Changeable Password</span>
+          </div>
+        </div>
+
+        <!-- Quick Access Banners -->
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="bg-white p-8 rounded-2xl border border-amber-200">
+            <h3 class="font-royal font-bold text-xl text-[#1C1714] mb-2">📸 Direct Cloudinary Media Upload</h3>
+            <p class="text-xs text-[#7E7068] mb-6">Upload bridal photos directly into your Cloudinary cloud <code class="text-amber-800 font-mono bg-amber-50 px-1 py-0.5 rounded">gdkzinnv</code>. Newly uploaded photos immediately appear on the client website.</p>
+            <button onclick="switchTab('gallery')" class="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+              Go to Gallery Manager &rarr;
+            </button>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl border border-amber-200">
+            <h3 class="font-royal font-bold text-xl text-[#1C1714] mb-2">🔒 Change Admin Password</h3>
+            <p class="text-xs text-[#7E7068] mb-6">Keep your studio admin access secure. You can update your master password anytime with single-click verification.</p>
+            <button onclick="switchTab('security')" class="btn-gold-outline px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+              Manage Security &rarr;
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           TAB 2: HERO & BANNERS (Real update & upload)
+           ============================================================= -->
+      <section id="tab-hero" class="tab-content hidden space-y-6">
+        <div class="bg-white p-8 rounded-2xl border border-amber-200">
+          <h3 class="text-xl font-royal font-bold text-[#1C1714] mb-4">Hero Section &amp; Main Banner Settings</h3>
+          <p class="text-xs text-[#7E7068] mb-6">Control the primary headline, tagline, trust badge, and hero images displayed at the top of the website.</p>
+
+          <form id="hero-settings-form" class="space-y-6">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Top Badge Text</label>
+              <input type="text" id="hero-badge" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Primary Headline</label>
+                <input type="text" id="hero-title" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Sub-headline / Tagline</label>
+                <input type="text" id="hero-subtitle" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+              </div>
+            </div>
+
+            <!-- Hero Image Upload via Cloudinary -->
+            <div class="border-t border-stone-200 pt-6">
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Hero Main Showcase Image</label>
+              <div class="flex flex-col sm:flex-row items-center gap-6 p-6 rounded-2xl bg-amber-50/40 border border-amber-200">
+                <img id="hero-preview-img" src="" alt="Hero Preview" class="w-36 h-48 object-cover rounded-2xl border-2 border-amber-400 shadow-md flex-shrink-0" />
+                <div class="space-y-4 flex-1">
+                  <div>
+                    <h4 class="text-sm font-bold text-[#1C1714]">Upload New Hero Photo (Instant Live)</h4>
+                    <p class="text-xs text-stone-600 mt-0.5">Select a photo from your computer or phone. It will immediately upload to Cloudinary and update your homepage hero section live!</p>
+                  </div>
+
+                  <div class="flex flex-wrap items-center gap-3">
+                    <input type="file" id="hero-file-input" accept="image/*" onchange="autoUploadHero(this)" class="text-xs text-stone-600 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-500 file:text-black hover:file:bg-amber-400 cursor-pointer" />
+                    <span id="hero-upload-status" class="text-xs font-semibold text-amber-800"></span>
+                  </div>
+
+                  <div>
+                    <span class="text-xs text-stone-500 block mb-1">Or paste direct image URL:</span>
+                    <div class="flex items-center gap-2">
+                      <input type="text" id="hero-img-url" placeholder="https://res.cloudinary.com/..." class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white" />
+                      <button type="button" onclick="applyHeroUrlDirectly()" class="btn-gold-outline px-4 py-2 rounded-xl text-xs font-semibold flex-shrink-0">
+                        Apply URL
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Pick from Existing Gallery Photos -->
+              <div class="mt-6 pt-6 border-t border-stone-200">
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="text-xs font-bold uppercase tracking-wider text-gray-700">Or Select from Existing Gallery Photos:</h4>
+                  <span class="text-[11px] text-amber-800 font-medium">Click any photo below to set as Hero</span>
+                </div>
+                <div id="hero-gallery-picker" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+                  <!-- Populated dynamically via admin.js -->
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-gold px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+              Save Headline &amp; Text Changes
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           TAB 3: PHOTO GALLERY (Cloudinary Upload, Add, Delete)
+           ============================================================= -->
+      <section id="tab-gallery" class="tab-content hidden space-y-8">
+        <!-- Upload Box -->
+        <div class="bg-white p-8 rounded-2xl border border-amber-200 shadow-xs">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-royal font-bold text-[#1C1714]">Add New Photo (Cloudinary Upload)</h3>
+              <p class="text-xs text-[#7E7068]">Images will be permanently uploaded to Cloudinary cloud: <code class="font-mono text-amber-800 font-bold">gdkzinnv</code></p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase bg-amber-100 text-amber-800 border border-amber-300">
+              Live Storage
+            </span>
+          </div>
+
+          <form id="gallery-upload-form" class="space-y-4">
+            <div class="grid sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Photo Title *</label>
+                <input type="text" id="gal-new-title" required placeholder="e.g. Royal Red Lehenga Look" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Category *</label>
+                <select id="gal-new-category" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm">
+                  <option value="Bridal">Bridal HD / Airbrush</option>
+                  <option value="Engagement">Engagement Party</option>
+                  <option value="Reception">Reception</option>
+                  <option value="Haldi">Haldi / Mehndi</option>
+                  <option value="Styling">Hair &amp; Saree Draping</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Details / Caption</label>
+                <input type="text" id="gal-new-details" placeholder="e.g. Traditional Kundan jewellery & matte base" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm" />
+              </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-amber-50/50 border-2 border-dashed border-amber-300 text-center">
+              <input type="file" id="gal-file-input" accept="image/*" class="hidden" onchange="previewGalleryUpload(this)" />
+              <label for="gal-file-input" class="cursor-pointer flex flex-col items-center">
+                <span class="text-3xl mb-2">📁</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-900">Click to Select Bridal Photo</span>
+                <span class="text-[11px] text-gray-500 mt-1">Supports JPG, PNG, WEBP (Max 15MB)</span>
+              </label>
+              <div id="gal-upload-preview" class="mt-4 hidden flex items-center justify-center gap-4">
+                <img id="gal-preview-thumb" src="" alt="Upload preview" class="w-24 h-24 object-cover rounded-xl border border-amber-400" />
+                <span id="gal-preview-name" class="text-xs font-semibold text-stone-700"></span>
+              </div>
+            </div>
+
+            <div class="p-3.5 bg-amber-50 rounded-xl border border-amber-200 flex items-center justify-between">
+              <label class="flex items-center gap-2.5 cursor-pointer text-xs font-bold text-amber-950">
+                <input type="checkbox" id="gal-set-as-hero" class="w-4 h-4 text-amber-600 rounded cursor-pointer" checked />
+                <span>👑 Also set this photo as the Hero Section Showcase on Homepage</span>
+              </label>
+              <span class="text-[11px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full">Recommended</span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2">
+              <div class="text-xs text-stone-500">
+                Or enter image URL directly:
+                <input type="text" id="gal-direct-url" placeholder="https://..." class="ml-1 sm:ml-2 px-3 py-1.5 rounded-lg border border-amber-200 text-xs w-64" />
+              </div>
+              <button type="submit" id="gal-submit-btn" class="btn-gold px-7 py-3 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer w-full sm:w-auto">
+                Upload &amp; Publish To Gallery
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Current Gallery List -->
+        <div class="bg-white p-8 rounded-2xl border border-amber-200">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-royal font-bold text-[#1C1714]">Current Gallery Photos</h3>
+            <span id="gallery-count-badge" class="text-xs font-bold text-amber-800 bg-amber-100 px-3 py-1 rounded-full">0 Photos</span>
+          </div>
+
+          <div id="admin-gallery-list" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Populated via admin.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           TAB 4: SERVICES & INCLUSIONS (Add, Edit, Delete)
+           ============================================================= -->
+      <section id="tab-services" class="tab-content hidden space-y-8">
+        <div class="bg-white p-8 rounded-2xl border border-amber-200 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-amber-200 gap-4 mb-6">
+            <div>
+              <div class="flex items-center gap-3">
+                <h3 class="text-xl font-royal font-bold text-[#1C1714]">Services &amp; Inclusions Manager</h3>
+                <span id="admin-services-count-badge" class="bg-amber-100 text-amber-900 border border-amber-300 text-xs px-3 py-1 rounded-full font-bold">
+                  6 Active Services
+                </span>
+              </div>
+              <p class="text-xs text-[#7E7068] mt-1">Live website (`arshmakeupartist.com`) per chal rhi sabhi services ko yahan se Add, Edit (Price, Photo, Inclusions), ya Delete kar sakte hain.</p>
+            </div>
+            <button onclick="openAddServiceModal()" class="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-md transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+              <span>+ Add New Service</span>
+            </button>
+          </div>
+
+          <div id="admin-services-list" class="space-y-4">
+            <!-- Populated dynamically via admin.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           TAB 5: ARTIST PROFILE & BIO
+           ============================================================= -->
+      <section id="tab-about" class="tab-content hidden space-y-6">
+        <div class="bg-white p-8 rounded-2xl border border-amber-200">
+          <h3 class="text-xl font-royal font-bold text-[#1C1714] mb-2">Artist Profile &amp; Bio Information</h3>
+          <p class="text-xs text-[#7E7068] mb-6">Update Arsh Khan's public profile, portrait photo, and signature philosophy.</p>
+
+          <form id="about-settings-form" class="space-y-6">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Artist Name</label>
+                <input type="text" id="about-name" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Artist Professional Title</label>
+                <input type="text" id="about-title" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+              </div>
+            </div>
+
+            <!-- Artist Photo Upload -->
+            <div class="border-y border-stone-200 py-6">
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Artist Portrait Photo</label>
+              <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-xl bg-stone-50 border border-stone-200">
+                <img id="artist-preview-img" src="" alt="Artist Preview" class="w-28 h-36 object-cover rounded-xl border-2 border-amber-300" />
+                <div class="space-y-3 flex-1">
+                  <p class="text-xs text-stone-600">Upload new artist photo to Cloudinary:</p>
+                  <div class="flex items-center gap-3">
+                    <input type="file" id="artist-file-input" accept="image/*" class="text-xs text-stone-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-100 file:text-amber-900 hover:file:bg-amber-200 cursor-pointer" />
+                    <button type="button" onclick="uploadArtistImage()" class="btn-gold px-4 py-2 rounded-lg text-xs font-bold uppercase">
+                      Upload
+                    </button>
+                  </div>
+                  <input type="text" id="artist-img-url" placeholder="Or paste Cloudinary image URL" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Signature Quote</label>
+              <input type="text" id="about-quote" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Biography Paragraph 1</label>
+              <textarea id="about-bio-1" rows="3" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Biography Paragraph 2</label>
+              <textarea id="about-bio-2" rows="3" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm"></textarea>
+            </div>
+
+            <button type="submit" class="btn-gold px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+              Save Artist Profile
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           TAB 6: CLIENT INQUIRIES & BOOKING TRACKER
+           ============================================================= -->
+      <section id="tab-inquiries" class="tab-content hidden space-y-6">
+        <div class="bg-white p-8 rounded-2xl border border-amber-200">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="text-xl font-royal font-bold text-[#1C1714]">Client Consultation Inquiries</h3>
+              <p class="text-xs text-[#7E7068]">Leads submitted through the website booking form.</p>
+            </div>
+            <button onclick="fetchInquiries()" class="btn-gold-outline px-4 py-2 rounded-xl text-xs font-semibold">
+              Refresh Leads
+            </button>
+          </div>
+
+          <div id="admin-inquiries-table" class="space-y-3">
+            <!-- Populated via admin.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           TAB 7: PACKAGES & POLICIES
+           ============================================================= -->
+      <section id="tab-pricing" class="tab-content hidden space-y-6">
+        <div class="bg-white p-8 rounded-2xl border border-amber-200">
+          <h3 class="text-xl font-royal font-bold text-[#1C1714] mb-2">Pricing &amp; Studio Policies</h3>
+          <p class="text-xs text-[#7E7068] mb-6">Edit the 50% advance policy, 15-20 days advance notice, and package notes.</p>
+
+          <form id="pricing-policy-form" class="space-y-6">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Pricing Banner Title</label>
+              <input type="text" id="pricing-title" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Pricing Banner Tag (Status Badge)</label>
+              <input type="text" id="pricing-status" placeholder="e.g. Bridal Packages Starting From ₹15,000" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Pricing Notice (Package Notice / Details)</label>
+              <textarea id="pricing-notice" rows="2" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm"></textarea>
+            </div>
+
+            <div class="border-t border-stone-200 pt-6">
+              <h4 class="font-royal font-bold text-base text-[#1C1714] mb-4">Core Policies</h4>
+              <div class="space-y-4" id="policies-edit-list">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <button type="submit" class="btn-gold px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+              Save Pricing &amp; Policies
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           TAB: GOOGLE 5-STAR REVIEWS MANAGEMENT
+           ============================================================= -->
+      <section id="tab-reviews" class="tab-content hidden space-y-8">
+        <!-- Add New Review Card -->
+        <div class="bg-white p-8 rounded-2xl border border-amber-200 shadow-sm">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800 text-lg font-bold">⭐</div>
+            <h3 class="text-xl font-royal font-bold text-[#1C1714]">Add New 5-Star Client Review</h3>
+          </div>
+          <p class="text-xs text-[#7E7068] mb-6">Add genuine feedback from brides and families to display in the website's Google Reviews section.</p>
+
+          <form id="add-review-form" class="space-y-4">
+            <div class="grid sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Bride / Client Full Name *</label>
+                <input type="text" id="new-rev-name" required placeholder="e.g. Priya Kapoor" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Service Rendered *</label>
+                <select id="new-rev-service" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm bg-white focus:outline-none focus:border-amber-500">
+                  <option value="Bridal HD Makeup & Saree Draping">Bridal HD Makeup & Saree Draping</option>
+                  <option value="Luxury Airbrush Bridal Makeup">Luxury Airbrush Bridal Makeup</option>
+                  <option value="Cocktail & Engagement Glam">Cocktail & Engagement Glam</option>
+                  <option value="Haldi, Mehndi & Reception Look">Haldi, Mehndi & Reception Look</option>
+                  <option value="Destination Wedding Royale">Destination Wedding Royale</option>
+                  <option value="Party & Sider Makeup">Party & Sider Makeup</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Event Venue / Location *</label>
+                <input type="text" id="new-rev-location" required placeholder="e.g. South Delhi / Chattarpur" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Star Rating</label>
+                <select id="new-rev-rating" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm bg-white focus:outline-none focus:border-amber-500">
+                  <option value="5" selected>★★★★★ (5 Stars - Exceptional)</option>
+                  <option value="4">★★★★☆ (4 Stars)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Badge Tag</label>
+                <input type="text" id="new-rev-badge" value="Verified Bride" placeholder="e.g. Verified Bride / Local Guide" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Review Time</label>
+                <input type="text" id="new-rev-time" value="Recently" placeholder="e.g. 2 weeks ago / Recently" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Client Review Text / Testimonial *</label>
+              <textarea id="new-rev-text" required rows="3" placeholder="Write the bride's authentic review praising Arsh Khan's work, punctuality, and long-lasting finish..." class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500"></textarea>
+            </div>
+
+            <button type="submit" id="add-review-btn" class="btn-gold px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer">
+              Publish 5★ Review To Website
+            </button>
+          </form>
+        </div>
+
+        <!-- Active Reviews List -->
+        <div class="bg-white p-8 rounded-2xl border border-amber-200 shadow-sm">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="text-xl font-royal font-bold text-[#1C1714]">Live Google Reviews on Website</h3>
+              <p class="text-xs text-[#7E7068]">Currently active testimonials displayed in the Google Reviews section.</p>
+            </div>
+            <span id="admin-reviews-count" class="bg-amber-100 text-amber-900 text-xs px-3 py-1 rounded-full font-bold">
+              6 Reviews Active
+            </span>
+          </div>
+
+          <div id="admin-reviews-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated by admin.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           TAB 8: CONTACT & STUDIO INFO
+           ============================================================= -->
+      <section id="tab-contact" class="tab-content hidden space-y-6">
+        <div class="bg-white p-8 rounded-2xl border border-amber-200">
+          <h3 class="text-xl font-royal font-bold text-[#1C1714] mb-2">Contact Details &amp; Location</h3>
+          <p class="text-xs text-[#7E7068] mb-6">Update contact phone, WhatsApp, Instagram handle, and address details.</p>
+
+          <form id="contact-settings-form" class="space-y-6">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Primary Phone Number *</label>
+                <input type="text" id="contact-phone" required class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">WhatsApp Number *</label>
+                <input type="text" id="contact-whatsapp" required class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Instagram Handle</label>
+                <input type="text" id="contact-instagram" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Instagram Profile URL</label>
+                <input type="url" id="contact-instagram-url" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Pincode</label>
+                <input type="text" id="contact-pincode" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Delhi NCR Coverage Notice</label>
+                <input type="text" id="contact-coverage" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Studio Address</label>
+              <input type="text" id="contact-address" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm" />
+            </div>
+
+            <button type="submit" class="btn-gold px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+              Save Contact Settings
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           TAB 9: PASSWORD MANAGEMENT SYSTEM (REAL SECURITY)
+           ============================================================= -->
+      <section id="tab-security" class="tab-content hidden space-y-6">
+        <div class="bg-white p-8 rounded-2xl border border-amber-200 max-w-2xl">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-2xl">🔐</span>
+            <h3 class="text-xl font-royal font-bold text-[#1C1714]">Password Management System</h3>
+          </div>
+          <p class="text-xs text-[#7E7068] mb-6">Aap yahan se apna custom password set kar sakte hain. Purana password enter karke naya password confirm karein.</p>
+
+          <form id="change-password-form" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Current Password *</label>
+              <input type="password" id="pw-current" required placeholder="Enter current password" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">New Password *</label>
+              <input type="password" id="pw-new" required placeholder="At least 5 characters" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Confirm New Password *</label>
+              <input type="password" id="pw-confirm" required placeholder="Repeat new password" class="w-full px-4 py-3 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+            </div>
+
+            <div class="p-4 rounded-xl bg-amber-50 text-xs text-amber-900 border border-amber-200">
+              💡 <strong>Security Note:</strong> Passwords are cryptographically salted and hashed using PBKDF2 (SHA-512) with 10,000 rounds. Even server administrators cannot view raw text passwords.
+            </div>
+
+            <button type="submit" id="pw-submit-btn" class="btn-gold px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer">
+              Update Admin Password
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===================================================================
+       SERVICE ADD / EDIT MODAL (LUXURY CMS CONTROL)
+       =================================================================== -->
+  <div id="service-modal" class="fixed inset-0 z-50 bg-[#1C1714]/80 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-amber-300 my-8 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="p-6 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200 flex items-center justify-between">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-[#8C6718]">Services CMS</span>
+          <h3 id="srv-modal-title" class="text-xl font-royal font-bold text-[#1C1714]">Add New Bridal Service</h3>
+        </div>
+        <button type="button" onclick="closeServiceModal()" class="w-8 h-8 rounded-full bg-white border border-amber-200 text-stone-500 hover:text-black hover:bg-stone-100 flex items-center justify-center cursor-pointer transition-colors text-lg font-bold">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal Body / Form -->
+      <form id="service-form" onsubmit="handleServiceFormSubmit(event)" class="p-6 sm:p-8 space-y-5">
+        <input type="hidden" id="srv-form-id" value="" />
+
+        <!-- Row 1: Name & Category -->
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Service Name *</label>
+            <input type="text" id="srv-form-name" required placeholder="e.g. BRIDAL HD / AIRBRUSH" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Category *</label>
+            <select id="srv-form-category" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500 bg-white">
+              <option value="Bridal">Bridal HD / Royal</option>
+              <option value="Pre-Wedding">Pre-Wedding (Engagement / Haldi / Mehndi)</option>
+              <option value="Post-Wedding">Post-Wedding / Reception</option>
+              <option value="Styling">Hair &amp; Saree Draping</option>
+              <option value="Special">Destination Wedding / VIP</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 2: Tagline & Badge -->
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Tagline / Short Hook</label>
+            <input type="text" id="srv-form-tagline" placeholder="e.g. Royal, long-lasting wedding day glam" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Badge Text</label>
+            <input type="text" id="srv-form-badge" placeholder="e.g. Signature Service, Most Requested, Couture" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+          </div>
+        </div>
+
+        <!-- Row 3: Price -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Pricing Display *</label>
+          <input type="text" id="srv-form-price" required placeholder="Starting From ₹15,000" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+          <p class="text-[11px] text-stone-500 mt-1">Default: <strong>Starting From ₹15,000</strong> (Aap isse kisi bhi service ke hisab se badal sakte hain)</p>
+        </div>
+
+        <!-- Row 4: Description -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Full Service Description</label>
+          <textarea id="srv-form-description" rows="3" placeholder="Bespoke makeup styling description that explains the process, skin prep, and luxury products used..." class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500"></textarea>
+        </div>
+
+        <!-- Row 5: Features / Inclusions -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Service Inclusions (Har line me ek point likhein)</label>
+          <textarea id="srv-form-features" rows="4" placeholder="Ultra HD or Silicon Airbrush Finish&#10;Pre-event Skin Prep &amp; Hydration Mask&#10;Handcrafted 3D Mink Lashes&#10;Royal Hairstyle &amp; Fresh Floral Styling&#10;Dupatta, Lehenga &amp; Heavy Jewelry Setting" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm font-mono focus:outline-none focus:border-amber-500"></textarea>
+          <p class="text-[11px] text-stone-500 mt-1">💡 Har naye point ko nayi line (Enter) dabakar likhein.</p>
+        </div>
+
+        <!-- Row 6: Image Upload / URL -->
+        <div class="p-4 rounded-2xl bg-amber-50/50 border border-amber-200 space-y-3">
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700">Service Showcase Image</label>
+          
+          <div class="flex items-center gap-4">
+            <img id="srv-preview-img" src="/assets/images/bridal_look_1.jpg" alt="Preview" class="w-20 h-20 rounded-xl object-cover border-2 border-amber-300 flex-shrink-0 shadow-sm" />
+            
+            <div class="space-y-2 flex-1">
+              <div>
+                <span class="text-xs text-stone-600 font-semibold block mb-1">Upload Photo to Cloudinary:</span>
+                <input type="file" id="srv-file-input" accept="image/*" onchange="autoUploadServicePhoto(this)" class="text-xs text-stone-600 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-black hover:file:bg-amber-400 cursor-pointer" />
+                <span id="srv-upload-status" class="text-xs font-semibold text-amber-800 ml-2"></span>
+              </div>
+              
+              <div>
+                <span class="text-[11px] text-stone-500 block mb-0.5">Or paste direct image URL:</span>
+                <input type="text" id="srv-form-image" placeholder="https://res.cloudinary.com/..." oninput="updateSrvPreview(this.value)" class="w-full px-3 py-1.5 rounded-lg border border-stone-300 text-xs bg-white" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer Actions -->
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-stone-200">
+          <button type="button" onclick="closeServiceModal()" class="px-5 py-2.5 rounded-xl border border-stone-300 hover:bg-stone-100 text-xs font-semibold text-stone-700 cursor-pointer">
+            Cancel
+          </button>
+          <button type="submit" id="srv-submit-btn" class="btn-gold px-8 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer shadow-md">
+            Save &amp; Publish Service
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

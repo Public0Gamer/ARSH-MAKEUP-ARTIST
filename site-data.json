@@ -1,0 +1,389 @@
+{
+  "branding": {
+    "name": "ARSH MAKEUP ARTIST DELHI",
+    "shortName": "Arsh Khan",
+    "tagline": "Enhancing your natural beauty — Bridal specialist in Delhi • PAN India available for destination weddings",
+    "established": "Delhi NCR",
+    "logoSubtitle": "Freelance Professional & Destination Wedding Makeup Artist",
+    "logoUrl": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790152811/arsh_makeup_artist/arsh_official_logo.png"
+  },
+  "contact": {
+    "phone": "7428701987",
+    "whatsapp": "7428701987",
+    "pincode": "110017",
+    "address": "Malviya Nagar & Saket, South Delhi, Pincode 110017",
+    "coverage": "All Delhi NCR & Destination Weddings across India",
+    "instagram": "@arshkhan_makeupartist",
+    "instagramUrl": "https://instagram.com/arshkhan_makeupartist",
+    "workingHours": "Mon - Sun: 7:00 AM - 10:00 PM (By Prior Appointment)"
+  },
+  "hero": {
+    "badge": "DELHI NCR'S PREMIER BRIDAL SPECIALIST",
+    "title": "Enhancing Your Natural Beauty",
+    "subtitle": "Bespoke bridal makeovers in Delhi NCR & PAN India available for destination weddings",
+    "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790152399/arsh_makeup_artist/nt6bsg7bzqrpjrpjqtw9.jpg",
+    "heroImages": [
+      "https://res.cloudinary.com/gdkzinnv/image/upload/v1790152399/arsh_makeup_artist/nt6bsg7bzqrpjrpjqtw9.jpg"
+    ]
+  },
+  "about": {
+    "artistName": "Arsh Khan",
+    "artistTitle": "Celebrity & Luxury Bridal Makeup Artist",
+    "experience": "8+ Years of Crafting Perfection",
+    "artistImage": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg",
+    "quote": "Makeup is not a mask; it is the art of illuminating the royal goddess within you.",
+    "bioParagraph1": "Welcome to the world of Arsh Khan — Delhi's acclaimed bridal makeup artist known for creating breathtaking, photogenic, and skin-like bridal transformations. Based in South Delhi (Pincode 110017) and serving the entirety of Delhi NCR and royal destination venues across India.",
+    "bioParagraph2": "Arsh's signature technique blends modern global aesthetics with timeless Indian royal tradition. Every stroke is measured to enhance your unique facial architecture, ensuring your bridal glow remains immaculate under 4K video lights, tearful vidai moments, and late-night celebrations.",
+    "highlights": [
+      "Customized Skin Preparation & High-End Priming",
+      "Specialist in Heavy Kundan & Saree / Dupatta Draping",
+      "Strictly 100% Original Global Luxury Products",
+      "Dedicated On-Location Bridal Studio Experience"
+    ]
+  },
+  "services": [
+    {
+      "id": "srv-1",
+      "name": "BRIDAL HD / AIRBRUSH",
+      "category": "Bridal",
+      "tagline": "Royal, long-lasting wedding day glam",
+      "description": "Flawless camera-ready high-definition & silicone airbrush application crafted to withstand all-day wedding rituals, intense flash photography, and tears with featherlight weight.",
+      "price": "Starting From ₹15,000",
+      "features": [
+        "Ultra HD or Silicon Airbrush Finish",
+        "Pre-event Skin Prep & Hydration Mask",
+        "Handcrafted 3D Mink Lashes",
+        "Royal Hairstyle & Fresh Floral Styling",
+        "Dupatta, Lehenga & Heavy Jewelry Setting",
+        "Complementary Touch-Up Kit"
+      ],
+      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg",
+      "badge": "Signature Service"
+    },
+    {
+      "id": "srv-2",
+      "name": "ENGAGEMENT PARTY",
+      "category": "Pre-Wedding",
+      "tagline": "Chic, radiant & contemporary evening glam",
+      "description": "Modern cocktail glow tailored to your gown or lehenga palette. Focused on glass-skin glow, softly sculpted contouring, and defined glamorous eyes.",
+      "price": "Starting From ₹15,000",
+      "features": [
+        "Luminous Glass Skin Base",
+        "Defined Soft Glam or Smokey Eyes",
+        "Hollywood Waves or Textured Updo",
+        "Gown/Lehenga Draping Support",
+        "Premium Lash Accents"
+      ],
+      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151736/arsh_makeup_artist/bridal_look_2_eyes.jpg",
+      "badge": "Most Requested"
+    },
+    {
+      "id": "srv-3",
+      "name": "HALDI / MEHNDI",
+      "category": "Pre-Wedding",
+      "tagline": "Vibrant, sun-kissed & sweat-proof",
+      "description": "Dewy, fresh daytime makeup engineered with sweat-proof and waterproof products so you dance and celebrate flower showers worry-free.",
+      "price": "Starting From ₹15,000",
+      "features": [
+        "Waterproof Radiant Finish",
+        "Floral Hair Jewelry & Braid Accents",
+        "Peach/Coral Sun-Kissed Palette",
+        "Featherlight Skin Feel"
+      ],
+      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151739/arsh_makeup_artist/bridal_look_4_kanjeevaram.jpg",
+      "badge": "Festive Glam"
+    },
+    {
+      "id": "srv-4",
+      "name": "RECEPTION",
+      "category": "Post-Wedding",
+      "tagline": "Red-carpet couture splendour",
+      "description": "High-octane couture makeup designed specifically for evening chandelier lighting, dramatic silhouettes, and statement royal jewelry.",
+      "price": "Starting From ₹15,000",
+      "features": [
+        "High-Drama Shimmer/Cut-Crease Eye Art",
+        "Sculpted High-Definition Cheekbones",
+        "Grand Royal Hairstyle or Sleek Glam",
+        "Full Outfit & Jewelry Pinning Assistance"
+      ],
+      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151738/arsh_makeup_artist/bridal_look_3_varmala.jpg",
+      "badge": "Couture"
+    },
+    {
+      "id": "srv-5",
+      "name": "HAIR & SAREE DRAPING",
+      "category": "Styling",
+      "tagline": "Masterful pleats & regal bridal hairdos",
+      "description": "Specialized draping for heavy can-can lehengas, South Indian Kanjeevarams, Gujarati styles, and intricate floral braids with authentic accessories.",
+      "price": "Starting From ₹15,000",
+      "features": [
+        "Precision Steamed & Pin-Straight Pleats",
+        "Secure Pinning & Comfort Guarantee",
+        "Traditional & Western Saree Styles",
+        "Matha Patti & Floral Garland Setting"
+      ],
+      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151739/arsh_makeup_artist/bridal_look_4_kanjeevaram.jpg",
+      "badge": "Master Craft"
+    },
+    {
+      "id": "srv-6",
+      "name": "DESTINATION WEDDING",
+      "category": "Special",
+      "tagline": "On-location luxury across India & beyond",
+      "description": "Complete wedding entourage and bridal concierge makeup services traveled anywhere across Udaipur, Jaipur, Goa, Jim Corbett, and abroad.",
+      "price": "Starting From ₹15,000",
+      "features": [
+        "Artist & Senior Assistant On-Site",
+        "Complete Multi-Day Ceremony Coverage",
+        "Bride + Mother & Sister Add-on options",
+        "Personalized Ceremony Moodboard"
+      ],
+      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg",
+      "badge": "VIP Exclusive"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gal-bridal_look_1_red",
+      "title": "Royal Red Lehenga Bridal Splendor",
+      "category": "Bridal",
+      "url": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg",
+      "featured": true,
+      "details": "Iconic traditional red bridal look with heavy Kundan jewelry, maang tikka, chooda, and soft sculpted HD base."
+    },
+    {
+      "id": "gal-bridal_look_2_eyes",
+      "title": "Dramatic Cut-Crease & Gold Glimmer",
+      "category": "Bridal",
+      "url": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151736/arsh_makeup_artist/bridal_look_2_eyes.jpg",
+      "featured": true,
+      "details": "Intricate dual-tone eyeshadow art featuring royal purple, 24K gold shimmer, and emerald circular matha patti."
+    },
+    {
+      "id": "gal-bridal_look_3_varmala",
+      "title": "Chandelier Reception Royalty",
+      "category": "Reception",
+      "url": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151738/arsh_makeup_artist/bridal_look_3_varmala.jpg",
+      "featured": true,
+      "details": "Heavily embellished gold scalloped blouse with royal varmala, sheer dupatta, and radiant longwear skin."
+    },
+    {
+      "id": "gal-bridal_look_4_kanjeevaram",
+      "title": "Temple Gold & Magenta Silk Bride",
+      "category": "Bridal",
+      "url": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151739/arsh_makeup_artist/bridal_look_4_kanjeevaram.jpg",
+      "featured": true,
+      "details": "Regal South Indian bridal styling in rich magenta pink silk saree paired with layered antique temple jewelry."
+    }
+  ],
+  "pricing": {
+    "title": "BESPOKE BRIDAL PACKAGES",
+    "status": "Bridal Packages Starting From ₹15,000",
+    "notice": "Due to personalized skin prep, custom bridal hair styling, and venue timing requirements, all packages are quoted on request to best serve your event vision.",
+    "packages": [
+      {
+        "name": "Royal Bridal HD Package",
+        "tag": "Most Popular",
+        "price": "Starting From ₹15,000",
+        "idealFor": "Wedding Day Main Ceremony",
+        "includes": [
+          "Ultra HD Base with International Luxury Cosmetics",
+          "Custom 3D Mink Eyelashes & Lenses",
+          "Advanced Bridal Hair Artistry & Floral Setting",
+          "Complete Saree / Dupatta & Heavy Jewelry Draping",
+          "On-site Touch-up Emergency Kit"
+        ]
+      },
+      {
+        "name": "Luxury Airbrush Signature",
+        "tag": "Ultra Sweatproof",
+        "price": "Starting From ₹15,000",
+        "idealFor": "Summer Weddings & Long Hour Events",
+        "includes": [
+          "Silicon Airbrush 24-Hour Flawless Base",
+          "High Definition Waterproof Eye Makeup",
+          "Royal Hair Extensions & Crown Styling",
+          "Multi-Dupatta Pinning & Accessories Setup",
+          "Pre-event Skin Hydration Protocol"
+        ]
+      },
+      {
+        "name": "Pre-Wedding & Sangeet Glow",
+        "tag": "Party Glam",
+        "price": "Starting From ₹15,000",
+        "idealFor": "Engagement, Sangeet, Cocktail, Reception",
+        "includes": [
+          "Dewy Glass-Skin or Matte Finish Base",
+          "Sculpted Cheekbones & Glamour Eyes",
+          "Hairstyle of Choice (Waves, Braids, Updo)",
+          "Outfit Draping & Accessory Alignment",
+          "MAC / Huda Beauty / NARS Products"
+        ]
+      },
+      {
+        "name": "Destination Wedding Royale",
+        "tag": "All-Inclusive",
+        "price": "Starting From ₹15,000",
+        "idealFor": "Palace & Resort Destination Celebrations",
+        "includes": [
+          "Dedicated Artist & Assistant On-Site",
+          "Coverage for Haldi, Mehndi, Sangeet & Pheras",
+          "Custom Bridal Consultation & Moodboard",
+          "Bride + Mother/Sister Special Rates"
+        ]
+      }
+    ]
+  },
+  "policy": {
+    "title": "STUDIO & BOOKING POLICIES",
+    "subtitle": "Please review our booking guidelines before scheduling your consultation.",
+    "items": [
+      {
+        "title": "50% Advance Booking (Non-Refundable)",
+        "badge": "Mandatory",
+        "desc": "A 50% non-refundable advance deposit is required to confirm and lock your wedding date in our calendar. Without an advance deposit, dates remain open to other inquiries."
+      },
+      {
+        "title": "15-20 Days Prior Advance Booking",
+        "badge": "Recommended",
+        "desc": "Bridal dates during the peak wedding season fill up quickly. We strongly advise confirming your booking at least 15 to 20 days in advance to reserve your preferred artist slot."
+      },
+      {
+        "title": "Outstation Travel & Stay Extra",
+        "badge": "Destination",
+        "desc": "For all destination or outstation weddings outside Delhi NCR, client arranges or reimburses round-trip travel tickets and secure hotel accommodations for the artist and assistant."
+      },
+      {
+        "title": "100% Genuine Luxury Products",
+        "badge": "Quality Assurance",
+        "desc": "We exclusively use top-tier genuine international brands: MAC, Huda Beauty, NARS, Bobbi Brown, Charlotte Tilbury, and Dior. We maintain strict hygiene and sanitize all brushes between clients."
+      }
+    ]
+  },
+  "brands": [
+    {
+      "name": "MAC Cosmetics",
+      "origin": "Canada / USA",
+      "badge": "Studio Fix HD"
+    },
+    {
+      "name": "Huda Beauty",
+      "origin": "Dubai / Global",
+      "badge": "Faux Filter & Rose Quartz"
+    },
+    {
+      "name": "NARS",
+      "origin": "France",
+      "badge": "Radiant Longwear"
+    },
+    {
+      "name": "Bobbi Brown",
+      "origin": "New York",
+      "badge": "Vitamin Enriched Prep"
+    },
+    {
+      "name": "Charlotte Tilbury",
+      "origin": "London",
+      "badge": "Airbrush Flawless Glow"
+    },
+    {
+      "name": "Dior Beauty",
+      "origin": "Paris",
+      "badge": "Backstage Highlighters"
+    }
+  ],
+  "reviews": {
+    "title": "Real Bride Love & 5-Star Reviews",
+    "subtitle": "Unfiltered feedback from real Indian brides across South Delhi, NCR & Destination weddings.",
+    "averageRating": "5.0",
+    "totalReviews": "128",
+    "recommendRate": "100%",
+    "googleReviewUrl": "https://www.google.com/search?q=ARSH+MAKEUP+ARTIST+DELHI+reviews",
+    "items": [
+      {
+        "id": "rev-1",
+        "name": "Pooja Sharma",
+        "initial": "P",
+        "avatarColor": "#1a73e8",
+        "rating": 5,
+        "badge": "Local Guide · 48 reviews",
+        "time": "2 weeks ago",
+        "service": "Bridal HD Makeup & Saree Draping",
+        "location": "Chattarpur Farmhouse Wedding, Delhi",
+        "category": "Bridal HD",
+        "review": "Booking Arsh for my wedding day was hands down the BEST decision of my wedding! From 6 PM varmala to 5 AM morning pheras, my makeup did not move even 1%! The HD finish was so skin-like, lightweight and natural—zero cakey feeling. Every single guest and my husband couldn't stop praising how royal yet natural I looked. Arsh was so punctual and patient during the pre-wedding rush. Thank you so much Arsh for making me feel like a true queen! 👑❤️",
+        "verified": true
+      },
+      {
+        "id": "rev-2",
+        "name": "Dr. Simran Kaur",
+        "initial": "S",
+        "avatarColor": "#e37400",
+        "rating": 5,
+        "badge": "Verified Bride",
+        "time": "a month ago",
+        "service": "Luxury Airbrush Bridal Makeup",
+        "location": "Aerocity Hotel, Delhi",
+        "category": "Airbrush Signature",
+        "review": "I am very particular about hygiene and genuine products because of my sensitive skin. Arsh only used fresh sanitized brushes and top-tier luxury brands like Charlotte Tilbury and Dior. The Airbrush base stayed completely sweat-proof and tear-proof throughout our emotional vidai ceremony. Her eye makeup and lashes blend so seamlessly. Highly recommended to every Delhi bride looking for understated royal elegance! ⭐⭐⭐⭐⭐",
+        "verified": true
+      },
+      {
+        "id": "rev-3",
+        "name": "Tanya Malhotra",
+        "initial": "T",
+        "avatarColor": "#0d652d",
+        "rating": 5,
+        "badge": "Local Guide · 19 reviews",
+        "time": "3 weeks ago",
+        "service": "Cocktail & Engagement Glam",
+        "location": "Saket, South Delhi",
+        "category": "Engagement",
+        "review": "Arsh did my cocktail evening glam and my mother’s party makeup. She gave me the most stunning Hollywood waves hairstyle and radiant glass-skin glow that looked magical under chandelier lighting. The outfit draping and jewelry setting were done to absolute perfection. 10/10 professionalism!",
+        "verified": true
+      },
+      {
+        "id": "rev-4",
+        "name": "Ananya Singhal",
+        "initial": "A",
+        "avatarColor": "#9334e6",
+        "rating": 5,
+        "badge": "Verified Bride",
+        "time": "2 months ago",
+        "service": "Haldi, Mehndi & Reception Look",
+        "location": "Punjabi Bagh, West Delhi",
+        "category": "Pre-Wedding",
+        "review": "Arsh created completely distinct vibes for all three of my functions! Fresh dewy sun-kissed for Haldi, floral braided chic for Mehndi, and high-fashion red carpet glam for Reception. What I loved most is how she listens to what YOU want instead of forcing typical heavy makeup. Worth every single rupee.",
+        "verified": true
+      },
+      {
+        "id": "rev-5",
+        "name": "Rhea Sengupta",
+        "initial": "R",
+        "avatarColor": "#d93025",
+        "rating": 5,
+        "badge": "Verified Bride",
+        "time": "3 months ago",
+        "service": "Destination Wedding Royale",
+        "location": "Jaipur Palace Destination Wedding",
+        "category": "Destination",
+        "review": "Hired Arsh for our destination wedding in Jaipur. She arrived right on time with her full professional kit and lighting setup. She handled me, my mother, and my sister effortlessly without any rush or stress. Her dupatta setting and matha patti pinning stayed rock solid even while dancing in the baraat! Total artist with golden hands.",
+        "verified": true
+      },
+      {
+        "id": "rev-6",
+        "name": "Mehak Chawla",
+        "initial": "M",
+        "avatarColor": "#1a73e8",
+        "rating": 5,
+        "badge": "Local Guide · 31 reviews",
+        "time": "4 months ago",
+        "service": "Bridal HD Makeup",
+        "location": "Vasant Vihar, South Delhi",
+        "category": "Bridal HD",
+        "review": "If you want your bridal photos and 4K wedding video to look flawless from every angle without looking overdone, book Arsh Khan without thinking twice! Her contouring and blush placement sculpted my face beautifully. She is super humble, polite, and reassuring on a bride's most anxious day.",
+        "verified": true
+      }
+    ]
+  }
+}
