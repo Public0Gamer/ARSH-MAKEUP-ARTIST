@@ -198,6 +198,8 @@ function populateAllSections() {
   const pr = d.pricing || {};
   const pol = d.policy || {};
   document.getElementById('pricing-title').value = pr.title || '';
+  const prStatusEl = document.getElementById('pricing-status');
+  if (prStatusEl) prStatusEl.value = pr.status || '';
   document.getElementById('pricing-notice').value = pr.notice || '';
 
   const polListEl = document.getElementById('policies-edit-list');
@@ -797,6 +799,7 @@ function setupEventListeners() {
     const pricingData = {
       ...(currentSiteData.pricing || {}),
       title: document.getElementById('pricing-title').value,
+      status: document.getElementById('pricing-status') ? document.getElementById('pricing-status').value : (currentSiteData.pricing?.status || 'Bridal Packages Starting From ₹15,000'),
       notice: document.getElementById('pricing-notice').value
     };
 
