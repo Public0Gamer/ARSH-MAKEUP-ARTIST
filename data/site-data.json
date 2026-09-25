@@ -48,7 +48,7 @@
       "category": "Bridal",
       "tagline": "Royal, long-lasting wedding day glam",
       "description": "Flawless camera-ready high-definition & silicone airbrush application crafted to withstand all-day wedding rituals, intense flash photography, and tears with featherlight weight.",
-      "price": "PRICE ON REQUEST",
+      "price": "Starting From ₹15,000",
       "features": [
         "Ultra HD or Silicon Airbrush Finish",
         "Pre-event Skin Prep & Hydration Mask",
@@ -178,13 +178,13 @@
   ],
   "pricing": {
     "title": "BESPOKE BRIDAL PACKAGES",
-    "status": "PRICE ON REQUEST",
+    "status": "Bridal Packages Starting From ₹15,000",
     "notice": "Due to personalized skin prep, custom bridal hair styling, and venue timing requirements, all packages are quoted on request to best serve your event vision.",
     "packages": [
       {
         "name": "Royal Bridal HD Package",
         "tag": "Most Popular",
-        "price": "Price on Request",
+        "price": "Starting From ₹15,000",
         "idealFor": "Wedding Day Main Ceremony",
         "includes": [
           "Ultra HD Base with International Luxury Cosmetics",
