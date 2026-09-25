@@ -160,7 +160,7 @@ function renderServices() {
       <div class="flex items-center justify-between pt-4 border-t border-amber-100">
         <div>
           <span class="text-[11px] tracking-wider uppercase text-gray-500 font-medium block">Investment</span>
-          <span class="text-sm font-bold tracking-wide text-[#8C6718]">${srv.price || 'PRICE ON REQUEST'}</span>
+          <span class="text-sm font-bold tracking-wide text-[#8C6718]">${srv.price || 'Starting From ₹15,000'}</span>
         </div>
         <button onclick="openBookingDrawer('${srv.name}')" class="btn-gold text-xs px-4 py-2.5 rounded-lg flex items-center gap-1.5 cursor-pointer">
           <span>Inquire Now</span>
@@ -233,7 +233,7 @@ function renderPackages() {
         <h3 class="text-2xl font-royal font-bold text-[#1C1714] mb-2">${pkg.name}</h3>
         <div class="my-4 pb-4 border-b border-amber-200/40">
           <span class="text-xs text-gray-500 uppercase tracking-widest block font-medium">Package Fee</span>
-          <span class="text-xl font-bold font-royal gold-gradient-text">${pkg.price || 'PRICE ON REQUEST'}</span>
+          <span class="text-xl font-bold font-royal gold-gradient-text">${pkg.price || 'Starting From ₹15,000'}</span>
         </div>
         <ul class="space-y-3 mb-8 text-sm text-[#4A3E38]">
           ${(pkg.includes || []).map(inc => `

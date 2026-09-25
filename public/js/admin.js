@@ -512,7 +512,7 @@ function renderAdminServices() {
             <h4 class="font-royal font-bold text-base text-[#1C1714]">${s.name}</h4>
           </div>
           <p class="text-xs text-stone-500 mt-0.5">${s.tagline || ''}</p>
-          <p class="text-xs font-semibold text-amber-800 mt-1">${s.price || 'PRICE ON REQUEST'}</p>
+          <p class="text-xs font-semibold text-amber-800 mt-1">${s.price || 'Starting From ₹15,000'}</p>
         </div>
       </div>
 
@@ -536,7 +536,7 @@ async function editServicePrompt(id) {
   if (newName === null) return;
   const newTagline = prompt('Enter Service Tagline:', service.tagline || '');
   if (newTagline === null) return;
-  const newPrice = prompt('Enter Pricing:', service.price || 'PRICE ON REQUEST');
+  const newPrice = prompt('Enter Pricing:', service.price || 'Starting From ₹15,000');
   if (newPrice === null) return;
 
   try {
@@ -579,7 +579,7 @@ function openNewServiceModal() {
   const name = prompt('Enter New Service Name:');
   if (!name) return;
   const tagline = prompt('Enter Tagline / Brief Description:') || '';
-  const price = prompt('Pricing Note (default: PRICE ON REQUEST):') || 'PRICE ON REQUEST';
+  const price = prompt('Pricing Note (default: Starting From ₹15,000):') || 'Starting From ₹15,000';
 
   fetch('/api/services', {
     method: 'POST',
