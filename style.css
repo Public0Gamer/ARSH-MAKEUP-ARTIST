@@ -212,12 +212,16 @@ body {
 .ba-container {
   position: relative;
   width: 100%;
-  height: 480px;
+  max-width: 480px;
+  aspect-ratio: 1004 / 1300;
+  height: auto;
+  margin: 0 auto;
   overflow: hidden;
   border-radius: 20px;
   border: 2px solid rgba(212, 175, 55, 0.4);
   box-shadow: var(--shadow-gold);
   user-select: none;
+  background-color: #1C1714;
 }
 
 .ba-image {
@@ -227,7 +231,7 @@ body {
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
 }
 
 .ba-after {
@@ -278,23 +282,27 @@ body {
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  z-index: 5;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
 }
 
 .ba-badge-before {
-  top: 20px;
-  left: 20px;
-  background: rgba(28, 23, 20, 0.75);
+  top: 16px;
+  left: 16px;
+  background: rgba(28, 23, 20, 0.85);
   color: #FFFFFF;
-  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
 }
 
 .ba-badge-after {
-  top: 20px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
   background: var(--gold-gradient);
   color: #1A1408;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 }
 
 /* ===================================================================
@@ -385,45 +393,114 @@ body {
   right: 0;
 }
 
-/* Floating WhatsApp Badge Pulsing */
+/* Floating WhatsApp Badge Pulsing & Luxury Widget */
 .floating-whatsapp-btn {
   position: fixed;
   bottom: 28px;
   right: 28px;
-  z-index: 90;
-  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+  z-index: 9999;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.floating-whatsapp-btn:hover {
-  transform: scale(1.08) translateY(-3px);
-  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+@keyframes waBreathingGlow {
+  0%, 100% {
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(212, 175, 55, 0.6);
+  }
+  50% {
+    box-shadow: 0 14px 35px rgba(37, 211, 102, 0.7), 0 0 0 12px rgba(212, 175, 55, 0);
+  }
 }
 
-.whatsapp-ping {
+@keyframes waGentleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.wa-pulse-glow {
+  animation: waBreathingGlow 3s infinite ease-in-out, waGentleBounce 6s infinite ease-in-out;
+}
+
+.wa-greeting-bubble {
   position: absolute;
-  top: -4px;
-  right: -4px;
+  bottom: 70px;
+  right: 0;
+  width: 280px;
+  background: #FFFFFF;
+  border: 1.5px solid #D4AF37;
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(28, 23, 20, 0.18);
+  padding: 12px 14px;
+  opacity: 0;
+  transform: translateY(12px) scale(0.95);
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 9998;
+}
+
+.wa-greeting-bubble.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.wa-greeting-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 26px;
   width: 14px;
   height: 14px;
-  background: #FF3B30;
-  border-radius: 50%;
-  border: 2px solid #FFFFFF;
+  background: #FFFFFF;
+  border-right: 1.5px solid #D4AF37;
+  border-bottom: 1.5px solid #D4AF37;
+  transform: rotate(45deg);
 }
+
+/* Mobile Sticky Bottom Lead Conversion Bar */
+.mobile-sticky-lead-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-sticky-lead-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9990;
+    background: rgba(18, 14, 12, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1.5px solid rgba(212, 175, 55, 0.5);
+    padding: 10px 16px;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  /* Lift floating button slightly on mobile so it doesn't overlap sticky bar */
+  .floating-whatsapp-btn {
+    bottom: 74px;
+    right: 18px;
+  }
+}
+
 
 /* Lightbox Modal */
 .lightbox-modal {
   position: fixed;
   inset: 0;
-  background: rgba(15, 12, 10, 0.95);
-  backdrop-filter: blur(12px);
+  background: rgba(10, 8, 7, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   z-index: 150;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .lightbox-modal.active {
@@ -431,11 +508,17 @@ body {
   pointer-events: auto;
 }
 
+.lightbox-modal #lightbox-image {
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-modal.active #lightbox-image {
+  transform: scale(1);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .ba-container {
-    height: 380px;
-  }
   .consultation-drawer {
     max-width: 100%;
   }

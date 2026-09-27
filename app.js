@@ -131,13 +131,21 @@ function renderServices() {
     <div class="tilt-card luxury-card p-6 lg:p-8 flex flex-col justify-between group hover:border-amber-400/60 transition-all duration-300">
       <div class="glare"></div>
       <div class="tilt-inner">
-        <div class="relative overflow-hidden rounded-xl mb-6 h-56 w-full">
-          <img src="${srv.image || '/assets/images/bridal_look_1.jpg'}" alt="${srv.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <!-- Clickable Image Container: Shows full face, crown, jewelry in crisp HD -->
+        <div class="relative overflow-hidden rounded-2xl mb-6 h-72 sm:h-80 w-full cursor-pointer group/img shadow-md border border-amber-200/50" onclick="openLightboxByUrl('${srv.image || '/assets/images/service_bridal_mandap.jpg'}', '${srv.name}', '${srv.tagline || srv.description || ''}')" title="Click to view full screen HD">
+          <img src="${srv.image || '/assets/images/service_bridal_mandap.jpg'}" alt="${srv.name}" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover/img:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
           ${srv.badge ? `<span class="absolute top-3 right-3 text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full gold-shimmer-badge">${srv.badge}</span>` : ''}
-          <div class="absolute bottom-3 left-4 right-4 text-white">
-            <span class="text-xs tracking-wider uppercase text-amber-300 font-semibold">${srv.category || 'Luxury Service'}</span>
-            <h3 class="text-xl font-royal font-bold">${srv.name}</h3>
+
+          <div class="absolute bottom-3 left-4 right-4 text-white flex items-end justify-between gap-2">
+            <div>
+              <span class="text-xs tracking-wider uppercase text-amber-300 font-semibold">${srv.category || 'Luxury Service'}</span>
+              <h3 class="text-lg sm:text-xl font-royal font-bold">${srv.name}</h3>
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-950 bg-amber-300/95 px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 group-hover/img:scale-105 transition-transform flex-shrink-0">
+              <svg class="w-3 h-3 text-amber-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+              <span>View HD</span>
+            </span>
           </div>
         </div>
 
@@ -182,21 +190,33 @@ function renderGallery() {
     ? siteData.gallery 
     : siteData.gallery.filter(i => (i.category || '').toLowerCase() === activeCategory.toLowerCase());
 
+  // Store active gallery array globally for fullscreen navigation
+  window.currentGalleryItems = items;
+
   container.innerHTML = items.map((item, idx) => `
-    <div class="tilt-card group relative overflow-hidden rounded-2xl cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 h-96" onclick="openLightbox('${item.url}', '${item.title}', '${item.details || ''}')">
+    <div class="tilt-card group relative overflow-hidden rounded-2xl cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 h-96 border border-amber-200/50" onclick="openLightboxByIndex(${idx})" title="Click to view full screen">
       <div class="glare"></div>
-      <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+      <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+      
+      <!-- Overlay Information (pointer-events-none so click passes through directly) -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white pointer-events-none">
         <span class="text-xs uppercase font-semibold text-amber-300 tracking-widest mb-1">${item.category || 'Bridal Glam'}</span>
         <h4 class="text-lg font-royal font-bold text-white mb-1">${item.title}</h4>
-        <p class="text-xs text-stone-300 line-clamp-2 mb-3">${item.details || ''}</p>
-        <div class="flex items-center gap-2 text-xs text-amber-300 font-medium">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
-          <span>Tap to View Full Look</span>
+        <p class="text-xs text-stone-300 line-clamp-2 mb-2">${item.details || ''}</p>
+        <div class="flex items-center gap-2 text-xs text-amber-300 font-bold">
+          <span>⛶ Click to View Fullscreen</span>
         </div>
       </div>
-      <div class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[11px] font-semibold tracking-wider px-3 py-1 rounded-full border border-white/20">
+
+      <!-- Top Left Category Pill -->
+      <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-[11px] font-semibold tracking-wider px-3 py-1 rounded-full border border-white/20">
         ${item.category}
+      </div>
+
+      <!-- Bottom Right HD Fullscreen Indicator (Always visible on mobile & desktop) -->
+      <div class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-amber-300 text-[11px] font-bold px-2.5 py-1 rounded-full border border-amber-300/30 flex items-center gap-1 shadow-md pointer-events-none">
+        <svg class="w-3 h-3 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+        <span>HD</span>
       </div>
     </div>
   `).join('');
@@ -467,28 +487,45 @@ function initBeforeAfterSlider() {
   const container = document.getElementById('ba-slider-container');
   if (!container) return;
 
-  const afterLayer = container.querySelector('.ba-after');
+  const overlayLayer = container.querySelector('.ba-overlay, .ba-before, .ba-after');
   const handle = container.querySelector('.ba-slider-handle');
+  if (!overlayLayer || !handle) return;
   let isDown = false;
 
-  function move(e) {
-    if (!isDown) return;
+  function updateSliderPosition(clientX) {
     const rect = container.getBoundingClientRect();
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     let x = clientX - rect.left;
     if (x < 0) x = 0;
     if (x > rect.width) x = rect.width;
-    const percentage = (x / rect.width) * 100;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
 
     handle.style.left = percentage + '%';
-    afterLayer.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+    overlayLayer.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
   }
 
-  container.addEventListener('mousedown', () => isDown = true);
+  function move(e) {
+    if (!isDown) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    updateSliderPosition(clientX);
+  }
+
+  // Click or tap anywhere on slider to instantly reveal
+  container.addEventListener('click', (e) => {
+    // Only if not dragging
+    updateSliderPosition(e.clientX);
+  });
+
+  container.addEventListener('mousedown', (e) => {
+    isDown = true;
+    updateSliderPosition(e.clientX);
+  });
   window.addEventListener('mouseup', () => isDown = false);
   container.addEventListener('mousemove', move);
 
-  container.addEventListener('touchstart', () => isDown = true, { passive: true });
+  container.addEventListener('touchstart', (e) => {
+    isDown = true;
+    if (e.touches && e.touches[0]) updateSliderPosition(e.touches[0].clientX);
+  }, { passive: true });
   window.addEventListener('touchend', () => isDown = false);
   container.addEventListener('touchmove', move, { passive: true });
 }
@@ -628,38 +665,187 @@ function closeBookingDrawer() {
 }
 
 // -------------------------------------------------------------
-// LIGHTBOX VIEWER
+// LIGHTBOX VIEWER WITH FULLSCREEN, CAROUSEL & WHATSAPP INTEGRATION
 // -------------------------------------------------------------
+let currentLightboxIndex = -1;
+let touchStartX = 0;
+let touchEndX = 0;
+
 function initLightbox() {
   const modal = document.getElementById('lightbox-modal');
   if (!modal) return;
+
+  // Background click to close
   modal.addEventListener('click', (e) => {
-    if (e.target === modal || e.target.closest('.close-lightbox')) {
+    if (e.target === modal || e.target.classList.contains('close-lightbox')) {
       closeLightbox();
     }
   });
+
+  // Keyboard navigation
+  window.addEventListener('keydown', (e) => {
+    if (modal.style.display !== 'flex') return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevLightboxImage();
+    if (e.key === 'ArrowRight') nextLightboxImage();
+  });
+
+  // Mobile Swipe Gestures
+  modal.addEventListener('touchstart', (e) => {
+    if (e.changedTouches && e.changedTouches[0]) {
+      touchStartX = e.changedTouches[0].screenX;
+    }
+  }, { passive: true });
+
+  modal.addEventListener('touchend', (e) => {
+    if (e.changedTouches && e.changedTouches[0]) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipeGesture();
+    }
+  }, { passive: true });
 }
 
+function handleSwipeGesture() {
+  const threshold = 45; // min swipe distance in px
+  if (touchEndX + threshold < touchStartX) {
+    nextLightboxImage();
+  } else if (touchEndX - threshold > touchStartX) {
+    prevLightboxImage();
+  }
+}
+
+function openLightboxByIndex(index) {
+  const items = window.currentGalleryItems || (siteData && siteData.gallery) || [];
+  if (!items || items.length === 0) return;
+  if (index < 0) index = items.length - 1;
+  if (index >= items.length) index = 0;
+
+  currentLightboxIndex = index;
+  const item = items[index];
+  displayLightboxItem(item.url, item.title, item.details, `${index + 1} / ${items.length}`);
+}
+
+function openLightboxByUrl(url, title, details) {
+  const items = window.currentGalleryItems || (siteData && siteData.gallery) || [];
+  
+  // Intelligent matching: matches by full URL, relative URL, or bare filename
+  const cleanPath = (url || '').split('?')[0];
+  const fileName = cleanPath.split('/').pop();
+
+  const foundIdx = items.findIndex(i => {
+    if (i.url === url) return true;
+    if (cleanPath.endsWith(i.url)) return true;
+    if (fileName && i.url.endsWith(fileName)) return true;
+    return false;
+  });
+
+  if (foundIdx !== -1) {
+    openLightboxByIndex(foundIdx);
+  } else {
+    currentLightboxIndex = -1;
+    displayLightboxItem(url, title, details, '1 / 1');
+  }
+}
+
+// Global backwards compatibility
 function openLightbox(url, title, details) {
+  openLightboxByUrl(url, title, details);
+}
+
+function displayLightboxItem(url, title, details, counterText) {
   const modal = document.getElementById('lightbox-modal');
   const img = document.getElementById('lightbox-image');
   const titleEl = document.getElementById('lightbox-title');
   const descEl = document.getElementById('lightbox-desc');
+  const counterEl = document.getElementById('lightbox-counter');
+  const rawLinkEl = document.getElementById('lightbox-raw-link');
+  const inqBtn = document.getElementById('lightbox-inquiry-btn');
+  const prevBtn = document.getElementById('lightbox-prev-btn');
+  const nextBtn = document.getElementById('lightbox-next-btn');
 
   if (modal && img) {
     img.src = url;
-    if (titleEl) titleEl.textContent = title;
-    if (descEl) descEl.textContent = details;
-    modal.classList.add('active');
+    img.style.transform = 'scale(1)'; // reset zoom
+    if (titleEl) titleEl.textContent = title || 'Royal Bridal Masterpiece';
+    if (descEl) descEl.textContent = details || 'Handcrafted Luxury Bridal Makeup by Arsh Khan Delhi';
+    if (counterEl) counterEl.textContent = counterText || '';
+    if (rawLinkEl) rawLinkEl.href = url;
+
+    // Show/hide nav buttons if single item vs carousel
+    const items = window.currentGalleryItems || (siteData && siteData.gallery) || [];
+    const isCarousel = currentLightboxIndex !== -1 && items.length > 1;
+    if (prevBtn) prevBtn.style.display = isCarousel ? 'flex' : 'none';
+    if (nextBtn) nextBtn.style.display = isCarousel ? 'flex' : 'none';
+
+    // WhatsApp Inquiry Button for this specific look
+    if (inqBtn) {
+      const targetPhone = (siteData && siteData.contact && siteData.contact.whatsapp) || '7428701987';
+      const msg = `👑 *ARSH MAKEUP ARTIST DELHI*\n` +
+                  `Hello Arsh! I loved this bridal look on your website:\n` +
+                  `✨ *${title || 'Bridal Look'}*\n` +
+                  `I would love to know package pricing and slot availability for my wedding date!`;
+      inqBtn.href = `https://wa.me/91${targetPhone.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`;
+    }
+
+    // 100% Guaranteed Display - zero reliance on external CSS classes
+    modal.style.display = 'flex';
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+    modal.style.zIndex = '9999999';
     document.body.style.overflow = 'hidden';
   }
+}
+
+function nextLightboxImage(e) {
+  if (e && e.stopPropagation) e.stopPropagation();
+  if (currentLightboxIndex === -1) return;
+  openLightboxByIndex(currentLightboxIndex + 1);
+}
+
+function prevLightboxImage(e) {
+  if (e && e.stopPropagation) e.stopPropagation();
+  if (currentLightboxIndex === -1) return;
+  openLightboxByIndex(currentLightboxIndex - 1);
 }
 
 function closeLightbox() {
   const modal = document.getElementById('lightbox-modal');
   if (modal) {
-    modal.classList.remove('active');
+    modal.style.display = 'none';
+    modal.style.opacity = '0';
+    modal.style.pointerEvents = 'none';
     document.body.style.overflow = '';
+  }
+  // Exit browser fullscreen if active
+  if (document.fullscreenElement) {
+    document.exitFullscreen().catch(() => {});
+  }
+}
+
+// Toggle real device/browser fullscreen
+function toggleNativeFullscreen() {
+  const modal = document.getElementById('lightbox-modal');
+  const target = modal || document.documentElement;
+  if (!document.fullscreenElement) {
+    if (target.requestFullscreen) target.requestFullscreen().catch(() => {});
+    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen().catch(() => {});
+    else if (target.msRequestFullscreen) target.msRequestFullscreen().catch(() => {});
+  } else {
+    if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+  }
+}
+
+// Toggle image zoom inside lightbox
+let isZoomed = false;
+function toggleImageZoom(img) {
+  if (!img) return;
+  isZoomed = !isZoomed;
+  if (isZoomed) {
+    img.style.transform = 'scale(1.4)';
+    img.style.cursor = 'zoom-out';
+  } else {
+    img.style.transform = 'scale(1)';
+    img.style.cursor = 'zoom-in';
   }
 }
 
@@ -677,3 +863,10 @@ function showNotification(msg) {
     setTimeout(() => toast.remove(), 300);
   }, 4000);
 }
+
+// Auto-trigger luxury WhatsApp greeting bubble after 2.5s for ad visitors
+setTimeout(() => {
+  const waToast = document.getElementById('wa-greeting-toast');
+  if (waToast) waToast.classList.add('show');
+}, 2500);
+
