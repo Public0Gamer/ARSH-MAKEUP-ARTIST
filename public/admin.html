@@ -385,19 +385,25 @@
            TAB 4: SERVICES & INCLUSIONS (Add, Edit, Delete)
            ============================================================= -->
       <section id="tab-services" class="tab-content hidden space-y-8">
-        <div class="bg-white p-8 rounded-2xl border border-amber-200">
-          <div class="flex items-center justify-between mb-6">
+        <div class="bg-white p-8 rounded-2xl border border-amber-200 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-amber-200 gap-4 mb-6">
             <div>
-              <h3 class="text-xl font-royal font-bold text-[#1C1714]">Services Manager</h3>
-              <p class="text-xs text-[#7E7068]">Add, edit, or remove bridal makeup services and their inclusions.</p>
+              <div class="flex items-center gap-3">
+                <h3 class="text-xl font-royal font-bold text-[#1C1714]">Services &amp; Inclusions Manager</h3>
+                <span id="admin-services-count-badge" class="bg-amber-100 text-amber-900 border border-amber-300 text-xs px-3 py-1 rounded-full font-bold">
+                  6 Active Services
+                </span>
+              </div>
+              <p class="text-xs text-[#7E7068] mt-1">Live website (`arshmakeupartist.com`) per chal rhi sabhi services ko yahan se Add, Edit (Price, Photo, Inclusions), ya Delete kar sakte hain.</p>
             </div>
-            <button onclick="openNewServiceModal()" class="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">
-              + Add New Service
+            <button onclick="openAddServiceModal()" class="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-md transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+              <span>+ Add New Service</span>
             </button>
           </div>
 
           <div id="admin-services-list" class="space-y-4">
-            <!-- Populated via admin.js -->
+            <!-- Populated dynamically via admin.js -->
           </div>
         </div>
       </section>
@@ -695,6 +701,111 @@
         </div>
       </section>
     </main>
+  </div>
+
+  <!-- ===================================================================
+       SERVICE ADD / EDIT MODAL (LUXURY CMS CONTROL)
+       =================================================================== -->
+  <div id="service-modal" class="fixed inset-0 z-50 bg-[#1C1714]/80 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-amber-300 my-8 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="p-6 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200 flex items-center justify-between">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-[#8C6718]">Services CMS</span>
+          <h3 id="srv-modal-title" class="text-xl font-royal font-bold text-[#1C1714]">Add New Bridal Service</h3>
+        </div>
+        <button type="button" onclick="closeServiceModal()" class="w-8 h-8 rounded-full bg-white border border-amber-200 text-stone-500 hover:text-black hover:bg-stone-100 flex items-center justify-center cursor-pointer transition-colors text-lg font-bold">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal Body / Form -->
+      <form id="service-form" onsubmit="handleServiceFormSubmit(event)" class="p-6 sm:p-8 space-y-5">
+        <input type="hidden" id="srv-form-id" value="" />
+
+        <!-- Row 1: Name & Category -->
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Service Name *</label>
+            <input type="text" id="srv-form-name" required placeholder="e.g. BRIDAL HD / AIRBRUSH" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Category *</label>
+            <select id="srv-form-category" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500 bg-white">
+              <option value="Bridal">Bridal HD / Royal</option>
+              <option value="Pre-Wedding">Pre-Wedding (Engagement / Haldi / Mehndi)</option>
+              <option value="Post-Wedding">Post-Wedding / Reception</option>
+              <option value="Styling">Hair &amp; Saree Draping</option>
+              <option value="Special">Destination Wedding / VIP</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 2: Tagline & Badge -->
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Tagline / Short Hook</label>
+            <input type="text" id="srv-form-tagline" placeholder="e.g. Royal, long-lasting wedding day glam" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Badge Text</label>
+            <input type="text" id="srv-form-badge" placeholder="e.g. Signature Service, Most Requested, Couture" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+          </div>
+        </div>
+
+        <!-- Row 3: Price -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Pricing Display *</label>
+          <input type="text" id="srv-form-price" required placeholder="Starting From ₹15,000" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500" />
+          <p class="text-[11px] text-stone-500 mt-1">Default: <strong>Starting From ₹15,000</strong> (Aap isse kisi bhi service ke hisab se badal sakte hain)</p>
+        </div>
+
+        <!-- Row 4: Description -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Full Service Description</label>
+          <textarea id="srv-form-description" rows="3" placeholder="Bespoke makeup styling description that explains the process, skin prep, and luxury products used..." class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm focus:outline-none focus:border-amber-500"></textarea>
+        </div>
+
+        <!-- Row 5: Features / Inclusions -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Service Inclusions (Har line me ek point likhein)</label>
+          <textarea id="srv-form-features" rows="4" placeholder="Ultra HD or Silicon Airbrush Finish&#10;Pre-event Skin Prep &amp; Hydration Mask&#10;Handcrafted 3D Mink Lashes&#10;Royal Hairstyle &amp; Fresh Floral Styling&#10;Dupatta, Lehenga &amp; Heavy Jewelry Setting" class="w-full px-4 py-2.5 rounded-xl border border-amber-200 text-sm font-mono focus:outline-none focus:border-amber-500"></textarea>
+          <p class="text-[11px] text-stone-500 mt-1">💡 Har naye point ko nayi line (Enter) dabakar likhein.</p>
+        </div>
+
+        <!-- Row 6: Image Upload / URL -->
+        <div class="p-4 rounded-2xl bg-amber-50/50 border border-amber-200 space-y-3">
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-700">Service Showcase Image</label>
+          
+          <div class="flex items-center gap-4">
+            <img id="srv-preview-img" src="/assets/images/bridal_look_1.jpg" alt="Preview" class="w-20 h-20 rounded-xl object-cover border-2 border-amber-300 flex-shrink-0 shadow-sm" />
+            
+            <div class="space-y-2 flex-1">
+              <div>
+                <span class="text-xs text-stone-600 font-semibold block mb-1">Upload Photo to Cloudinary:</span>
+                <input type="file" id="srv-file-input" accept="image/*" onchange="autoUploadServicePhoto(this)" class="text-xs text-stone-600 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-black hover:file:bg-amber-400 cursor-pointer" />
+                <span id="srv-upload-status" class="text-xs font-semibold text-amber-800 ml-2"></span>
+              </div>
+              
+              <div>
+                <span class="text-[11px] text-stone-500 block mb-0.5">Or paste direct image URL:</span>
+                <input type="text" id="srv-form-image" placeholder="https://res.cloudinary.com/..." oninput="updateSrvPreview(this.value)" class="w-full px-3 py-1.5 rounded-lg border border-stone-300 text-xs bg-white" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer Actions -->
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-stone-200">
+          <button type="button" onclick="closeServiceModal()" class="px-5 py-2.5 rounded-xl border border-stone-300 hover:bg-stone-100 text-xs font-semibold text-stone-700 cursor-pointer">
+            Cancel
+          </button>
+          <button type="submit" id="srv-submit-btn" class="btn-gold px-8 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer shadow-md">
+            Save &amp; Publish Service
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script src="/js/admin.js"></script>

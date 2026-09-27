@@ -21,16 +21,18 @@
     "badge": "DELHI NCR'S PREMIER BRIDAL SPECIALIST",
     "title": "Enhancing Your Natural Beauty",
     "subtitle": "Bespoke bridal makeovers in Delhi NCR & PAN India available for destination weddings",
-    "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790152399/arsh_makeup_artist/nt6bsg7bzqrpjrpjqtw9.jpg",
+    "image": "/assets/images/bridal_mandap_red.jpg",
     "heroImages": [
-      "https://res.cloudinary.com/gdkzinnv/image/upload/v1790152399/arsh_makeup_artist/nt6bsg7bzqrpjrpjqtw9.jpg"
+      "/assets/images/bridal_mandap_red.jpg",
+      "/assets/images/editorial_soft_glam.jpg",
+      "/assets/images/bridal_crimson_glow.jpg"
     ]
   },
   "about": {
     "artistName": "Arsh Khan",
     "artistTitle": "Celebrity & Luxury Bridal Makeup Artist",
     "experience": "8+ Years of Crafting Perfection",
-    "artistImage": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg",
+    "artistImage": "/assets/images/editorial_soft_glam.jpg",
     "quote": "Makeup is not a mask; it is the art of illuminating the royal goddess within you.",
     "bioParagraph1": "Welcome to the world of Arsh Khan — Delhi's acclaimed bridal makeup artist known for creating breathtaking, photogenic, and skin-like bridal transformations. Based in South Delhi (Pincode 110017) and serving the entirety of Delhi NCR and royal destination venues across India.",
     "bioParagraph2": "Arsh's signature technique blends modern global aesthetics with timeless Indian royal tradition. Every stroke is measured to enhance your unique facial architecture, ensuring your bridal glow remains immaculate under 4K video lights, tearful vidai moments, and late-night celebrations.",
@@ -57,7 +59,7 @@
         "Dupatta, Lehenga & Heavy Jewelry Setting",
         "Complementary Touch-Up Kit"
       ],
-      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg",
+      "image": "/assets/images/bridal_mandap_red.jpg",
       "badge": "Signature Service"
     },
     {
@@ -74,7 +76,7 @@
         "Gown/Lehenga Draping Support",
         "Premium Lash Accents"
       ],
-      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151736/arsh_makeup_artist/bridal_look_2_eyes.jpg",
+      "image": "/assets/images/bridal_pastel_peach.jpg",
       "badge": "Most Requested"
     },
     {
@@ -90,7 +92,7 @@
         "Peach/Coral Sun-Kissed Palette",
         "Featherlight Skin Feel"
       ],
-      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151739/arsh_makeup_artist/bridal_look_4_kanjeevaram.jpg",
+      "image": "/assets/images/editorial_soft_glam.jpg",
       "badge": "Festive Glam"
     },
     {
@@ -106,7 +108,7 @@
         "Grand Royal Hairstyle or Sleek Glam",
         "Full Outfit & Jewelry Pinning Assistance"
       ],
-      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151738/arsh_makeup_artist/bridal_look_3_varmala.jpg",
+      "image": "/assets/images/bridal_crimson_glow.jpg",
       "badge": "Couture"
     },
     {
@@ -122,7 +124,7 @@
         "Traditional & Western Saree Styles",
         "Matha Patti & Floral Garland Setting"
       ],
-      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151739/arsh_makeup_artist/bridal_look_4_kanjeevaram.jpg",
+      "image": "/assets/images/bridal_red_smile_mandap.jpg",
       "badge": "Master Craft"
     },
     {
@@ -138,42 +140,66 @@
         "Bride + Mother & Sister Add-on options",
         "Personalized Ceremony Moodboard"
       ],
-      "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg",
+      "image": "/assets/images/bridal_royal_lehenga_mandap.jpg",
       "badge": "VIP Exclusive"
     }
   ],
   "gallery": [
     {
-      "id": "gal-bridal_look_1_red",
-      "title": "Royal Red Lehenga Bridal Splendor",
+      "id": "gal-mandap-red",
+      "title": "Royal Red Lehenga Mandap Glam",
       "category": "Bridal",
-      "url": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg",
+      "url": "/assets/images/bridal_mandap_red.jpg",
       "featured": true,
-      "details": "Iconic traditional red bridal look with heavy Kundan jewelry, maang tikka, chooda, and soft sculpted HD base."
+      "details": "Traditional royal red bridal lehenga with heavy zardozi embroidery, intricate Kundan choker, matha patti, and kaleerein in floral mandap."
     },
     {
-      "id": "gal-bridal_look_2_eyes",
-      "title": "Dramatic Cut-Crease & Gold Glimmer",
-      "category": "Bridal",
-      "url": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151736/arsh_makeup_artist/bridal_look_2_eyes.jpg",
+      "id": "gal-pastel-peach",
+      "title": "Pastel Peach Kundan Elegance",
+      "category": "Engagement",
+      "url": "/assets/images/bridal_pastel_peach.jpg",
       "featured": true,
-      "details": "Intricate dual-tone eyeshadow art featuring royal purple, 24K gold shimmer, and emerald circular matha patti."
+      "details": "Ethereal pastel peach bridal couture paired with layered pink bead Kundan choker, delicate matha patti, nath, and radiant glass skin finish."
     },
     {
-      "id": "gal-bridal_look_3_varmala",
-      "title": "Chandelier Reception Royalty",
+      "id": "gal-editorial-pink",
+      "title": "Editorial Glam Signature Bride",
       "category": "Reception",
-      "url": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151738/arsh_makeup_artist/bridal_look_3_varmala.jpg",
+      "url": "/assets/images/editorial_soft_glam.jpg",
       "featured": true,
-      "details": "Heavily embellished gold scalloped blouse with royal varmala, sheer dupatta, and radiant longwear skin."
+      "details": "High-definition soft sculpted glam by Arsh Khan with diamond jewellery, maang tikka, and soft rose-toned couture styling."
     },
     {
-      "id": "gal-bridal_look_4_kanjeevaram",
-      "title": "Temple Gold & Magenta Silk Bride",
+      "id": "gal-transformation-compare",
+      "title": "Real Bridal HD Transformation (Before & After)",
       "category": "Bridal",
-      "url": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151739/arsh_makeup_artist/bridal_look_4_kanjeevaram.jpg",
+      "url": "/assets/images/transformation_compare_full.jpg",
       "featured": true,
-      "details": "Regal South Indian bridal styling in rich magenta pink silk saree paired with layered antique temple jewelry."
+      "details": "Authentic bare-skin to royal bridal HD transformation showcasing flawless base coverage, eye sculpting, and Kundan jewelry styling."
+    },
+    {
+      "id": "gal-crimson-mandap",
+      "title": "Grand Crimson Wedding Mandap Glow",
+      "category": "Bridal",
+      "url": "/assets/images/bridal_crimson_glow.jpg",
+      "featured": true,
+      "details": "Regal bride in crimson velvet lehenga illuminated by candlelit wedding mandap with gold pillars and floral arrangements."
+    },
+    {
+      "id": "gal-red-smile-mandap",
+      "title": "Radiant Varmala Mandap Smile",
+      "category": "Bridal",
+      "url": "/assets/images/bridal_red_smile_mandap.jpg",
+      "featured": true,
+      "details": "Joyful bride in royal crimson lehenga and fresh floral varmala, adorned in traditional Kundan jewelry under luxury floral mandap lighting."
+    },
+    {
+      "id": "gal-royal-temple-mandap",
+      "title": "Heritage Arched Mandap Royalty",
+      "category": "Bridal",
+      "url": "/assets/images/bridal_royal_lehenga_mandap.jpg",
+      "featured": true,
+      "details": "Regal bridal portrait captured under arched temple floral mandap, featuring handcrafted zardozi lehenga and immaculate HD base."
     }
   ],
   "pricing": {

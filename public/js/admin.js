@@ -121,6 +121,12 @@ function switchTab(tabId) {
   const meta = TAB_TITLES[tabId] || { title: 'Dashboard', subtitle: '' };
   document.getElementById('tab-title').textContent = meta.title;
   document.getElementById('tab-subtitle').textContent = meta.subtitle;
+
+  // Ensure content is immediately fresh when switching tabs
+  if (tabId === 'services') renderAdminServices();
+  if (tabId === 'gallery') renderAdminGallery();
+  if (tabId === 'reviews') renderAdminReviews();
+  if (tabId === 'inquiries') renderInquiries();
 }
 
 // ==========================================
@@ -143,86 +149,110 @@ function populateAllSections() {
   const d = currentSiteData;
 
   // Overview stats
-  const galCount = (d.gallery || []).length;
-  const srvCount = (d.services || []).length;
-  document.getElementById('stat-gallery-count').textContent = galCount;
-  document.getElementById('stat-services-count').textContent = srvCount;
-  document.getElementById('gallery-count-badge').textContent = `${galCount} Photos`;
+  try {
+    const galCount = (d.gallery || []).length;
+    const srvCount = (d.services || []).length;
+    const statGal = document.getElementById('stat-gallery-count');
+    if (statGal) statGal.textContent = galCount;
+    const statSrv = document.getElementById('stat-services-count');
+    if (statSrv) statSrv.textContent = srvCount;
+    const galBadge = document.getElementById('gallery-count-badge');
+    if (galBadge) galBadge.textContent = `${galCount} Photos`;
+  } catch (err) {
+    console.warn('Overview stats render error:', err);
+  }
 
   // 1. Hero Form
-  const h = d.hero || {};
-  document.getElementById('hero-badge').value = h.badge || '';
-  document.getElementById('hero-title').value = h.title || '';
-  document.getElementById('hero-subtitle').value = h.subtitle || '';
-  const heroImg = (h.heroImages && h.heroImages[0]) || h.image || '';
-  document.getElementById('hero-img-url').value = heroImg;
-  document.getElementById('hero-preview-img').src = heroImg;
+  try {
+    const h = d.hero || {};
+    if (document.getElementById('hero-badge')) document.getElementById('hero-badge').value = h.badge || '';
+    if (document.getElementById('hero-title')) document.getElementById('hero-title').value = h.title || '';
+    if (document.getElementById('hero-subtitle')) document.getElementById('hero-subtitle').value = h.subtitle || '';
+    const heroImg = (h.heroImages && h.heroImages[0]) || h.image || '';
+    if (document.getElementById('hero-img-url')) document.getElementById('hero-img-url').value = heroImg;
+    if (document.getElementById('hero-preview-img')) document.getElementById('hero-preview-img').src = heroImg;
 
-  // Render quick Hero Gallery Picker
-  const heroPicker = document.getElementById('hero-gallery-picker');
-  if (heroPicker && d.gallery) {
-    heroPicker.innerHTML = d.gallery.map(item => `
-      <div class="relative group rounded-xl overflow-hidden border-2 ${
-        heroImg === item.url ? 'border-amber-500 shadow-md ring-2 ring-amber-300' : 'border-stone-200'
-      } cursor-pointer h-24 bg-stone-100" onclick="setPhotoAsHero('${item.url}')" title="Click to set as Hero image">
-        <img src="${item.url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white text-[11px] font-bold text-center px-1">
-          👑 Set as Hero
+    // Render quick Hero Gallery Picker
+    const heroPicker = document.getElementById('hero-gallery-picker');
+    if (heroPicker && d.gallery) {
+      heroPicker.innerHTML = d.gallery.map(item => `
+        <div class="relative group rounded-xl overflow-hidden border-2 ${
+          heroImg === item.url ? 'border-amber-500 shadow-md ring-2 ring-amber-300' : 'border-stone-200'
+        } cursor-pointer h-24 bg-stone-100" onclick="setPhotoAsHero('${item.url}')" title="Click to set as Hero image">
+          <img src="${item.url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+          <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white text-[11px] font-bold text-center px-1">
+            👑 Set as Hero
+          </div>
+          ${heroImg === item.url ? '<span class="absolute top-1 right-1 bg-amber-500 text-black text-[9px] font-bold px-1.5 py-0.5 rounded shadow">Active</span>' : ''}
         </div>
-        ${heroImg === item.url ? '<span class="absolute top-1 right-1 bg-amber-500 text-black text-[9px] font-bold px-1.5 py-0.5 rounded shadow">Active</span>' : ''}
-      </div>
-    `).join('');
+      `).join('');
+    }
+  } catch (err) {
+    console.warn('Hero form render error:', err);
   }
 
   // 2. About Form
-  const ab = d.about || {};
-  document.getElementById('about-name').value = ab.artistName || '';
-  document.getElementById('about-title').value = ab.artistTitle || '';
-  document.getElementById('about-quote').value = ab.quote || '';
-  document.getElementById('about-bio-1').value = ab.bioParagraph1 || '';
-  document.getElementById('about-bio-2').value = ab.bioParagraph2 || '';
-  document.getElementById('about-img-url').value = ab.artistImage || '';
-  document.getElementById('artist-preview-img').src = ab.artistImage || '';
+  try {
+    const ab = d.about || {};
+    if (document.getElementById('about-name')) document.getElementById('about-name').value = ab.artistName || '';
+    if (document.getElementById('about-title')) document.getElementById('about-title').value = ab.artistTitle || '';
+    if (document.getElementById('about-quote')) document.getElementById('about-quote').value = ab.quote || '';
+    if (document.getElementById('about-bio-1')) document.getElementById('about-bio-1').value = ab.bioParagraph1 || '';
+    if (document.getElementById('about-bio-2')) document.getElementById('about-bio-2').value = ab.bioParagraph2 || '';
+    const artistImgInput = document.getElementById('artist-img-url');
+    if (artistImgInput) artistImgInput.value = ab.artistImage || '';
+    if (document.getElementById('artist-preview-img')) document.getElementById('artist-preview-img').src = ab.artistImage || '';
+  } catch (err) {
+    console.warn('About form render error:', err);
+  }
 
   // 3. Contact Form
-  const c = d.contact || {};
-  document.getElementById('contact-phone').value = c.phone || '';
-  document.getElementById('contact-whatsapp').value = c.whatsapp || '';
-  document.getElementById('contact-instagram').value = c.instagram || '';
-  document.getElementById('contact-instagram-url').value = c.instagramUrl || '';
-  document.getElementById('contact-pincode').value = c.pincode || '';
-  document.getElementById('contact-coverage').value = c.coverage || '';
-  document.getElementById('contact-address').value = c.address || '';
+  try {
+    const c = d.contact || {};
+    if (document.getElementById('contact-phone')) document.getElementById('contact-phone').value = c.phone || '';
+    if (document.getElementById('contact-whatsapp')) document.getElementById('contact-whatsapp').value = c.whatsapp || '';
+    if (document.getElementById('contact-instagram')) document.getElementById('contact-instagram').value = c.instagram || '';
+    if (document.getElementById('contact-instagram-url')) document.getElementById('contact-instagram-url').value = c.instagramUrl || '';
+    if (document.getElementById('contact-pincode')) document.getElementById('contact-pincode').value = c.pincode || '';
+    if (document.getElementById('contact-coverage')) document.getElementById('contact-coverage').value = c.coverage || '';
+    if (document.getElementById('contact-address')) document.getElementById('contact-address').value = c.address || '';
+  } catch (err) {
+    console.warn('Contact form render error:', err);
+  }
 
   // 4. Pricing & Policy Form
-  const pr = d.pricing || {};
-  const pol = d.policy || {};
-  document.getElementById('pricing-title').value = pr.title || '';
-  const prStatusEl = document.getElementById('pricing-status');
-  if (prStatusEl) prStatusEl.value = pr.status || '';
-  document.getElementById('pricing-notice').value = pr.notice || '';
+  try {
+    const pr = d.pricing || {};
+    const pol = d.policy || {};
+    if (document.getElementById('pricing-title')) document.getElementById('pricing-title').value = pr.title || '';
+    const prStatusEl = document.getElementById('pricing-status');
+    if (prStatusEl) prStatusEl.value = pr.status || '';
+    if (document.getElementById('pricing-notice')) document.getElementById('pricing-notice').value = pr.notice || '';
 
-  const polListEl = document.getElementById('policies-edit-list');
-  if (polListEl && pol.items) {
-    polListEl.innerHTML = pol.items.map((item, idx) => `
-      <div class="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-2">
-        <div class="flex items-center justify-between">
-          <input type="text" class="policy-title-input font-bold text-sm text-[#1C1714] bg-white px-3 py-1.5 rounded border border-stone-300 w-2/3" value="${item.title}" data-index="${idx}" />
-          <input type="text" class="policy-badge-input text-xs font-semibold text-amber-800 bg-amber-50 px-2 py-1 rounded border border-amber-300 w-1/4" value="${item.badge || 'Policy'}" data-index="${idx}" />
+    const polListEl = document.getElementById('policies-edit-list');
+    if (polListEl && pol.items) {
+      polListEl.innerHTML = pol.items.map((item, idx) => `
+        <div class="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-2">
+          <div class="flex items-center justify-between">
+            <input type="text" class="policy-title-input font-bold text-sm text-[#1C1714] bg-white px-3 py-1.5 rounded border border-stone-300 w-2/3" value="${item.title}" data-index="${idx}" />
+            <input type="text" class="policy-badge-input text-xs font-semibold text-amber-800 bg-amber-50 px-2 py-1 rounded border border-amber-300 w-1/4" value="${item.badge || 'Policy'}" data-index="${idx}" />
+          </div>
+          <textarea class="policy-desc-input w-full text-xs text-stone-600 bg-white p-2 rounded border border-stone-300" rows="2" data-index="${idx}">${item.desc}</textarea>
         </div>
-        <textarea class="policy-desc-input w-full text-xs text-stone-600 bg-white p-2 rounded border border-stone-300" rows="2" data-index="${idx}">${item.desc}</textarea>
-      </div>
-    `).join('');
+      `).join('');
+    }
+  } catch (err) {
+    console.warn('Pricing/Policy form render error:', err);
   }
 
   // 5. Render Gallery items
-  renderAdminGallery();
+  try { renderAdminGallery(); } catch (e) { console.error('Gallery render error:', e); }
 
   // 6. Render Services items
-  renderAdminServices();
+  try { renderAdminServices(); } catch (e) { console.error('Services render error:', e); }
 
   // 7. Render Reviews
-  renderAdminReviews();
+  try { renderAdminReviews(); } catch (e) { console.error('Reviews render error:', e); }
 }
 
 // ==========================================
@@ -496,70 +526,277 @@ async function uploadArtistImage() {
 }
 
 // ==========================================
-// 5. SERVICES CRUD
+// 5. SERVICES CRUD (FULL ADD, EDIT, DELETE & CLOUDINARY UPLOAD)
 // ==========================================
+
 function renderAdminServices() {
   const container = document.getElementById('admin-services-list');
+  if (!container) return;
+
   const services = currentSiteData.services || [];
 
-  container.innerHTML = services.map(s => `
-    <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-      <div class="flex items-center gap-4">
-        <img src="${s.image || '/assets/images/bridal_look_1.jpg'}" alt="${s.name}" class="w-16 h-16 rounded-xl object-cover border border-amber-300 flex-shrink-0" />
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded">${s.badge || 'Service'}</span>
-            <h4 class="font-royal font-bold text-base text-[#1C1714]">${s.name}</h4>
+  // Update counter badges
+  const countBadge = document.getElementById('admin-services-count-badge');
+  if (countBadge) countBadge.textContent = `${services.length} Active Services`;
+  const statCount = document.getElementById('stat-services-count');
+  if (statCount) statCount.textContent = services.length;
+
+  if (services.length === 0) {
+    container.innerHTML = `
+      <div class="p-12 text-center bg-stone-50 rounded-2xl border-2 border-dashed border-stone-200">
+        <span class="text-3xl mb-3 block">💄</span>
+        <h4 class="font-royal font-bold text-base text-stone-700 mb-1">No services active currently</h4>
+        <p class="text-xs text-stone-500 mb-4">Click below to create your first bridal or party makeup service.</p>
+        <button onclick="openAddServiceModal()" class="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+          + Add New Service
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = services.map(s => {
+    const srvImg = s.image || 'https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg';
+    const featuresList = (s.features || []).map(f => `
+      <span class="inline-flex items-center gap-1 text-[11px] bg-white text-stone-700 border border-stone-200 px-2 py-0.5 rounded-md">
+        <span class="text-amber-600 font-bold">✓</span> ${f}
+      </span>
+    `).join('');
+
+    return `
+      <div class="p-5 sm:p-6 rounded-2xl bg-stone-50 border border-stone-200 hover:border-amber-300 transition-all flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5 shadow-xs group">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-1">
+          <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-amber-300/80 flex-shrink-0 shadow-sm bg-stone-200">
+            <img src="${srvImg}" alt="${s.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='/assets/images/bridal_look_1.jpg'" />
+            <span class="absolute top-1 left-1 bg-black/70 text-white text-[9px] font-bold uppercase px-1.5 py-0.5 rounded">
+              ${s.category || 'Service'}
+            </span>
           </div>
-          <p class="text-xs text-stone-500 mt-0.5">${s.tagline || ''}</p>
-          <p class="text-xs font-semibold text-amber-800 mt-1">${s.price || 'Starting From ₹15,000'}</p>
+
+          <div class="space-y-1.5 flex-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-0.5 rounded-full">${s.badge || 'Signature Service'}</span>
+              <h4 class="font-royal font-bold text-base sm:text-lg text-[#1C1714]">${s.name}</h4>
+            </div>
+
+            ${s.tagline ? `<p class="text-xs text-[#8C6718] font-medium italic">"${s.tagline}"</p>` : ''}
+            ${s.description ? `<p class="text-xs text-stone-600 line-clamp-2 leading-relaxed">${s.description}</p>` : ''}
+
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <span class="text-xs font-bold text-amber-900 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200">
+                🏷️ ${s.price || 'Starting From ₹15,000'}
+              </span>
+            </div>
+
+            ${featuresList ? `
+              <div class="flex flex-wrap gap-1.5 pt-1.5">
+                ${featuresList}
+              </div>
+            ` : ''}
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 self-end lg:self-center flex-shrink-0 pt-2 lg:pt-0">
+          <button onclick="openEditServiceModal('${s.id}')" class="btn-gold px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-xs hover:shadow-sm">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+            <span>Edit</span>
+          </button>
+          <button onclick="deleteServiceItem('${s.id}')" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-red-600 hover:bg-red-50 border border-red-200 flex items-center gap-1.5 cursor-pointer transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            <span>Delete</span>
+          </button>
         </div>
       </div>
-
-      <div class="flex items-center gap-2">
-        <button onclick="editServicePrompt('${s.id}')" class="btn-gold-outline px-3.5 py-1.5 rounded-lg text-xs font-semibold cursor-pointer">
-          Edit
-        </button>
-        <button onclick="deleteServiceItem('${s.id}')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-red-600 hover:bg-red-50 cursor-pointer">
-          Delete
-        </button>
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
-async function editServicePrompt(id) {
-  const service = (currentSiteData.services || []).find(s => s.id === id);
-  if (!service) return;
+// Open Add Service Modal
+function openAddServiceModal() {
+  const form = document.getElementById('service-form');
+  if (form) form.reset();
 
-  const newName = prompt('Enter Service Name:', service.name);
-  if (newName === null) return;
-  const newTagline = prompt('Enter Service Tagline:', service.tagline || '');
-  if (newTagline === null) return;
-  const newPrice = prompt('Enter Pricing:', service.price || 'Starting From ₹15,000');
-  if (newPrice === null) return;
+  document.getElementById('srv-form-id').value = '';
+  document.getElementById('srv-modal-title').textContent = 'Add New Bridal Service';
+  document.getElementById('srv-submit-btn').textContent = 'Add & Publish Service';
+  document.getElementById('srv-form-price').value = 'Starting From ₹15,000';
+  document.getElementById('srv-form-badge').value = 'Signature Service';
+  document.getElementById('srv-preview-img').src = 'https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg';
+  document.getElementById('srv-form-image').value = 'https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg';
+  document.getElementById('srv-upload-status').textContent = '';
+
+  const modal = document.getElementById('service-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+}
+
+// Backward compatibility alias
+function openNewServiceModal() {
+  openAddServiceModal();
+}
+
+// Open Edit Service Modal prefilled with existing service details
+function openEditServiceModal(id) {
+  const service = (currentSiteData.services || []).find(s => s.id === id);
+  if (!service) {
+    alert('Service not found');
+    return;
+  }
+
+  document.getElementById('srv-form-id').value = service.id;
+  document.getElementById('srv-modal-title').textContent = `Edit Service: ${service.name}`;
+  document.getElementById('srv-submit-btn').textContent = 'Update Service';
+
+  document.getElementById('srv-form-name').value = service.name || '';
+  document.getElementById('srv-form-category').value = service.category || 'Bridal';
+  document.getElementById('srv-form-tagline').value = service.tagline || '';
+  document.getElementById('srv-form-badge').value = service.badge || 'Signature Service';
+  document.getElementById('srv-form-price').value = service.price || 'Starting From ₹15,000';
+  document.getElementById('srv-form-description').value = service.description || '';
+  document.getElementById('srv-form-features').value = (service.features || []).join('\n');
+
+  const imgUrl = service.image || 'https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg';
+  document.getElementById('srv-form-image').value = imgUrl;
+  document.getElementById('srv-preview-img').src = imgUrl;
+  document.getElementById('srv-upload-status').textContent = '';
+
+  const modal = document.getElementById('service-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+}
+
+function closeServiceModal() {
+  const modal = document.getElementById('service-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+}
+
+function updateSrvPreview(url) {
+  if (url && url.trim()) {
+    document.getElementById('srv-preview-img').src = url.trim();
+  }
+}
+
+// Auto-upload service photo to Cloudinary
+async function autoUploadServicePhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+
+  const statusEl = document.getElementById('srv-upload-status');
+  if (statusEl) statusEl.innerHTML = `<span class="text-amber-700 animate-pulse">⏳ Uploading to Cloudinary...</span>`;
+
+  const formData = new FormData();
+  formData.append('image', file);
 
   try {
-    const res = await fetch(`/api/services/${id}`, {
-      method: 'PUT',
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${adminToken}` },
+      body: formData
+    });
+    const data = await res.json();
+
+    if (data.success && data.url) {
+      document.getElementById('srv-form-image').value = data.url;
+      document.getElementById('srv-preview-img').src = data.url;
+      if (statusEl) statusEl.innerHTML = `<span class="text-emerald-700 font-bold">✅ Uploaded!</span>`;
+      showToast('Photo uploaded to Cloudinary successfully!');
+    } else {
+      if (statusEl) statusEl.innerHTML = `<span class="text-red-600 font-bold">❌ ${data.message || 'Upload failed'}</span>`;
+      alert('Upload failed: ' + (data.message || 'Server error'));
+    }
+  } catch (err) {
+    if (statusEl) statusEl.innerHTML = `<span class="text-red-600 font-bold">❌ Error</span>`;
+    alert('Upload error: ' + err.message);
+  }
+}
+
+// Handle Service Form Submit (Add or Edit)
+async function handleServiceFormSubmit(e) {
+  e.preventDefault();
+
+  const id = document.getElementById('srv-form-id').value;
+  const name = document.getElementById('srv-form-name').value.trim();
+  const category = document.getElementById('srv-form-category').value;
+  const tagline = document.getElementById('srv-form-tagline').value.trim();
+  const badge = document.getElementById('srv-form-badge').value.trim();
+  const price = document.getElementById('srv-form-price').value.trim() || 'Starting From ₹15,000';
+  const description = document.getElementById('srv-form-description').value.trim();
+  const featuresRaw = document.getElementById('srv-form-features').value;
+  const image = document.getElementById('srv-form-image').value.trim();
+
+  if (!name) {
+    alert('Please enter a service name');
+    return;
+  }
+
+  const features = featuresRaw
+    .split('\n')
+    .map(f => f.trim())
+    .filter(Boolean);
+
+  const payload = {
+    name,
+    category,
+    tagline,
+    badge,
+    price,
+    description,
+    features,
+    image
+  };
+
+  const btn = document.getElementById('srv-submit-btn');
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  btn.textContent = 'Saving...';
+
+  try {
+    const isEdit = Boolean(id);
+    const url = isEdit ? `/api/services/${id}` : '/api/services';
+    const method = isEdit ? 'PUT' : 'POST';
+
+    const res = await fetch(url, {
+      method: method,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${adminToken}`
       },
-      body: JSON.stringify({ name: newName, tagline: newTagline, price: newPrice })
+      body: JSON.stringify(payload)
     });
+
     const data = await res.json();
+
     if (data.success) {
-      showToast('Service updated successfully!');
+      showToast(isEdit ? '✨ Service updated successfully!' : '🎉 New service added & live on website!');
+      closeServiceModal();
       await fetchAdminData();
+    } else {
+      alert(data.message || 'Failed to save service');
     }
   } catch (err) {
-    alert('Error: ' + err.message);
+    alert('Error saving service: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalText;
   }
 }
 
+// Delete Service Item
 async function deleteServiceItem(id) {
-  if (!confirm('Are you sure you want to delete this service?')) return;
+  const service = (currentSiteData.services || []).find(s => s.id === id);
+  const sName = service ? service.name : 'this service';
+
+  if (!confirm(`Are you sure you want to permanently delete "${sName}"?\nIt will be immediately removed from the live website.`)) {
+    return;
+  }
+
   try {
     const res = await fetch(`/api/services/${id}`, {
       method: 'DELETE',
@@ -567,33 +804,14 @@ async function deleteServiceItem(id) {
     });
     const data = await res.json();
     if (data.success) {
-      showToast('Service removed!');
+      showToast(`🗑️ "${sName}" deleted successfully!`);
       await fetchAdminData();
+    } else {
+      alert(data.message || 'Failed to delete service');
     }
   } catch (err) {
     alert('Error: ' + err.message);
   }
-}
-
-function openNewServiceModal() {
-  const name = prompt('Enter New Service Name:');
-  if (!name) return;
-  const tagline = prompt('Enter Tagline / Brief Description:') || '';
-  const price = prompt('Pricing Note (default: Starting From ₹15,000):') || 'Starting From ₹15,000';
-
-  fetch('/api/services', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${adminToken}`
-    },
-    body: JSON.stringify({ name, tagline, price, features: ['Premium Makeup Base', 'Lashes & Styling Included'] })
-  }).then(r => r.json()).then(d => {
-    if (d.success) {
-      showToast('New service added successfully!');
-      fetchAdminData();
-    }
-  });
 }
 
 // ==========================================

@@ -415,20 +415,30 @@ body {
 .lightbox-modal {
   position: fixed;
   inset: 0;
-  background: rgba(15, 12, 10, 0.95);
-  backdrop-filter: blur(12px);
+  background: rgba(10, 8, 7, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   z-index: 150;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .lightbox-modal.active {
   opacity: 1;
   pointer-events: auto;
+}
+
+.lightbox-modal #lightbox-image {
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-modal.active #lightbox-image {
+  transform: scale(1);
 }
 
 /* Responsive adjustments */

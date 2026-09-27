@@ -17,7 +17,7 @@
   <meta property="og:title" content="ARSH MAKEUP ARTIST DELHI | Best Bridal Makeup Artist in Delhi NCR" />
   <meta property="og:description" content="Bespoke bridal & luxury party makeovers by Arsh Khan in South Delhi & PAN India. Starting from ₹15,000. WhatsApp/Call: 7428701987." />
   <meta property="og:url" content="https://arshmakeupartist.com/" />
-  <meta property="og:image" content="https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg" />
+  <meta property="og:image" content="https://arshmakeupartist.com/assets/images/bridal_mandap_red.jpg" />
   <meta property="og:site_name" content="ARSH MAKEUP ARTIST DELHI" />
   <meta property="og:locale" content="en_IN" />
 
@@ -25,7 +25,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="ARSH MAKEUP ARTIST DELHI | Best Bridal Makeup Artist Delhi" />
   <meta name="twitter:description" content="Luxury bridal makeup transformations in Delhi NCR & PAN India destination weddings. Call: 7428701987." />
-  <meta name="twitter:image" content="https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg" />
+  <meta name="twitter:image" content="https://arshmakeupartist.com/assets/images/bridal_mandap_red.jpg" />
 
   <!-- Local Delhi Geo SEO -->
   <meta name="geo.region" content="IN-DL" />
@@ -40,7 +40,7 @@
     "@type": ["BeautySalon", "ProfessionalService"],
     "name": "ARSH MAKEUP ARTIST DELHI",
     "alternateName": ["Arsh Khan Makeup Artist", "Arsh Makeup Studio"],
-    "image": "https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg",
+    "image": "https://arshmakeupartist.com/assets/images/bridal_mandap_red.jpg",
     "url": "https://arshmakeupartist.com",
     "telephone": "+91-7428701987",
     "priceRange": "Starting From ₹15,000",
@@ -217,8 +217,15 @@
         <div class="relative mx-auto max-w-md lg:max-w-none">
           <!-- Decorative Royal Borders -->
           <div class="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-amber-400/30 to-amber-100/10 blur-xl"></div>
-          <div class="relative rounded-3xl overflow-hidden border-2 border-amber-300/60 shadow-2xl p-2 bg-white">
-            <img id="hero-main-image" src="/assets/images/bridal_look_3.jpg" alt="Arsh Bridal Makeup Masterpiece" class="w-full h-[520px] object-cover rounded-2xl animate-float" />
+          <div class="relative rounded-3xl overflow-hidden border-2 border-amber-300/60 shadow-2xl p-2 bg-white cursor-pointer group" onclick="openLightboxByUrl(document.getElementById('hero-main-image').src, 'Royal Mandap Bridal HD Masterpiece', 'Delhi NCR Premier Luxury Bridal Specialist Arsh Khan')">
+            <img id="hero-main-image" src="/assets/images/bridal_mandap_red.jpg" alt="Arsh Bridal Makeup Masterpiece" class="w-full h-[520px] object-cover rounded-2xl animate-float group-hover:scale-[1.02] transition-transform duration-500" />
+            
+            <!-- Fullscreen Tap Hint Badge -->
+            <div class="absolute top-5 right-5 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full text-[11px] text-amber-300 font-semibold border border-white/20 flex items-center gap-1.5 shadow-lg group-hover:bg-amber-400 group-hover:text-black transition-all">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+              <span>Tap Fullscreen</span>
+            </div>
+
             <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl glass-panel border border-white/60">
               <div class="flex items-center justify-between">
                 <div>
@@ -239,22 +246,22 @@
        =================================================================== -->
   <section class="py-20 bg-[#F5EFEB] border-y border-amber-200/40 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-14 reveal-on-scroll">
+      <div class="text-center max-w-3xl mx-auto mb-12 reveal-on-scroll">
         <span class="text-xs uppercase font-bold tracking-widest text-[#8C6718] mb-2 block">Interactive Experience</span>
         <h2 class="text-3xl sm:text-4xl font-royal font-bold text-[#1C1714] mb-4">The Bridal Transformation</h2>
-        <p class="text-sm sm:text-base text-[#4A3E38]">Drag the gold slider left and right to reveal the precision blending, flawless HD skin, and royal jewelry setting crafted by Arsh Khan.</p>
+        <p class="text-sm sm:text-base text-[#4A3E38]">Drag the gold slider left and right to reveal the authentic bare-skin to royal HD bridal transformation crafted by Arsh Khan.</p>
       </div>
 
-      <div class="max-w-4xl mx-auto reveal-on-scroll delay-100">
-        <div id="ba-slider-container" class="ba-container">
-          <!-- Before Image (Base) -->
-          <div class="ba-image" style="background-image: url('/assets/images/bridal_look_2.jpg');"></div>
-          <span class="ba-badge ba-badge-before">Eye Art & Matha Patti</span>
+      <div class="max-w-2xl mx-auto reveal-on-scroll delay-100">
+        <div id="ba-slider-container" class="ba-container shadow-2xl">
+          <!-- Before Image (Base: Natural Bare Skin) -->
+          <div class="ba-image" style="background-image: url('/assets/images/transformation_before.jpg'); background-position: center top;"></div>
+          <span class="ba-badge ba-badge-before">Natural Pre-Makeup</span>
 
-          <!-- After Image (Clipped overlay) -->
+          <!-- After Image (Clipped overlay: Royal HD Bridal Glam) -->
           <div class="ba-after" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
-            <div class="ba-image" style="background-image: url('/assets/images/bridal_look_1.jpg');"></div>
-            <span class="ba-badge ba-badge-after">Signature Royal Bride</span>
+            <div class="ba-image" style="background-image: url('/assets/images/transformation_after.jpg'); background-position: center top;"></div>
+            <span class="ba-badge ba-badge-after">Royal HD Bridal Glam</span>
           </div>
 
           <!-- Draggable Divider Handle -->
@@ -268,6 +275,14 @@
         <div class="flex items-center justify-between text-xs text-[#7E7068] mt-3 px-2 font-medium">
           <span>👈 Drag left/right to compare</span>
           <span>Camera-Ready 4K High Definition</span>
+        </div>
+
+        <!-- Direct Button to View Full Side-by-Side in Lightbox -->
+        <div class="text-center mt-6">
+          <button onclick="openLightbox('/assets/images/transformation_compare_full.jpg', 'Real Bridal HD Transformation (Before & After)', 'Authentic unfiltered transformation: Natural bare skin vs Royal bridal HD finish by Arsh Khan.')" class="btn-gold-outline text-xs px-6 py-3 rounded-xl font-bold uppercase tracking-wider inline-flex items-center gap-2 cursor-pointer shadow-xs hover:shadow-md transition-all">
+            <svg class="w-4 h-4 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+            <span>View Full Side-by-Side Comparison</span>
+          </button>
         </div>
       </div>
     </div>
@@ -283,8 +298,15 @@
         <div class="lg:col-span-5 reveal-on-scroll">
           <div class="relative">
             <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl border-2 border-[#D4AF37] z-0"></div>
-            <div class="relative rounded-3xl overflow-hidden shadow-2xl z-10 bg-white p-2">
-              <img id="about-artist-image" src="/assets/images/bridal_look_1.jpg" alt="Arsh Khan Bridal Artist" class="w-full h-[520px] object-cover rounded-2xl" />
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl z-10 bg-white p-2 cursor-pointer group" onclick="openLightboxByUrl(document.getElementById('about-artist-image').src, 'Arsh Khan - Celebrity & Luxury Bridal Makeup Artist', 'Delhi NCR Premier Bridal Specialist & Destination Wedding Makeup Artist')">
+              <img id="about-artist-image" src="/assets/images/editorial_soft_glam.jpg" alt="Arsh Khan Bridal Artist" class="w-full h-[520px] object-cover rounded-2xl group-hover:scale-[1.02] transition-transform duration-500" />
+              
+              <!-- Fullscreen Tap Hint Badge -->
+              <div class="absolute top-5 right-5 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full text-[11px] text-amber-300 font-semibold border border-white/20 flex items-center gap-1.5 shadow-lg group-hover:bg-amber-400 group-hover:text-black transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                <span>Tap Fullscreen</span>
+              </div>
+
               <div class="p-4 bg-white/95 text-center border-t border-amber-100">
                 <h3 class="font-royal font-bold text-xl text-[#1C1714]" data-bind="about.artistName">Arsh Khan</h3>
                 <p class="text-xs uppercase tracking-wider text-[#8C6718] font-semibold" data-bind="about.artistTitle">Celebrity & Luxury Bridal Makeup Artist</p>
@@ -803,14 +825,56 @@
     <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
   </a>
 
-  <!-- Lightbox Modal -->
-  <div id="lightbox-modal" class="lightbox-modal">
-    <button class="close-lightbox absolute top-6 right-6 text-white text-3xl font-light hover:text-amber-400 z-50">✕</button>
-    <div class="max-w-4xl max-h-[90vh] p-4 flex flex-col items-center">
-      <img id="lightbox-image" src="" alt="Full view" class="max-h-[75vh] w-auto object-contain rounded-2xl shadow-2xl border border-amber-300/40 mb-4" />
-      <div class="text-center text-white">
-        <h3 id="lightbox-title" class="font-royal text-xl font-bold text-amber-300"></h3>
-        <p id="lightbox-desc" class="text-xs text-stone-300 mt-1 max-w-lg"></p>
+  <!-- ===================================================================
+       ROYAL FULLSCREEN LIGHTBOX VIEWER (GALLERY & PORTFOLIO INSPECTOR)
+       =================================================================== -->
+  <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Fullscreen Image Viewer">
+    <!-- Top Action Bar -->
+    <div class="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between z-50 pointer-events-auto">
+      <div class="flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 sm:px-4 py-1.5 rounded-full border border-white/20 text-xs text-amber-300 font-medium">
+        <span id="lightbox-counter">1 / 7</span>
+        <span class="text-stone-400 hidden sm:inline">&bull; Arsh Khan Bridal Portfolio</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Open in New Tab Button -->
+        <a id="lightbox-raw-link" href="#" target="_blank" title="Open Full-Resolution Image in New Tab" class="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:text-amber-300 hover:border-amber-400 transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+        <!-- Close Button -->
+        <button onclick="closeLightbox()" aria-label="Close Fullscreen" class="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-xl hover:text-amber-300 hover:border-amber-400 hover:rotate-90 transition-all cursor-pointer">
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Arrow: Prev -->
+    <button id="lightbox-prev-btn" onclick="prevLightboxImage(event)" aria-label="Previous Photo" class="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 hover:border-amber-400 text-white flex items-center justify-center text-xl sm:text-2xl transition-all z-50 cursor-pointer shadow-xl">
+      ❮
+    </button>
+
+    <!-- Navigation Arrow: Next -->
+    <button id="lightbox-next-btn" onclick="nextLightboxImage(event)" aria-label="Next Photo" class="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 hover:border-amber-400 text-white flex items-center justify-center text-xl sm:text-2xl transition-all z-50 cursor-pointer shadow-xl">
+      ❯
+    </button>
+
+    <!-- Main Lightbox Image Container -->
+    <div class="relative max-w-5xl max-h-[92vh] w-full p-2 sm:p-4 flex flex-col items-center justify-center select-none" onclick="event.stopPropagation()">
+      <div class="relative group max-h-[72vh] flex items-center justify-center">
+        <img id="lightbox-image" src="" alt="Full view" class="max-h-[72vh] max-w-[92vw] sm:max-w-[85vw] w-auto h-auto object-contain rounded-2xl shadow-2xl border border-amber-300/40 transition-transform duration-300" />
+      </div>
+
+      <!-- Caption & Instant Inquiry Action -->
+      <div class="text-center text-white mt-4 max-w-2xl px-4">
+        <h3 id="lightbox-title" class="font-royal text-lg sm:text-2xl font-bold text-amber-300 leading-snug"></h3>
+        <p id="lightbox-desc" class="text-xs sm:text-sm text-stone-300 mt-1 line-clamp-2"></p>
+        
+        <div class="mt-3 flex items-center justify-center gap-3">
+          <a id="lightbox-inquiry-btn" href="#" target="_blank" class="btn-gold text-xs px-5 py-2.5 rounded-full font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-lg">
+            <svg class="w-4 h-4 text-emerald-950" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            <span>Book This Look On WhatsApp</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -850,6 +914,8 @@
       } catch (e) {
         window.open(`https://wa.me/917428701987`, '_blank');
       }
+    }
+
     // Hidden Owner Access: 3 fast clicks on copyright text quietly opens admin
     let secretClicks = 0;
     let secretTimer = null;
