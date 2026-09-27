@@ -105,7 +105,7 @@
   </script>
 
   <!-- Custom Stylesheet (with cache-buster) -->
-  <link rel="stylesheet" href="/css/style.css?v=2.2" />
+  <link rel="stylesheet" href="/css/style.css?v=2.3" />
 </head>
 <body class="bg-luxury-pattern text-[#1C1714]">
 
@@ -246,17 +246,19 @@
         <p class="text-sm sm:text-base text-[#4A3E38]">Drag the gold slider left and right to reveal the authentic bare-skin to royal HD bridal transformation crafted by Arsh Khan.</p>
       </div>
 
-      <div class="max-w-xl mx-auto reveal-on-scroll delay-100">
-        <div id="ba-slider-container" class="ba-container shadow-2xl h-[480px] sm:h-[530px]">
-          <!-- Before Image (Base: Natural Bare Skin - Perfectly Centered Face) -->
-          <div class="ba-image" style="background-image: url('/assets/images/transformation_before.jpg'); background-position: center center; background-size: cover;"></div>
-          <span class="ba-badge ba-badge-before">Natural Pre-Makeup</span>
+      <div class="max-w-md sm:max-w-lg mx-auto reveal-on-scroll delay-100">
+        <div id="ba-slider-container" class="ba-container shadow-2xl">
+          <!-- After Image (Base: Royal HD Bridal Glam - Perfectly Centered Face in Crisp HD) -->
+          <div class="ba-image" style="background-image: url('/assets/images/transformation_after.jpg'); background-position: center center; background-size: cover;"></div>
 
-          <!-- After Image (Clipped overlay: Royal HD Bridal Glam - Perfectly Centered Face) -->
-          <div class="ba-after" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
-            <div class="ba-image" style="background-image: url('/assets/images/transformation_after.jpg'); background-position: center center; background-size: cover;"></div>
-            <span class="ba-badge ba-badge-after">Royal HD Bridal Glam</span>
+          <!-- Before Image (Clipped Overlay: Natural Pre-Makeup Bare Skin) -->
+          <div class="ba-overlay ba-before" style="position: absolute; inset: 0; overflow: hidden; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
+            <div class="ba-image" style="background-image: url('/assets/images/transformation_before.jpg'); background-position: center center; background-size: cover;"></div>
           </div>
+
+          <!-- Badges (Direct children so neither gets clipped while sliding) -->
+          <span class="ba-badge ba-badge-before">Natural Pre-Makeup</span>
+          <span class="ba-badge ba-badge-after">Royal HD Bridal Glam</span>
 
           <!-- Draggable Divider Handle -->
           <div class="ba-slider-handle" style="left: 50%;">
@@ -819,7 +821,7 @@
   <!-- ===================================================================
        ROYAL FULLSCREEN LIGHTBOX VIEWER (GALLERY & PORTFOLIO INSPECTOR)
        =================================================================== -->
-  <div id="lightbox-modal" class="lightbox-modal" style="display:none; position:fixed; inset:0; z-index:9999999; background:rgba(10,8,7,0.97); align-items:center; justify-content:center;" role="dialog" aria-modal="true" aria-label="Fullscreen Image Viewer">
+  <div id="lightbox-modal" class="lightbox-modal cursor-pointer" onclick="closeLightbox()" style="display:none; position:fixed; inset:0; z-index:9999999; background:rgba(10,8,7,0.97); align-items:center; justify-content:center;" role="dialog" aria-modal="true" aria-label="Fullscreen Image Viewer">
     <!-- Top Action Bar -->
     <div class="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between z-50 pointer-events-auto">
       <div class="flex items-center gap-2 bg-black/70 backdrop-blur-md px-3 sm:px-4 py-2 rounded-full border border-white/20 text-xs text-amber-300 font-medium">
@@ -931,6 +933,6 @@
       });
     }
   </script>
-  <script src="/js/app.js?v=2.2"></script>
+  <script src="/js/app.js?v=2.3"></script>
 </body>
 </html>

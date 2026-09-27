@@ -132,14 +132,20 @@ function renderServices() {
       <div class="glare"></div>
       <div class="tilt-inner">
         <!-- Clickable Image Container: Shows full face, crown, jewelry in crisp HD -->
-        <div class="relative overflow-hidden rounded-2xl mb-6 h-64 sm:h-72 w-full cursor-pointer group/img shadow-md border border-amber-200/50" onclick="openLightboxByUrl('${srv.image || '/assets/images/service_bridal_mandap.jpg'}', '${srv.name}', '${srv.tagline || srv.description || ''}')" title="Click to view full screen">
+        <div class="relative overflow-hidden rounded-2xl mb-6 h-72 sm:h-80 w-full cursor-pointer group/img shadow-md border border-amber-200/50" onclick="openLightboxByUrl('${srv.image || '/assets/images/service_bridal_mandap.jpg'}', '${srv.name}', '${srv.tagline || srv.description || ''}')" title="Click to view full screen HD">
           <img src="${srv.image || '/assets/images/service_bridal_mandap.jpg'}" alt="${srv.name}" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover/img:scale-105" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
           ${srv.badge ? `<span class="absolute top-3 right-3 text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full gold-shimmer-badge">${srv.badge}</span>` : ''}
 
-          <div class="absolute bottom-3 left-4 right-4 text-white">
-            <span class="text-xs tracking-wider uppercase text-amber-300 font-semibold">${srv.category || 'Luxury Service'}</span>
-            <h3 class="text-xl font-royal font-bold">${srv.name}</h3>
+          <div class="absolute bottom-3 left-4 right-4 text-white flex items-end justify-between gap-2">
+            <div>
+              <span class="text-xs tracking-wider uppercase text-amber-300 font-semibold">${srv.category || 'Luxury Service'}</span>
+              <h3 class="text-lg sm:text-xl font-royal font-bold">${srv.name}</h3>
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-950 bg-amber-300/95 px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 group-hover/img:scale-105 transition-transform flex-shrink-0">
+              <svg class="w-3 h-3 text-amber-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+              <span>View HD</span>
+            </span>
           </div>
         </div>
 
@@ -205,6 +211,12 @@ function renderGallery() {
       <!-- Top Left Category Pill -->
       <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-[11px] font-semibold tracking-wider px-3 py-1 rounded-full border border-white/20">
         ${item.category}
+      </div>
+
+      <!-- Bottom Right HD Fullscreen Indicator (Always visible on mobile & desktop) -->
+      <div class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-amber-300 text-[11px] font-bold px-2.5 py-1 rounded-full border border-amber-300/30 flex items-center gap-1 shadow-md pointer-events-none">
+        <svg class="w-3 h-3 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+        <span>HD</span>
       </div>
     </div>
   `).join('');
@@ -475,28 +487,45 @@ function initBeforeAfterSlider() {
   const container = document.getElementById('ba-slider-container');
   if (!container) return;
 
-  const afterLayer = container.querySelector('.ba-after');
+  const overlayLayer = container.querySelector('.ba-overlay, .ba-before, .ba-after');
   const handle = container.querySelector('.ba-slider-handle');
+  if (!overlayLayer || !handle) return;
   let isDown = false;
 
-  function move(e) {
-    if (!isDown) return;
+  function updateSliderPosition(clientX) {
     const rect = container.getBoundingClientRect();
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     let x = clientX - rect.left;
     if (x < 0) x = 0;
     if (x > rect.width) x = rect.width;
-    const percentage = (x / rect.width) * 100;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
 
     handle.style.left = percentage + '%';
-    afterLayer.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+    overlayLayer.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
   }
 
-  container.addEventListener('mousedown', () => isDown = true);
+  function move(e) {
+    if (!isDown) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    updateSliderPosition(clientX);
+  }
+
+  // Click or tap anywhere on slider to instantly reveal
+  container.addEventListener('click', (e) => {
+    // Only if not dragging
+    updateSliderPosition(e.clientX);
+  });
+
+  container.addEventListener('mousedown', (e) => {
+    isDown = true;
+    updateSliderPosition(e.clientX);
+  });
   window.addEventListener('mouseup', () => isDown = false);
   container.addEventListener('mousemove', move);
 
-  container.addEventListener('touchstart', () => isDown = true, { passive: true });
+  container.addEventListener('touchstart', (e) => {
+    isDown = true;
+    if (e.touches && e.touches[0]) updateSliderPosition(e.touches[0].clientX);
+  }, { passive: true });
   window.addEventListener('touchend', () => isDown = false);
   container.addEventListener('touchmove', move, { passive: true });
 }
