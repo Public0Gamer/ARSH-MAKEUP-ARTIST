@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://arshmakeupartist.com/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/gdkzinnv/image/upload/v1790151735/arsh_makeup_artist/bridal_look_1_red.jpg</image:loc>
+      <image:title>Arsh Khan Bridal Makeup Artist Delhi</image:title>
+      <image:caption>Signature luxury bridal makeover by Arsh Khan Delhi NCR</image:caption>
+    </image:image>
+  </url>
+</urlset>
