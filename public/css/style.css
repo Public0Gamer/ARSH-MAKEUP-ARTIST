@@ -212,12 +212,15 @@ body {
 .ba-container {
   position: relative;
   width: 100%;
-  height: 480px;
+  height: 520px;
+  max-width: 640px;
+  margin: 0 auto;
   overflow: hidden;
   border-radius: 20px;
   border: 2px solid rgba(212, 175, 55, 0.4);
   box-shadow: var(--shadow-gold);
   user-select: none;
+  background-color: #1C1714;
 }
 
 .ba-image {
@@ -227,7 +230,7 @@ body {
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
 }
 
 .ba-after {
@@ -444,7 +447,7 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .ba-container {
-    height: 380px;
+    height: 420px;
   }
   .consultation-drawer {
     max-width: 100%;

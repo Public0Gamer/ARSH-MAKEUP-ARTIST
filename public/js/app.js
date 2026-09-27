@@ -131,16 +131,11 @@ function renderServices() {
     <div class="tilt-card luxury-card p-6 lg:p-8 flex flex-col justify-between group hover:border-amber-400/60 transition-all duration-300">
       <div class="glare"></div>
       <div class="tilt-inner">
-        <div class="relative overflow-hidden rounded-xl mb-6 h-56 w-full cursor-pointer group/img" onclick="openLightboxByUrl('${srv.image || '/assets/images/bridal_mandap_red.jpg'}', '${srv.name}', '${srv.tagline || srv.description || ''}')" title="Tap to view fullscreen">
-          <img src="${srv.image || '/assets/images/bridal_mandap_red.jpg'}" alt="${srv.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <!-- Clickable Image Container: Shows full face, crown, jewelry in crisp HD -->
+        <div class="relative overflow-hidden rounded-2xl mb-6 h-64 sm:h-72 w-full cursor-pointer group/img shadow-md border border-amber-200/50" onclick="openLightboxByUrl('${srv.image || '/assets/images/service_bridal_mandap.jpg'}', '${srv.name}', '${srv.tagline || srv.description || ''}')" title="Click to view full screen">
+          <img src="${srv.image || '/assets/images/service_bridal_mandap.jpg'}" alt="${srv.name}" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover/img:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
           ${srv.badge ? `<span class="absolute top-3 right-3 text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full gold-shimmer-badge">${srv.badge}</span>` : ''}
-          
-          <!-- Tap Fullscreen Hint -->
-          <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] text-amber-300 font-semibold border border-white/20 flex items-center gap-1 opacity-80 group-hover/img:opacity-100 transition-opacity">
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
-            <span>Tap Fullscreen</span>
-          </div>
 
           <div class="absolute bottom-3 left-4 right-4 text-white">
             <span class="text-xs tracking-wider uppercase text-amber-300 font-semibold">${srv.category || 'Luxury Service'}</span>
@@ -193,29 +188,23 @@ function renderGallery() {
   window.currentGalleryItems = items;
 
   container.innerHTML = items.map((item, idx) => `
-    <div class="tilt-card group relative overflow-hidden rounded-2xl cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 h-96" onclick="openLightboxByIndex(${idx})" title="Tap to view fullscreen">
+    <div class="tilt-card group relative overflow-hidden rounded-2xl cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 h-96 border border-amber-200/50" onclick="openLightboxByIndex(${idx})" title="Click to view full screen">
       <div class="glare"></div>
-      <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+      <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
       
-      <!-- Overlay Information -->
-      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+      <!-- Overlay Information (pointer-events-none so click passes through directly) -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white pointer-events-none">
         <span class="text-xs uppercase font-semibold text-amber-300 tracking-widest mb-1">${item.category || 'Bridal Glam'}</span>
         <h4 class="text-lg font-royal font-bold text-white mb-1">${item.title}</h4>
-        <p class="text-xs text-stone-300 line-clamp-2 mb-3">${item.details || ''}</p>
-        <div class="flex items-center gap-2 text-xs text-amber-300 font-medium">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
-          <span>Tap to View Full Screen</span>
+        <p class="text-xs text-stone-300 line-clamp-2 mb-2">${item.details || ''}</p>
+        <div class="flex items-center gap-2 text-xs text-amber-300 font-bold">
+          <span>⛶ Click to View Fullscreen</span>
         </div>
       </div>
 
       <!-- Top Left Category Pill -->
       <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-[11px] font-semibold tracking-wider px-3 py-1 rounded-full border border-white/20">
         ${item.category}
-      </div>
-
-      <!-- Top Right Expand Icon -->
-      <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 p-2 rounded-full border border-white/20 group-hover:bg-amber-400 group-hover:text-black transition-all shadow-md">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
       </div>
     </div>
   `).join('');
@@ -666,7 +655,7 @@ function initLightbox() {
 
   // Keyboard navigation
   window.addEventListener('keydown', (e) => {
-    if (!modal.classList.contains('active')) return;
+    if (modal.style.display !== 'flex') return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') prevLightboxImage();
     if (e.key === 'ArrowRight') nextLightboxImage();
@@ -690,10 +679,8 @@ function initLightbox() {
 function handleSwipeGesture() {
   const threshold = 45; // min swipe distance in px
   if (touchEndX + threshold < touchStartX) {
-    // Swiped left -> Next image
     nextLightboxImage();
   } else if (touchEndX - threshold > touchStartX) {
-    // Swiped right -> Previous image
     prevLightboxImage();
   }
 }
@@ -711,7 +698,18 @@ function openLightboxByIndex(index) {
 
 function openLightboxByUrl(url, title, details) {
   const items = window.currentGalleryItems || (siteData && siteData.gallery) || [];
-  const foundIdx = items.findIndex(i => i.url === url);
+  
+  // Intelligent matching: matches by full URL, relative URL, or bare filename
+  const cleanPath = (url || '').split('?')[0];
+  const fileName = cleanPath.split('/').pop();
+
+  const foundIdx = items.findIndex(i => {
+    if (i.url === url) return true;
+    if (cleanPath.endsWith(i.url)) return true;
+    if (fileName && i.url.endsWith(fileName)) return true;
+    return false;
+  });
+
   if (foundIdx !== -1) {
     openLightboxByIndex(foundIdx);
   } else {
@@ -738,6 +736,7 @@ function displayLightboxItem(url, title, details, counterText) {
 
   if (modal && img) {
     img.src = url;
+    img.style.transform = 'scale(1)'; // reset zoom
     if (titleEl) titleEl.textContent = title || 'Royal Bridal Masterpiece';
     if (descEl) descEl.textContent = details || 'Handcrafted Luxury Bridal Makeup by Arsh Khan Delhi';
     if (counterEl) counterEl.textContent = counterText || '';
@@ -759,7 +758,11 @@ function displayLightboxItem(url, title, details, counterText) {
       inqBtn.href = `https://wa.me/91${targetPhone.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`;
     }
 
-    modal.classList.add('active');
+    // 100% Guaranteed Display - zero reliance on external CSS classes
+    modal.style.display = 'flex';
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+    modal.style.zIndex = '9999999';
     document.body.style.overflow = 'hidden';
   }
 }
@@ -779,8 +782,41 @@ function prevLightboxImage(e) {
 function closeLightbox() {
   const modal = document.getElementById('lightbox-modal');
   if (modal) {
-    modal.classList.remove('active');
+    modal.style.display = 'none';
+    modal.style.opacity = '0';
+    modal.style.pointerEvents = 'none';
     document.body.style.overflow = '';
+  }
+  // Exit browser fullscreen if active
+  if (document.fullscreenElement) {
+    document.exitFullscreen().catch(() => {});
+  }
+}
+
+// Toggle real device/browser fullscreen
+function toggleNativeFullscreen() {
+  const modal = document.getElementById('lightbox-modal');
+  const target = modal || document.documentElement;
+  if (!document.fullscreenElement) {
+    if (target.requestFullscreen) target.requestFullscreen().catch(() => {});
+    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen().catch(() => {});
+    else if (target.msRequestFullscreen) target.msRequestFullscreen().catch(() => {});
+  } else {
+    if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+  }
+}
+
+// Toggle image zoom inside lightbox
+let isZoomed = false;
+function toggleImageZoom(img) {
+  if (!img) return;
+  isZoomed = !isZoomed;
+  if (isZoomed) {
+    img.style.transform = 'scale(1.4)';
+    img.style.cursor = 'zoom-out';
+  } else {
+    img.style.transform = 'scale(1)';
+    img.style.cursor = 'zoom-in';
   }
 }
 
